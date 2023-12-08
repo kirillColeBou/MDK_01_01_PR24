@@ -23,6 +23,26 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
         public Login()
         {
             InitializeComponent();
+
+        }
+
+        private void Login_Click(object sender, MouseButtonEventArgs e)
+        {
+            if (login_user.Text != "" && password_user.Password != "")
+                if (login_user.Text == "kirill")
+                    if (password_user.Password == "1234")
+                        MessageBox.Show("Вход выполнен");
+                    else
+                        MessageBox.Show("Пароль неверный");
+                else
+                    MessageBox.Show("Имя пользователя неверно");
+            else
+                MessageBox.Show("Введите логин и пароль");
+        }
+
+        private void Regin_Click(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }

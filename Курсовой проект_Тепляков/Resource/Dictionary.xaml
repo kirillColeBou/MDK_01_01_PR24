@@ -141,14 +141,14 @@
         </Style.Triggers>
     </Style>
     <Style TargetType="{x:Type Border}" x:Key="Grid_Itm_Anim">
-        <Setter Property="Background" Value="white"/>
+        <Setter Property="Background" Value="#FF545454"/>
         <Style.Triggers>
             <EventTrigger RoutedEvent="MouseEnter">
                 <EventTrigger.Actions>
                     <BeginStoryboard>
                         <Storyboard>
-                            <ColorAnimation To="#FF959595" Storyboard.TargetProperty="(Grid.Background).(SolidColorBrush.Color)" FillBehavior="HoldEnd" Duration="0:0:0:0.2"/>
-                            <ColorAnimation To="White" Storyboard.TargetProperty="(Label.Foreground).(SolidColorBrush.Color)" FillBehavior="HoldEnd" Duration="0:0:0:0.2"/>
+                            <ColorAnimation To="White" Storyboard.TargetProperty="(Grid.Background).(SolidColorBrush.Color)" FillBehavior="HoldEnd" Duration="0:0:0:0.2"/>
+                            <ColorAnimation To="#FF545454" Storyboard.TargetProperty="(Label.Foreground).(SolidColorBrush.Color)" FillBehavior="HoldEnd" Duration="0:0:0:0.2"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger.Actions>
