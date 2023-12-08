@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Курсовой_проект_Тепляков"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Информационная система военного округа" Height="550" Width="800">
     <Grid>
-        
+        <Frame x:Name="frame" Opacity="0" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>
