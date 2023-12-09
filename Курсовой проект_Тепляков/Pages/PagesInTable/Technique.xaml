@@ -5,10 +5,39 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Курсовой_проект_Тепляков.Pages.PagesInTable"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="950"
       Title="Technique">
 
-    <Grid>
-        
-    </Grid>
+    <Border CornerRadius="10,0,0,10">
+        <Border.Background>
+            <SolidColorBrush Color="#3D3D3D" Opacity="1.0"/>
+        </Border.Background>
+        <Grid>
+            <Grid.Resources>
+                <ResourceDictionary Source="/Resource/Dictionary.xaml"/>
+            </Grid.Resources>
+            <ScrollViewer x:Name="scroll_user">
+                <Border x:Name="Info_user" MinHeight="580">
+                    <Grid>
+                        <Label Content="Техника" Margin="39,28,26,0" Foreground="White" FontSize="30" FontFamily="Yu Gothic UI Semibold" HorizontalContentAlignment="Left" Height="52" VerticalAlignment="Top"/>
+                        <Label Content="Название техники" Margin="39,85,26,0" Foreground="White" FontSize="15" FontFamily="Yu Gothic UI Semilight" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
+                        <TextBox Style="{StaticResource BaseBox}" Height="35" Background="#FFDEDEDE" Margin="40,130,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="700"/>
+                        <Label Content="Номер части" Margin="39,175,26,0" Foreground="White" FontSize="15" FontFamily="Yu Gothic UI Semilight" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
+                        <ComboBox FontFamily="Yu Gothic UI Semilight" Height="30" Margin="42,220,195,0" VerticalAlignment="Top" FontSize="14"/>
+                        <Label Content="Характеристики" Margin="39,265,26,0" Foreground="White" FontSize="15" FontFamily="Yu Gothic UI Semilight" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
+                        <TextBox Style="{StaticResource BaseBox}" Height="35" Background="#FFDEDEDE" Margin="40,310,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="700"/>
+                        <Button Style="{StaticResource BtnRedac}" Margin="0,0,136.2,24" VerticalAlignment="Bottom" Height="40" Width="105" Click="Click_Technique_Redact" HorizontalAlignment="Right">
+                            <Image Source="/Images/redac.png" Width="20" Height="20"/>
+                        </Button>
+                        <Button x:Name="btn_cancel"  Style="{StaticResource BtnRedac}" Background="#FFE48F2B" Margin="0,0,26.2,24" VerticalAlignment="Bottom" Height="40" Width="105" Click="Click_Cancel_Technique_Redact" HorizontalAlignment="Right">
+                            <Image Source="/Images/backs.png" Width="20" Height="20"/>
+                        </Button>
+                        <Button x:Name="btn_remove" Style="{StaticResource BtnRedac}" Background="#FFE42B2B" Margin="30,0,0,23.6" VerticalAlignment="Bottom" Height="40" Width="105" Click="Click_Remove_Technique_Redact" HorizontalAlignment="Left">
+                            <Image Source="/Images/del.png" Width="20" Height="20"/>
+                        </Button>
+                    </Grid>
+                </Border>
+            </ScrollViewer>
+        </Grid>
+    </Border>
 </Page>

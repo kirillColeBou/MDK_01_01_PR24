@@ -25,17 +25,17 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             InitializeComponent();
         }
 
-        private void Click_Companies_Redact(object sender, RoutedEventArgs e)
+        private void Click_Locations_Redact(object sender, RoutedEventArgs e)
         {
             MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.locations);
         }
 
-        private void Click_Cancel_Companies_Redact(object sender, RoutedEventArgs e)
+        private void Click_Cancel_Locations_Redact(object sender, RoutedEventArgs e)
         {
             MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main);
         }
 
-        private void Click_Remove_Companies_Redact(object sender, RoutedEventArgs e)
+        private void Click_Remove_Locations_Redact(object sender, RoutedEventArgs e)
         {
             MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.locations);
         }

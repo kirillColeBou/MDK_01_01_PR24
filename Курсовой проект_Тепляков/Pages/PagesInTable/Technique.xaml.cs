@@ -24,5 +24,20 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
         {
             InitializeComponent();
         }
+
+        private void Click_Technique_Redact(object sender, RoutedEventArgs e)
+        {
+            MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.technique);
+        }
+
+        private void Click_Cancel_Technique_Redact(object sender, RoutedEventArgs e)
+        {
+            MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main);
+        }
+
+        private void Click_Remove_Technique_Redact(object sender, RoutedEventArgs e)
+        {
+            MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.technique);
+        }
     }
 }

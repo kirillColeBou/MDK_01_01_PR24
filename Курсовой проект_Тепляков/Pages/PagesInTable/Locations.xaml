@@ -30,13 +30,13 @@
                         <TextBox Style="{StaticResource BaseBox}" Height="35" Background="#FFDEDEDE" Margin="40,400,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="700"/>
                         <Label Content="Количество сооружений" Margin="39,445,26,0" Foreground="White" FontSize="15" FontFamily="Yu Gothic UI Semilight" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
                         <TextBox Style="{StaticResource BaseBox}" Height="35" Background="#FFDEDEDE" Margin="40,490,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="700"/>
-                        <Button Style="{StaticResource BtnRedac}" Margin="0,0,136.2,24" VerticalAlignment="Bottom" Height="40" Width="105" Click="Click_Companies_Redact" HorizontalAlignment="Right">
+                        <Button Style="{StaticResource BtnRedac}" Margin="0,0,136.2,24" VerticalAlignment="Bottom" Height="40" Width="105" Click="Click_Locations_Redact" HorizontalAlignment="Right">
                             <Image Source="/Images/redac.png" Width="20" Height="20"/>
                         </Button>
-                        <Button x:Name="btn_cancel"  Style="{StaticResource BtnRedac}" Background="#FFE48F2B" Margin="0,0,26.2,24" VerticalAlignment="Bottom" Height="40" Width="105" Click="Click_Cancel_Companies_Redact" HorizontalAlignment="Right">
+                        <Button x:Name="btn_cancel"  Style="{StaticResource BtnRedac}" Background="#FFE48F2B" Margin="0,0,26.2,24" VerticalAlignment="Bottom" Height="40" Width="105" Click="Click_Cancel_Locations_Redact" HorizontalAlignment="Right">
                             <Image Source="/Images/backs.png" Width="20" Height="20"/>
                         </Button>
-                        <Button x:Name="btn_remove" Style="{StaticResource BtnRedac}" Background="#FFE42B2B" Margin="30,0,0,23.6" VerticalAlignment="Bottom" Height="40" Width="105" Click="Click_Remove_Companies_Redact" HorizontalAlignment="Left">
+                        <Button x:Name="btn_remove" Style="{StaticResource BtnRedac}" Background="#FFE42B2B" Margin="30,0,0,23.6" VerticalAlignment="Bottom" Height="40" Width="105" Click="Click_Remove_Locations_Redact" HorizontalAlignment="Left">
                             <Image Source="/Images/del.png" Width="20" Height="20"/>
                         </Button>
                     </Grid>
