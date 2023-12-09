@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -20,10 +21,50 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
     /// </summary>
     public partial class Login : Page
     {
+        public static Regin regin;
+        public static Main init;
+
         public Login()
         {
             InitializeComponent();
+            regin = new Regin();
+            init = new Main();
+        }
 
+        public void OpenPageRegin()
+        {
+            DoubleAnimation opgridAnimation = new DoubleAnimation();
+            opgridAnimation.From = 1;
+            opgridAnimation.To = 0;
+            opgridAnimation.Duration = TimeSpan.FromSeconds(0.6);
+            opgridAnimation.Completed += delegate
+            {
+                MainWindow.main.frame.Navigate(regin);
+                DoubleAnimation opgrisdAnimation = new DoubleAnimation();
+                opgrisdAnimation.From = 0;
+                opgrisdAnimation.To = 1;
+                opgrisdAnimation.Duration = TimeSpan.FromSeconds(1.2);
+                MainWindow.main.frame.BeginAnimation(Frame.OpacityProperty, opgrisdAnimation);
+            };
+            MainWindow.main.frame.BeginAnimation(Frame.OpacityProperty, opgridAnimation);
+        }
+
+        public void OpenPageMain()
+        {
+            DoubleAnimation opgridAnimation = new DoubleAnimation();
+            opgridAnimation.From = 1;
+            opgridAnimation.To = 0;
+            opgridAnimation.Duration = TimeSpan.FromSeconds(0.6);
+            opgridAnimation.Completed += delegate
+            {
+                MainWindow.main.frame.Navigate(init);
+                DoubleAnimation opgrisdAnimation = new DoubleAnimation();
+                opgrisdAnimation.From = 0;
+                opgrisdAnimation.To = 1;
+                opgrisdAnimation.Duration = TimeSpan.FromSeconds(1.2);
+                MainWindow.main.frame.BeginAnimation(Frame.OpacityProperty, opgrisdAnimation);
+            };
+            MainWindow.main.frame.BeginAnimation(Frame.OpacityProperty, opgridAnimation);
         }
 
         private void Login_Click(object sender, MouseButtonEventArgs e)
@@ -31,7 +72,10 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
             if (login_user.Text != "" && password_user.Password != "")
                 if (login_user.Text == "kirill")
                     if (password_user.Password == "1234")
+                    {
                         MessageBox.Show("Вход выполнен");
+                        OpenPageMain();
+                    }
                     else
                         MessageBox.Show("Пароль неверный");
                 else
@@ -42,7 +86,7 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
 
         private void Regin_Click(object sender, MouseButtonEventArgs e)
         {
-
+            OpenPageRegin();
         }
     }
 }

@@ -5,10 +5,51 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Курсовой_проект_Тепляков.Pages.Login_Regin"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="800"
       Title="Regin">
 
-    <Grid>
-        
+    <Grid Background="#545454">
+        <Grid.Resources>
+            <ResourceDictionary Source="/Resource/Dictionary.xaml"/>
+        </Grid.Resources>
+        <Grid Margin="0,0,0,0" VerticalAlignment="Top" Height="60" Grid.ColumnSpan="2">
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="31" Direction="260" Color="#FFC1C1C1" ShadowDepth="0"/>
+            </Grid.Effect>
+            <Border CornerRadius="00,00,00,00" Margin="0,0,0,0">
+                <Border.Background>
+                    <SolidColorBrush Color="#FF2C2C2C" Opacity="1.0"/>
+                </Border.Background>
+            </Border>
+            <Image Source="/Images/logo.png" Margin="19,8,0,0" HorizontalAlignment="Left" Width="41" Height="42" VerticalAlignment="Top"/>
+        </Grid>
+        <Border Margin="10,70,10,10" CornerRadius="15,15,15,15">
+            <Border.Background>
+                <SolidColorBrush Color="#3D3D3D" Opacity="1.0"/>
+            </Border.Background>
+            <Grid MinHeight="480">
+                <Label Content="Регистрация"                  Foreground="White"   FontSize="30" FontFamily="Yu Gothic UI Semibold"  Margin="0,70,0,0"  HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <Label Content="Введите логин:"          Foreground="White"   FontSize="16" FontFamily="Yu Gothic UI Semilight" Margin="0,160,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <TextBox Style="{StaticResource BaseBox}"     Foreground="#3D3D3D" FontSize="16" FontFamily="Yu Gothic UI Semilight" Margin="0,200,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#FFDEDEDE"  Width="220" Height="30" x:Name="login_new_user"/>
+                <Label Content="Введите пароль:"         Foreground="White"   FontSize="16" FontFamily="Yu Gothic UI Semilight" Margin="0,240,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <PasswordBox Style="{StaticResource BaseBox}" Foreground="#3D3D3D" FontSize="16" FontFamily="Yu Gothic UI Semilight" Margin="0,280,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#FFDEDEDE"  Width="220" Height="30" x:Name="password_new_user_first" PasswordChar="*"/>
+                <Label Content="Повторите пароль:"         Foreground="White"   FontSize="16" FontFamily="Yu Gothic UI Semilight" Margin="0,320,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <PasswordBox Style="{StaticResource BaseBox}" Foreground="#3D3D3D" FontSize="16" FontFamily="Yu Gothic UI Semilight" Margin="0,360,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#FFDEDEDE"  Width="220" Height="30" x:Name="password_new_user_second" PasswordChar="*"/>
+                <Grid Margin="0,400,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" Width="260" Height="50">
+                    <Border Height="30" CornerRadius="5,5,5,5" Style="{StaticResource Grid_Itm_Anim}" MouseDown="Back_Click" Padding="7,7,7,7" Margin="0,0,135,0" VerticalAlignment="Center" Width="105" HorizontalAlignment="Right">
+                        <Grid Height="18">
+                            <Image Source="/Images/back.png" Margin="5,0,0,0" HorizontalAlignment="Left" Width="15" Height="16" VerticalAlignment="Top" />
+                            <Label Content="Авторизация" Margin="30,-2,0,0" Foreground="DarkGray" FontWeight="Bold" FontSize="8.5" FontFamily="Corbel" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Top"/>
+                        </Grid>
+                    </Border>
+                    <Border Height="30" CornerRadius="5,5,5,5" Style="{StaticResource Grid_Itm_Anim}" MouseDown="Login_Click" Padding="7,7,7,7" Margin="0,0,20,0" VerticalAlignment="Center" Width="105" HorizontalAlignment="Right">
+                        <Grid Height="18">
+                            <Image Source="/Images/regin.png" Margin="5,0,0,0" HorizontalAlignment="Left" Width="15" Height="16" VerticalAlignment="Top"/>
+                            <Label Content="Войти" Margin="30,-2,0,0" Foreground="DarkGray" FontWeight="Bold" FontSize="8.5" FontFamily="Corbel" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Top"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Border>
     </Grid>
 </Page>

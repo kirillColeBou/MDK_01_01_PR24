@@ -75,6 +75,34 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Main.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PagesInTable\Companies.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PagesInTable\Locations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PagesInTable\Parts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PagesInTable\Technique.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PagesInTable\Type_of_troops.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PagesInTable\Weapons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resource\Dictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -86,6 +114,27 @@
     </Compile>
     <Compile Include="Pages\Login_Regin\Regin.xaml.cs">
       <DependentUpon>Regin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Main.xaml.cs">
+      <DependentUpon>Main.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PagesInTable\Companies.xaml.cs">
+      <DependentUpon>Companies.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PagesInTable\Locations.xaml.cs">
+      <DependentUpon>Locations.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PagesInTable\Parts.xaml.cs">
+      <DependentUpon>Parts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PagesInTable\Technique.xaml.cs">
+      <DependentUpon>Technique.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PagesInTable\Type_of_troops.xaml.cs">
+      <DependentUpon>Type_of_troops.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PagesInTable\Weapons.xaml.cs">
+      <DependentUpon>Weapons.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -123,6 +172,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\regin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\back.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
