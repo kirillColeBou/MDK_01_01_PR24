@@ -80,7 +80,7 @@ namespace Курсовой_проект_Тепляков.Pages
                             await Task.Delay(90);
                             if (page_select == page_main.parts)
                             {
-                                var add = new PagesInTable.Parts();
+                                var add = new Pages.PagesInTable.Parts();
                                 parrent.Children.Add(new Elements.Add(add));
                             }
                         });

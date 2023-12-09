@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Курсовой_проект_Тепляков.Pages.PagesInTable"
       mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="950"
+      d:DesignHeight="750" d:DesignWidth="950"
       Title="Type_of_troops">
 
     <Border CornerRadius="10,0,0,10">
@@ -17,7 +17,7 @@
                 <ResourceDictionary Source="/Resource/Dictionary.xaml"/>
             </Grid.Resources>
             <ScrollViewer>
-                <Border MinHeight="580">
+                <Border MinHeight="600">
                     <Grid>
                         <Label Content="Виды войск" Margin="39,28,26,0" Foreground="White" FontSize="30" FontFamily="Yu Gothic UI Semibold" HorizontalContentAlignment="Left" Height="52" VerticalAlignment="Top"/>
                         <Label Content="Название вида войск" Margin="39,85,26,0" Foreground="White" FontSize="15" FontFamily="Yu Gothic UI Semilight" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>

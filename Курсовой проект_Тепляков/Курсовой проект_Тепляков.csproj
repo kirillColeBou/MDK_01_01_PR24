@@ -171,7 +171,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ClassConnection\ClassConnection.csproj">
+      <Project>{A92362A1-BAF6-4796-AD36-55F00F908C2C}</Project>
+      <Name>ClassConnection</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\logo.png" />
   </ItemGroup>

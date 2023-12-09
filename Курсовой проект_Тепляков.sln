@@ -5,6 +5,8 @@ VisualStudioVersion = 17.9.34310.174
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Курсовой проект_Тепляков", "Курсовой проект_Тепляков\Курсовой проект_Тепляков.csproj", "{4C983DAA-7400-45EB-8758-19B266AC53CF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassConnection", "ClassConnection\ClassConnection.csproj", "{A92362A1-BAF6-4796-AD36-55F00F908C2C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{4C983DAA-7400-45EB-8758-19B266AC53CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C983DAA-7400-45EB-8758-19B266AC53CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C983DAA-7400-45EB-8758-19B266AC53CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A92362A1-BAF6-4796-AD36-55F00F908C2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A92362A1-BAF6-4796-AD36-55F00F908C2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A92362A1-BAF6-4796-AD36-55F00F908C2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A92362A1-BAF6-4796-AD36-55F00F908C2C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

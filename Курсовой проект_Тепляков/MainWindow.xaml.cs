@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClassConnection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -42,6 +43,24 @@ namespace Курсовой_проект_Тепляков
             opgridAnimation.Completed += delegate
             {
                 frame.Navigate(login);
+                DoubleAnimation opgrisdAnimation = new DoubleAnimation();
+                opgrisdAnimation.From = 0;
+                opgrisdAnimation.To = 1;
+                opgrisdAnimation.Duration = TimeSpan.FromSeconds(1.2);
+                frame.BeginAnimation(Frame.OpacityProperty, opgrisdAnimation);
+            };
+            frame.BeginAnimation(Frame.OpacityProperty, opgridAnimation);
+        }
+
+        public void OpenPageMain()
+        {
+            DoubleAnimation opgridAnimation = new DoubleAnimation();
+            opgridAnimation.From = 1;
+            opgridAnimation.To = 0;
+            opgridAnimation.Duration = TimeSpan.FromSeconds(0.6);
+            opgridAnimation.Completed += delegate
+            {
+                frame.Navigate(main);
                 DoubleAnimation opgrisdAnimation = new DoubleAnimation();
                 opgrisdAnimation.From = 0;
                 opgrisdAnimation.To = 1;

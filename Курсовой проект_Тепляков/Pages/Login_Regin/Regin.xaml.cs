@@ -21,29 +21,9 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
     /// </summary>
     public partial class Regin : Page
     {
-        public static Main init;
         public Regin()
         {
             InitializeComponent();
-            init = new Main();
-        }
-
-        public void OpenPageMain()
-        {
-            DoubleAnimation opgridAnimation = new DoubleAnimation();
-            opgridAnimation.From = 1;
-            opgridAnimation.To = 0;
-            opgridAnimation.Duration = TimeSpan.FromSeconds(0.6);
-            opgridAnimation.Completed += delegate
-            {
-                MainWindow.init.frame.Navigate(init);
-                DoubleAnimation opgrisdAnimation = new DoubleAnimation();
-                opgrisdAnimation.From = 0;
-                opgrisdAnimation.To = 1;
-                opgrisdAnimation.Duration = TimeSpan.FromSeconds(1.2);
-                MainWindow.init.frame.BeginAnimation(Frame.OpacityProperty, opgrisdAnimation);
-            };
-            MainWindow.init.frame.BeginAnimation(Frame.OpacityProperty, opgridAnimation);
         }
 
         private void Back_Click(object sender, MouseButtonEventArgs e)
@@ -57,7 +37,7 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
                 if (password_new_user_first.Password == password_new_user_second.Password)
                 {
                     MessageBox.Show("Вход выполнен");
-                    OpenPageMain();
+                    MainWindow.init.OpenPageMain();
                 }  
                 else
                     MessageBox.Show("Пароли не совпадают");
