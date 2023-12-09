@@ -36,14 +36,14 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
             opgridAnimation.Duration = TimeSpan.FromSeconds(0.6);
             opgridAnimation.Completed += delegate
             {
-                MainWindow.main.frame.Navigate(init);
+                MainWindow.init.frame.Navigate(init);
                 DoubleAnimation opgrisdAnimation = new DoubleAnimation();
                 opgrisdAnimation.From = 0;
                 opgrisdAnimation.To = 1;
                 opgrisdAnimation.Duration = TimeSpan.FromSeconds(1.2);
-                MainWindow.main.frame.BeginAnimation(Frame.OpacityProperty, opgrisdAnimation);
+                MainWindow.init.frame.BeginAnimation(Frame.OpacityProperty, opgrisdAnimation);
             };
-            MainWindow.main.frame.BeginAnimation(Frame.OpacityProperty, opgridAnimation);
+            MainWindow.init.frame.BeginAnimation(Frame.OpacityProperty, opgridAnimation);
         }
 
         private void Back_Click(object sender, MouseButtonEventArgs e)

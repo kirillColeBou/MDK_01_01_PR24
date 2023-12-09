@@ -13,6 +13,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 using Курсовой_проект_Тепляков.Pages.Login_Regin;
 
 namespace Курсовой_проект_Тепляков.Pages
@@ -44,44 +45,194 @@ namespace Курсовой_проект_Тепляков.Pages
             opgridAnimation.Duration = TimeSpan.FromSeconds(0.6);
             opgridAnimation.Completed += delegate
             {
-                MainWindow.main.frame.Navigate(new Login());
+                MainWindow.init.frame.Navigate(new Login());
                 DoubleAnimation opgrisdAnimation = new DoubleAnimation();
                 opgrisdAnimation.From = 0;
                 opgrisdAnimation.To = 1;
                 opgrisdAnimation.Duration = TimeSpan.FromSeconds(1.2);
-                MainWindow.main.frame.BeginAnimation(Frame.OpacityProperty, opgrisdAnimation);
+                MainWindow.init.frame.BeginAnimation(Frame.OpacityProperty, opgrisdAnimation);
             };
-            MainWindow.main.frame.BeginAnimation(Frame.OpacityProperty, opgridAnimation);
+            MainWindow.init.frame.BeginAnimation(Frame.OpacityProperty, opgridAnimation);
         }
 
         private void Click_Parts(object sender, RoutedEventArgs e)
         {
-
+            if (frame_main.Visibility == Visibility.Visible) MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main);
+            if (page_select != page_main.parts)
+            {
+                page_select = page_main.parts;
+                DoubleAnimation opgridAnimation = new DoubleAnimation();
+                opgridAnimation.From = 1;
+                opgridAnimation.To = 0;
+                opgridAnimation.Duration = TimeSpan.FromSeconds(0.2);
+                opgridAnimation.Completed += delegate
+                {
+                    parrent.Children.Clear();
+                    DoubleAnimation opgriAnimation = new DoubleAnimation();
+                    opgriAnimation.From = 0;
+                    opgriAnimation.To = 1;
+                    opgriAnimation.Duration = TimeSpan.FromSeconds(0.2);
+                    opgriAnimation.Completed += delegate
+                    {
+                        Dispatcher.InvokeAsync(async () =>
+                        {
+                            await Task.Delay(90);
+                        });
+                    };
+                    parrent.BeginAnimation(StackPanel.OpacityProperty, opgriAnimation);
+                };
+                parrent.BeginAnimation(StackPanel.OpacityProperty, opgridAnimation);
+            }
         }
 
         private void Click_Locations(object sender, RoutedEventArgs e)
         {
-
+            if (frame_main.Visibility == Visibility.Visible) MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main);
+            if (page_select != page_main.locations)
+            {
+                page_select = page_main.locations;
+                DoubleAnimation opgridAnimation = new DoubleAnimation();
+                opgridAnimation.From = 1;
+                opgridAnimation.To = 0;
+                opgridAnimation.Duration = TimeSpan.FromSeconds(0.2);
+                opgridAnimation.Completed += delegate
+                {
+                    parrent.Children.Clear();
+                    DoubleAnimation opgriAnimation = new DoubleAnimation();
+                    opgriAnimation.From = 0;
+                    opgriAnimation.To = 1;
+                    opgriAnimation.Duration = TimeSpan.FromSeconds(0.2);
+                    opgriAnimation.Completed += delegate
+                    {
+                        Dispatcher.InvokeAsync(async () =>
+                        {
+                            await Task.Delay(90);
+                        });
+                    };
+                    parrent.BeginAnimation(StackPanel.OpacityProperty, opgriAnimation);
+                };
+                parrent.BeginAnimation(StackPanel.OpacityProperty, opgridAnimation);
+            }
         }
 
         private void Click_Companies(object sender, RoutedEventArgs e)
         {
-
+            if (frame_main.Visibility == Visibility.Visible) MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main);
+            if (page_select != page_main.companies)
+            {
+                page_select = page_main.companies;
+                DoubleAnimation opgridAnimation = new DoubleAnimation();
+                opgridAnimation.From = 1;
+                opgridAnimation.To = 0;
+                opgridAnimation.Duration = TimeSpan.FromSeconds(0.2);
+                opgridAnimation.Completed += delegate
+                {
+                    parrent.Children.Clear();
+                    DoubleAnimation opgriAnimation = new DoubleAnimation();
+                    opgriAnimation.From = 0;
+                    opgriAnimation.To = 1;
+                    opgriAnimation.Duration = TimeSpan.FromSeconds(0.2);
+                    opgriAnimation.Completed += delegate
+                    {
+                        Dispatcher.InvokeAsync(async () =>
+                        {
+                            await Task.Delay(90);
+                        });
+                    };
+                    parrent.BeginAnimation(StackPanel.OpacityProperty, opgriAnimation);
+                };
+                parrent.BeginAnimation(StackPanel.OpacityProperty, opgridAnimation);
+            }
         }
 
         private void Click_Technique(object sender, RoutedEventArgs e)
         {
-
+            if (frame_main.Visibility == Visibility.Visible) MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main);
+            if (page_select != page_main.technique)
+            {
+                page_select = page_main.technique;
+                DoubleAnimation opgridAnimation = new DoubleAnimation();
+                opgridAnimation.From = 1;
+                opgridAnimation.To = 0;
+                opgridAnimation.Duration = TimeSpan.FromSeconds(0.2);
+                opgridAnimation.Completed += delegate
+                {
+                    parrent.Children.Clear();
+                    DoubleAnimation opgriAnimation = new DoubleAnimation();
+                    opgriAnimation.From = 0;
+                    opgriAnimation.To = 1;
+                    opgriAnimation.Duration = TimeSpan.FromSeconds(0.2);
+                    opgriAnimation.Completed += delegate
+                    {
+                        Dispatcher.InvokeAsync(async () =>
+                        {
+                            await Task.Delay(90);
+                        });
+                    };
+                    parrent.BeginAnimation(StackPanel.OpacityProperty, opgriAnimation);
+                };
+                parrent.BeginAnimation(StackPanel.OpacityProperty, opgridAnimation);
+            }
         }
 
         private void Click_Type_of_troops(object sender, RoutedEventArgs e)
         {
-
+            if (frame_main.Visibility == Visibility.Visible) MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main);
+            if (page_select != page_main.type_of_troops)
+            {
+                page_select = page_main.type_of_troops;
+                DoubleAnimation opgridAnimation = new DoubleAnimation();
+                opgridAnimation.From = 1;
+                opgridAnimation.To = 0;
+                opgridAnimation.Duration = TimeSpan.FromSeconds(0.2);
+                opgridAnimation.Completed += delegate
+                {
+                    parrent.Children.Clear();
+                    DoubleAnimation opgriAnimation = new DoubleAnimation();
+                    opgriAnimation.From = 0;
+                    opgriAnimation.To = 1;
+                    opgriAnimation.Duration = TimeSpan.FromSeconds(0.2);
+                    opgriAnimation.Completed += delegate
+                    {
+                        Dispatcher.InvokeAsync(async () =>
+                        {
+                            await Task.Delay(90);
+                        });
+                    };
+                    parrent.BeginAnimation(StackPanel.OpacityProperty, opgriAnimation);
+                };
+                parrent.BeginAnimation(StackPanel.OpacityProperty, opgridAnimation);
+            }
         }
 
         private void Click_Weapons(object sender, RoutedEventArgs e)
         {
-
+            if (frame_main.Visibility == Visibility.Visible) MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main);
+            if (page_select != page_main.weapons)
+            {
+                page_select = page_main.weapons;
+                DoubleAnimation opgridAnimation = new DoubleAnimation();
+                opgridAnimation.From = 1;
+                opgridAnimation.To = 0;
+                opgridAnimation.Duration = TimeSpan.FromSeconds(0.2);
+                opgridAnimation.Completed += delegate
+                {
+                    parrent.Children.Clear();
+                    DoubleAnimation opgriAnimation = new DoubleAnimation();
+                    opgriAnimation.From = 0;
+                    opgriAnimation.To = 1;
+                    opgriAnimation.Duration = TimeSpan.FromSeconds(0.2);
+                    opgriAnimation.Completed += delegate
+                    {
+                        Dispatcher.InvokeAsync(async () =>
+                        {
+                            await Task.Delay(90);
+                        });
+                    };
+                    parrent.BeginAnimation(StackPanel.OpacityProperty, opgriAnimation);
+                };
+                parrent.BeginAnimation(StackPanel.OpacityProperty, opgridAnimation);
+            }
         }
 
         private void Click_Back(object sender, RoutedEventArgs e)

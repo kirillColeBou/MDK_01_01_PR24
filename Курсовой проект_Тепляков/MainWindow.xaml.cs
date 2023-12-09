@@ -21,12 +21,14 @@ namespace Курсовой_проект_Тепляков
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static MainWindow main;
+        public static Pages.Main main;
+        public static MainWindow init;
         public static Pages.Login_Regin.Login login;
         public MainWindow()
         {
             InitializeComponent();
-            main = this;
+            init = this;
+            main = new Pages.Main();
             login = new Pages.Login_Regin.Login();
             OpenPageLogin();
         }
