@@ -16,8 +16,8 @@
             <Grid.Resources>
                 <ResourceDictionary Source="/Resource/Dictionary.xaml"/>
             </Grid.Resources>
-            <ScrollViewer x:Name="scroll_user">
-                <Border x:Name="Info_user" MinHeight="580">
+            <ScrollViewer>
+                <Border MinHeight="580">
                     <Grid>
                         <Label Content="Рота" Margin="39,28,26,0" Foreground="White" FontSize="30" FontFamily="Yu Gothic UI Semibold" HorizontalContentAlignment="Left" Height="52" VerticalAlignment="Top"/>
                         <Label Content="Главнокомандующий" Margin="39,85,26,0" Foreground="White" FontSize="15" FontFamily="Yu Gothic UI Semilight" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
