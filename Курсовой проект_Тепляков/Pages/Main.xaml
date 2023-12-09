@@ -5,10 +5,80 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Курсовой_проект_Тепляков.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="1050"
       Title="Main">
 
-    <Grid>
-        
+    <Grid Background="#545454">
+        <Grid.Resources>
+            <ResourceDictionary Source="/Resource/Dictionary.xaml"/>
+        </Grid.Resources>
+        <Grid Margin="0,0,0,0" VerticalAlignment="Top" Height="60" Grid.ColumnSpan="2">
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="31" Direction="260" Color="#FFC1C1C1" ShadowDepth="0"/>
+            </Grid.Effect>
+            <Border CornerRadius="00,00,00,00" Margin="0,0,0,0">
+                <Border.Background>
+                    <SolidColorBrush Color="#FF2C2C2C" Opacity="1.0"/>
+                </Border.Background>
+            </Border>
+            <Image Source="/Images/logo.png" Margin="19,8,0,0" HorizontalAlignment="Left" Width="41" Height="42" VerticalAlignment="Top"/>
+        </Grid>
+        <Grid Margin="10,71,10,0" Height="51" VerticalAlignment="Top">
+            <StackPanel x:Name="list_move" Orientation="Horizontal">
+                <Border x:Name="parts_itms" Margin="5,3,10,0" Height="45" CornerRadius="5,5,5,5" Style="{StaticResource Grid_Itm_Anim}" MouseDown="Click_Parts" Padding="7,7,7,7">
+                    <Grid Height="30">
+                        <Image Source="/Images/parts.png" Margin="5,0,0,0" HorizontalAlignment="Left" Width="29" Height="30" VerticalAlignment="Top"/>
+                        <Label Content="Части" Margin="44,0,0,0" Foreground="#FF171717" FontSize="15" FontFamily="Corbel" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top"/>
+                    </Grid>
+                </Border>
+                <Border x:Name="locations_itms" Margin="5,3,0,0" Height="45" CornerRadius="5,5,5,5" Style="{StaticResource Grid_Itm_Anim}" MouseDown="Click_Locations" Padding="7,7,7,7">
+                    <Grid Height="30">
+                        <Image Source="/Images/locations.png" Margin="5,0,0,0" HorizontalAlignment="Left" Width="29" Height="30" VerticalAlignment="Top"/>
+                        <Label Content="Места дислокации" Margin="44,0,0,0" Foreground="#FF171717" FontSize="15" FontFamily="Corbel" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="30"  VerticalAlignment="Top"/>
+                    </Grid>
+                </Border>
+                <Border x:Name="companies_itms" Margin="15,3,0,0" Height="45" CornerRadius="5,5,5,5" Style="{StaticResource Grid_Itm_Anim}" MouseDown="Click_Companies" Padding="7,7,7,7">
+                    <Grid Height="30">
+                        <Image Source="/Images/companies.png" Margin="5,0,0,0" HorizontalAlignment="Left" Width="29" Height="30" VerticalAlignment="Top"/>
+                        <Label Content="Роты" Margin="44,0,0,0" Foreground="#FF171717" FontSize="15" FontFamily="Corbel" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="30"  VerticalAlignment="Top"/>
+                    </Grid>
+                </Border>
+                <Border x:Name="technique_itms" Margin="15,3,0,0" Height="45" CornerRadius="5,5,5,5" Style="{StaticResource Grid_Itm_Anim}" MouseDown="Click_Technique" Padding="7,7,7,7">
+                    <Grid Height="30">
+                        <Image Source="/Images/technique.png" Margin="5,0,0,0" HorizontalAlignment="Left" Width="29" Height="30" VerticalAlignment="Top"/>
+                        <Label Content="Техника" Margin="44,0,0,0" Foreground="#FF171717" FontSize="15" FontFamily="Corbel" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="30"  VerticalAlignment="Top"/>
+                    </Grid>
+                </Border>
+                <Border x:Name="typeOfTroops_itms" Margin="15,3,0,0" Height="45" CornerRadius="5,5,5,5" Style="{StaticResource Grid_Itm_Anim}" MouseDown="Click_Type_of_troops" Padding="7,7,7,7">
+                    <Grid Height="30">
+                        <Image Source="/Images/type_of_troops.png" Margin="5,0,0,0" HorizontalAlignment="Left" Width="29" Height="30" VerticalAlignment="Top"/>
+                        <Label Content="Виды войск" Margin="44,0,0,0" Foreground="#FF171717" FontSize="15" FontFamily="Corbel" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="30"  VerticalAlignment="Top"/>
+                    </Grid>
+                </Border>
+                <Border x:Name="weapons_itms" Margin="15,3,0,0" Height="45" CornerRadius="5,5,5,5" Style="{StaticResource Grid_Itm_Anim}" MouseDown="Click_Weapons" Padding="7,7,7,7">
+                    <Grid Height="30">
+                        <Image Source="/Images/weapons.png" Margin="5,0,0,0" HorizontalAlignment="Left" Width="29" Height="30" VerticalAlignment="Top"/>
+                        <Label Content="Вооружения" Margin="44,0,0,0" Foreground="#FF171717" FontSize="15" FontFamily="Corbel" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Height="30"  VerticalAlignment="Top"/>
+                    </Grid>
+                </Border>
+                <Border Margin="15,3,0,0" Height="45" CornerRadius="5,5,5,5" Style="{StaticResource Grid_Itm_Anim}" MouseDown="Click_Back" Padding="7,7,7,7">
+                    <Grid Height="30">
+                        <Image Source="/Images/back.png" Margin="5,0,0,0" HorizontalAlignment="Left" Width="29" Height="30" VerticalAlignment="Top"/>
+                        <Label Content="Назад" Margin="44,0,0,0" Foreground="#FF171717" FontSize="15" FontFamily="Corbel" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top"/>
+                    </Grid>
+                </Border>
+            </StackPanel>
+        </Grid>
+        <Border Margin="10,133,10,10" CornerRadius="15,15,15,15">
+            <Border.Background>
+                <SolidColorBrush Color="#3D3D3D" Opacity="1.0"/>
+            </Border.Background>
+            <Grid MinHeight="457">
+                <ScrollViewer x:Name="scroll_main">
+                    <StackPanel x:Name="parrent"/>
+                </ScrollViewer>
+                <Frame x:Name="frame_main" NavigationUIVisibility="Hidden" Visibility="Hidden" Opacity="0"/>
+            </Grid>
+        </Border>
     </Grid>
 </Page>

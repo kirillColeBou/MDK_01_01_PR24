@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Курсовой_проект_Тепляков.Pages.Login_Regin"
       mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="1050"
       Title="Regin">
 
     <Grid Background="#545454">
@@ -27,7 +27,7 @@
             <Border.Background>
                 <SolidColorBrush Color="#3D3D3D" Opacity="1.0"/>
             </Border.Background>
-            <Grid MinHeight="480">
+            <Grid MinHeight="530">
                 <Label Content="Регистрация"                  Foreground="White"   FontSize="30" FontFamily="Yu Gothic UI Semibold"  Margin="0,70,0,0"  HorizontalAlignment="Center" VerticalAlignment="Top"/>
                 <Label Content="Введите логин:"          Foreground="White"   FontSize="16" FontFamily="Yu Gothic UI Semilight" Margin="0,160,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                 <TextBox Style="{StaticResource BaseBox}"     Foreground="#3D3D3D" FontSize="16" FontFamily="Yu Gothic UI Semilight" Margin="0,200,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#FFDEDEDE"  Width="220" Height="30" x:Name="login_new_user"/>
