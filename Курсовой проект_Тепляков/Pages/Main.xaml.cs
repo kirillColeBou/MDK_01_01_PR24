@@ -23,18 +23,19 @@ namespace Курсовой_проект_Тепляков.Pages
     /// </summary>
     public partial class Main : Page
     {
-        public static page_main page_select;
-        public static Main init;
-        public Main()
-        {
-            InitializeComponent();
-            init = this;
-            page_select = page_main.none;
-        }
-
         public enum page_main
         {
             companies, locations, parts, technique, type_of_troops, weapons, none
+        }
+
+        public static page_main page_select;
+        public static Main main;
+
+        public Main()
+        {
+            InitializeComponent();
+            main = this;
+            page_select = page_main.none;
         }
 
         public void OpenPageLogin()
@@ -77,6 +78,11 @@ namespace Курсовой_проект_Тепляков.Pages
                         Dispatcher.InvokeAsync(async () =>
                         {
                             await Task.Delay(90);
+                            if (page_select == page_main.parts)
+                            {
+                                var add = new PagesInTable.Parts();
+                                parrent.Children.Add(new Elements.Add(add));
+                            }
                         });
                     };
                     parrent.BeginAnimation(StackPanel.OpacityProperty, opgriAnimation);
@@ -107,6 +113,11 @@ namespace Курсовой_проект_Тепляков.Pages
                         Dispatcher.InvokeAsync(async () =>
                         {
                             await Task.Delay(90);
+                            if (page_select == page_main.locations)
+                            {
+                                var add = new PagesInTable.Locations();
+                                parrent.Children.Add(new Elements.Add(add));
+                            }
                         });
                     };
                     parrent.BeginAnimation(StackPanel.OpacityProperty, opgriAnimation);
@@ -137,6 +148,11 @@ namespace Курсовой_проект_Тепляков.Pages
                         Dispatcher.InvokeAsync(async () =>
                         {
                             await Task.Delay(90);
+                            if (page_select == page_main.companies)
+                            {
+                                var add = new PagesInTable.Companies();
+                                parrent.Children.Add(new Elements.Add(add));
+                            }
                         });
                     };
                     parrent.BeginAnimation(StackPanel.OpacityProperty, opgriAnimation);
@@ -167,6 +183,11 @@ namespace Курсовой_проект_Тепляков.Pages
                         Dispatcher.InvokeAsync(async () =>
                         {
                             await Task.Delay(90);
+                            if (page_select == page_main.technique)
+                            {
+                                var add = new PagesInTable.Technique();
+                                parrent.Children.Add(new Elements.Add(add));
+                            }
                         });
                     };
                     parrent.BeginAnimation(StackPanel.OpacityProperty, opgriAnimation);
@@ -197,6 +218,11 @@ namespace Курсовой_проект_Тепляков.Pages
                         Dispatcher.InvokeAsync(async () =>
                         {
                             await Task.Delay(90);
+                            if (page_select == page_main.type_of_troops)
+                            {
+                                var add = new PagesInTable.Type_of_troops();
+                                parrent.Children.Add(new Elements.Add(add));
+                            }
                         });
                     };
                     parrent.BeginAnimation(StackPanel.OpacityProperty, opgriAnimation);
@@ -227,6 +253,11 @@ namespace Курсовой_проект_Тепляков.Pages
                         Dispatcher.InvokeAsync(async () =>
                         {
                             await Task.Delay(90);
+                            if (page_select == page_main.weapons)
+                            {
+                                var add = new PagesInTable.Weapons();
+                                parrent.Children.Add(new Elements.Add(add));
+                            }
                         });
                     };
                     parrent.BeginAnimation(StackPanel.OpacityProperty, opgriAnimation);
