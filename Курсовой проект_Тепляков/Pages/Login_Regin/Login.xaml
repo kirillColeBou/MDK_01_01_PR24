@@ -28,12 +28,14 @@
                 <SolidColorBrush Color="#3D3D3D" Opacity="1.0"/>
             </Border.Background>
             <Grid MinHeight="530">
-                <Label Content="Авторизация"                  Foreground="White"   FontSize="30" FontFamily="Yu Gothic UI Semibold"  Margin="0,70,0,0"  HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <Label Content="Введите свой логин:"          Foreground="White"   FontSize="16" FontFamily="Yu Gothic UI Semilight" Margin="0,160,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <TextBox Style="{StaticResource BaseBox}"     Foreground="#3D3D3D" FontSize="16" FontFamily="Yu Gothic UI Semilight" Margin="0,200,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#FFDEDEDE"  Width="220" Height="32" x:Name="login_user"/>
-                <Label Content="Введите свой пароль:"         Foreground="White"   FontSize="16" FontFamily="Yu Gothic UI Semilight" Margin="0,240,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <PasswordBox Style="{StaticResource BaseBox}" Foreground="#3D3D3D" FontSize="16" FontFamily="Yu Gothic UI Semilight" Margin="0,280,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#FFDEDEDE"  Width="220" Height="32" x:Name="password_user" PasswordChar="*"/>
-                <Grid Margin="0,320,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" Width="260" Height="50">
+                <Label Content="Авторизация"                  Foreground="White"   FontSize="30" FontFamily="Yu Gothic UI Semibold"  Margin="0,70,0,0"     HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <Label Content="Введите свой логин:"          Foreground="White"   FontSize="16" FontFamily="Yu Gothic UI Semilight" Margin="0,160,0,0"    HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <TextBox Style="{StaticResource BaseBox}"     Foreground="#3D3D3D" FontSize="16" FontFamily="Yu Gothic UI Semilight" Margin="0,200,0,0"    HorizontalAlignment="Center" VerticalAlignment="Top" Background="#FFDEDEDE"    Width="220" Height="32" x:Name="login_user" TextChanged="login_user_TextChanged"/>
+                <Label Content="Логин не верный"              Foreground="#FB3F51" FontSize="10"  FontFamily="Yu Gothic UI Semilight" Margin="0,230,100,0" HorizontalAlignment="Center" VerticalAlignment="Top" x:Name="login_incorrect"   Width="100" Visibility="Hidden"/>
+                <Label Content="Введите свой пароль:"         Foreground="White"   FontSize="16" FontFamily="Yu Gothic UI Semilight" Margin="0,260,0,0"    HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <PasswordBox Style="{StaticResource BaseBox}" Foreground="#3D3D3D" FontSize="16" FontFamily="Yu Gothic UI Semilight" Margin="0,300,0,0"    HorizontalAlignment="Center" VerticalAlignment="Top" Background="#FFDEDEDE"    Width="220" Height="32" x:Name="password_user" PasswordChar="*" PasswordChanged="password_user_TextChanged"/>
+                <Label Content="Пароль неверный"              Foreground="#FB3F51" FontSize="10"  FontFamily="Yu Gothic UI Semilight" Margin="0,330,100,0" HorizontalAlignment="Center" VerticalAlignment="Top" x:Name="password_incorrect" Width="100" Visibility="Hidden"/>
+                <Grid Margin="0,360,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" Width="260" Height="50">
                     <Border Height="30" CornerRadius="5,5,5,5" Style="{StaticResource Grid_Itm_Anim}" MouseDown="Login_Click" Padding="7,7,7,7" Margin="0,0,135,0" VerticalAlignment="Center" Width="105" HorizontalAlignment="Right">
                         <Grid Height="18">
                             <Image Source="/Images/login.png" Margin="5,0,0,0" HorizontalAlignment="Left" Width="15" Height="16" VerticalAlignment="Top"/>

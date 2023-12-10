@@ -47,8 +47,25 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
             MainWindow.init.frame.BeginAnimation(Frame.OpacityProperty, opgridAnimation);
         }
 
+        private void login_user_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            login_incorrect.Visibility = Visibility.Hidden;
+            login_user.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#3D3D3D"));
+        }
+
+        private void password_user_TextChanged(object sender, RoutedEventArgs e)
+        {
+            password_incorrect.Visibility = Visibility.Hidden;
+            password_user.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#3D3D3D"));
+        }
+
         private void Login_Click(object sender, MouseButtonEventArgs e)
         {
+            login_incorrect.Content = "Логин не верный";
+            login_incorrect.Visibility = Visibility.Hidden;
+            password_incorrect.Content = "Пароль не верный";
+            password_incorrect.Visibility = Visibility.Hidden;
+
             if (login_user.Text != "" && password_user.Password != "")
                 if (login_user.Text == "kirill")
                     if (password_user.Password == "1234")
@@ -56,12 +73,26 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
                         MainWindow.init.OpenPageMain();
                     }
                     else
-                        MessageBox.Show("Пароль неверный");
+                    {
+                        password_user.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                        password_incorrect.Visibility = Visibility.Visible;
+                    }
                 else
-                    MessageBox.Show("Имя пользователя неверно");
+                {
+                    login_user.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                    login_incorrect.Visibility = Visibility.Visible;
+                }
             else
-                MessageBox.Show("Введите логин и пароль");
+            {
+                login_user.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                login_incorrect.Content = "Введите логин";
+                login_incorrect.Visibility = Visibility.Visible;
+                password_user.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                password_incorrect.Content = "Введите пароль";
+                password_incorrect.Visibility = Visibility.Visible;
+            }
         }
+
 
         private void Regin_Click(object sender, MouseButtonEventArgs e)
         {
