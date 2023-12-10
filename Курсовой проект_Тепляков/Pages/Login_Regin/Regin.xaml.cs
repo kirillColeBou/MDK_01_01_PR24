@@ -47,23 +47,41 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
 
         private void Login_Click(object sender, MouseButtonEventArgs e)
         {
+            login_incorrect.Visibility = Visibility.Hidden;
             password_incorrect_first.Content = "Пароли не совпадают";
             password_incorrect_first.Visibility = Visibility.Hidden;
             password_incorrect_second.Content = "Пароли не совпадают";
             password_incorrect_second.Visibility = Visibility.Hidden;
-            if (login_new_user.Text != "" && password_new_user_first.Password != "" && password_new_user_second.Password != "")
-                if (password_new_user_first.Password == password_new_user_second.Password)
-                {
-                    MainWindow.init.OpenPageMain();
-                }
+            if (login_new_user.Text != "")
+                if (password_new_user_first.Password != "" && password_new_user_second.Password != "")
+
+                    if (password_new_user_first.Password == password_new_user_second.Password)
+                    {
+                        MainWindow.init.OpenPageMain();
+                    }
+                    else
+                    {
+                        password_new_user_first.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                        password_incorrect_first.Visibility = Visibility.Visible;
+                        password_new_user_second.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                        password_incorrect_second.Visibility = Visibility.Visible;
+                    }
                 else
                 {
                     password_new_user_first.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                    password_incorrect_first.Content = "Введите пароль";
                     password_incorrect_first.Visibility = Visibility.Visible;
                     password_new_user_second.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                    password_incorrect_second.Content = "Введите пароль";
                     password_incorrect_second.Visibility = Visibility.Visible;
                 }
             else
+            {
+                login_new_user.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                login_incorrect.Content = "Введите логин";
+                login_incorrect.Visibility = Visibility.Visible;
+            }
+            if(login_new_user.Text == "" && password_new_user_first.Password == "" && password_new_user_second.Password == "")
             {
                 login_new_user.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
                 login_incorrect.Content = "Введите логин";
