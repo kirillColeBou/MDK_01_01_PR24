@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Курсовой_проект_Тепляков.Elements.Companies_items"
+﻿<UserControl x:Class="Курсовой_проект_Тепляков.Elements.Locations_items"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -10,8 +10,11 @@
             <Grid.Resources>
                 <ResourceDictionary Source="/Resource/Dictionary.xaml"/>
             </Grid.Resources>
-            <Label Content="Рота (номер)" Margin="19,10,101,0" Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" Height="35" VerticalAlignment="Top" FontWeight="Bold" FontSize="18"/>
-            <Label Content="Главнокомандующий" Margin="19,50,101,0" Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
+            <Label Content="Страна"                Margin="19,5,101,0"   Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" Height="35" VerticalAlignment="Top" FontWeight="Bold" FontSize="18"/>
+            <Label Content="Город"                 Margin="19,36,101,0"  Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
+            <Label Content="Адрес"                 Margin="19,61,101,0"  Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
+            <Label Content="Занимаемая площадь"    Margin="250,36,101,0" Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
+            <Label Content="Количество сооружений" Margin="250,61,101,0" Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
             <Button Style="{StaticResource BtnRedac}" Background="#FF2C2C2C" Margin="0,5,9.6,0" VerticalAlignment="Top" Height="40" Width="63" Click="Click_redact" HorizontalAlignment="Right">
                 <Image Source="/Images/redac.png" Width="20" Height="20"/>
             </Button>

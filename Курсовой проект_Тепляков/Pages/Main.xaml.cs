@@ -150,6 +150,7 @@ namespace Курсовой_проект_Тепляков.Pages
                             await Task.Delay(90);
                             if (page_select == page_main.companies)
                             {
+                                
                                 var add = new PagesInTable.Companies();
                                 parrent.Children.Add(new Elements.Add(add));
                             }

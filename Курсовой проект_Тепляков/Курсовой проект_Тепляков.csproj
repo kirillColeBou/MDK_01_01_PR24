@@ -66,6 +66,26 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Elements\Locations_items.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Elements\Parts_items.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Elements\Technique_items.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Elements\TypeOfTroops_items.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Elements\Weapons_items.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -79,6 +99,21 @@
     </Compile>
     <Compile Include="Elements\Companies_items.xaml.cs">
       <DependentUpon>Companies_items.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Elements\Locations_items.xaml.cs">
+      <DependentUpon>Locations_items.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Elements\Parts_items.xaml.cs">
+      <DependentUpon>Parts_items.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Elements\Technique_items.xaml.cs">
+      <DependentUpon>Technique_items.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Elements\TypeOfTroops_items.xaml.cs">
+      <DependentUpon>TypeOfTroops_items.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Elements\Weapons_items.xaml.cs">
+      <DependentUpon>Weapons_items.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
