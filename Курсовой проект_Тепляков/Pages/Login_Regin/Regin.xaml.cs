@@ -36,7 +36,6 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
             if (login_new_user.Text != "" && password_new_user_first.Password != "" && password_new_user_second.Password != "")
                 if (password_new_user_first.Password == password_new_user_second.Password)
                 {
-                    MessageBox.Show("Вход выполнен");
                     MainWindow.init.OpenPageMain();
                 }  
                 else

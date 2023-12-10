@@ -53,7 +53,6 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
                 if (login_user.Text == "kirill")
                     if (password_user.Password == "1234")
                     {
-                        MessageBox.Show("Вход выполнен");
                         MainWindow.init.OpenPageMain();
                     }
                     else
