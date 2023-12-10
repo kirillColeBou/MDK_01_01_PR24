@@ -80,6 +80,7 @@ namespace Курсовой_проект_Тепляков.Pages
                             await Task.Delay(90);
                             if (page_select == page_main.parts)
                             {
+                                parrent.Children.Add(new Elements.Parts_items()); //Для демонстрации
                                 var add = new Pages.PagesInTable.Parts();
                                 parrent.Children.Add(new Elements.Add(add));
                             }
@@ -115,6 +116,7 @@ namespace Курсовой_проект_Тепляков.Pages
                             await Task.Delay(90);
                             if (page_select == page_main.locations)
                             {
+                                parrent.Children.Add(new Elements.Locations_items()); //Для демонстрации
                                 var add = new PagesInTable.Locations();
                                 parrent.Children.Add(new Elements.Add(add));
                             }
@@ -150,7 +152,7 @@ namespace Курсовой_проект_Тепляков.Pages
                             await Task.Delay(90);
                             if (page_select == page_main.companies)
                             {
-                                
+                                parrent.Children.Add(new Elements.Companies_items()); //Для демонстрации
                                 var add = new PagesInTable.Companies();
                                 parrent.Children.Add(new Elements.Add(add));
                             }
@@ -186,6 +188,7 @@ namespace Курсовой_проект_Тепляков.Pages
                             await Task.Delay(90);
                             if (page_select == page_main.technique)
                             {
+                                parrent.Children.Add(new Elements.Technique_items()); //Для демонстрации
                                 var add = new PagesInTable.Technique();
                                 parrent.Children.Add(new Elements.Add(add));
                             }
@@ -221,6 +224,7 @@ namespace Курсовой_проект_Тепляков.Pages
                             await Task.Delay(90);
                             if (page_select == page_main.type_of_troops)
                             {
+                                parrent.Children.Add(new Elements.TypeOfTroops_items()); //Для демонстрации
                                 var add = new PagesInTable.Type_of_troops();
                                 parrent.Children.Add(new Elements.Add(add));
                             }
@@ -256,6 +260,7 @@ namespace Курсовой_проект_Тепляков.Pages
                             await Task.Delay(90);
                             if (page_select == page_main.weapons)
                             {
+                                parrent.Children.Add(new Elements.Weapons_items()); //Для демонстрации
                                 var add = new PagesInTable.Weapons();
                                 parrent.Children.Add(new Elements.Add(add));
                             }
