@@ -6,12 +6,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data.OleDb;
+using System.IO;
 
 namespace ClassConnection
 {
     public class Connection
     {
-        public static readonly string Path = "Server=KIRILL\\SQLExpress;Database=military_district;User Id=sa;Password=sa";
+        #region Connection_strings_depending_on_the_place_of_work
+        public static readonly string Path_Home = "Server=KIRILL\\SQLExpress;Database=military_district;User Id=sa;Password=sa";
+        public static readonly string Path_PAT = "Server=10.0.181.170;Database=military_district;User Id=galkin_teplyakov;Password=QweqweQwe123$123_123;TrustServerCertificate=True";
+        #endregion
 
         #region All_Lists
         public List<Companies> companies = new List<Companies>();
@@ -31,11 +35,22 @@ namespace ClassConnection
         {
             try
             {
-                SqlConnection connect = new SqlConnection(Path);
-                connect.Open();
-                SqlCommand command = new SqlCommand(query, connect);
-                SqlDataReader reader = command.ExecuteReader();
-                return reader;
+                try
+                {
+                    SqlConnection connect = new SqlConnection(Path_Home);
+                    connect.Open();
+                    SqlCommand command = new SqlCommand(query, connect);
+                    SqlDataReader reader = command.ExecuteReader();
+                    return reader;
+                }
+                catch
+                {
+                    SqlConnection connect = new SqlConnection(Path_PAT);
+                    connect.Open();
+                    SqlCommand command = new SqlCommand(query, connect);
+                    SqlDataReader reader = command.ExecuteReader();
+                    return reader;
+                }
             }
             catch
             {
@@ -160,7 +175,8 @@ namespace ClassConnection
                             Companies = Convert.ToInt32(itemsParts.GetValue(4)),
                             Count_companies = Convert.ToInt32(itemsParts.GetValue(5)),
                             Count_technique = Convert.ToInt32(itemsParts.GetValue(6)),
-                            Count_weapons = Convert.ToInt32(itemsParts.GetValue(7))
+                            Count_weapons = Convert.ToInt32(itemsParts.GetValue(7)),
+                            Date_of_foundation = Convert.ToDateTime(itemsParts.GetValue(8))
                         };
                         parts.Add(newParts);
                     }

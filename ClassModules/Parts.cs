@@ -16,5 +16,6 @@ namespace ClassModules
         public int Count_companies { get; set; }
         public int Count_technique { get; set; }
         public int Count_weapons { get; set; }
+        public DateTime Date_of_foundation { get; set; }
     }
 }
