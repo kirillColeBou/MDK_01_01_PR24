@@ -20,9 +20,11 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
     /// </summary>
     public partial class Companies : Page
     {
-        public Companies()
+        ClassModules.Companies companies;
+        public Companies(ClassModules.Companies _companies)
         {
             InitializeComponent();
+            companies = _companies;
         }
 
         private void Click_Companies_Redact(object sender, RoutedEventArgs e)

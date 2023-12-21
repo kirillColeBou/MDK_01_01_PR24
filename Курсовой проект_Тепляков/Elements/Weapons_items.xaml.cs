@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClassModules;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,14 +21,21 @@ namespace Курсовой_проект_Тепляков.Elements
     /// </summary>
     public partial class Weapons_items : UserControl
     {
-        public Weapons_items()
+        Weapons weapons;
+        public Weapons_items(Weapons _weapons)
         {
             InitializeComponent();
+            weapons = _weapons;
+            if(_weapons.Name_weapons != null)
+            {
+                Id_weapons.Content = "Вооружение № " + _weapons.Id_weapons;
+                Name_weapons.Content = _weapons.Name_weapons;
+            }
         }
 
         private void Click_redact(object sender, RoutedEventArgs e)
         {
-            MainWindow.main.Animation_move(MainWindow.main.scroll_main, MainWindow.main.frame_main, MainWindow.main.frame_main, new Pages.PagesInTable.Weapons());
+            MainWindow.main.Animation_move(MainWindow.main.scroll_main, MainWindow.main.frame_main, MainWindow.main.frame_main, new Pages.PagesInTable.Weapons(weapons));
         }
 
         private void Click_remove(object sender, RoutedEventArgs e)

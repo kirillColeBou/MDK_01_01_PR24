@@ -20,9 +20,11 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
     /// </summary>
     public partial class Type_of_troops : Page
     {
-        public Type_of_troops()
+        ClassModules.Type_of_troops type_of_troops;
+        public Type_of_troops(ClassModules.Type_of_troops _type_of_troops)
         {
             InitializeComponent();
+            type_of_troops = _type_of_troops;
         }
 
         private void Click_TypeOfTroops_Redact(object sender, RoutedEventArgs e)

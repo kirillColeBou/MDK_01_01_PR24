@@ -20,9 +20,11 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
     /// </summary>
     public partial class Weapons : Page
     {
-        public Weapons()
+        ClassModules.Weapons weapons;
+        public Weapons(ClassModules.Weapons _weapons)
         {
             InitializeComponent();
+            weapons = _weapons;
         }
 
         private void Click_Weapons_Redact(object sender, RoutedEventArgs e)

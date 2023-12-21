@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClassModules;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Linq;
 using Курсовой_проект_Тепляков.Pages.Login_Regin;
+using Курсовой_проект_Тепляков.Pages.PagesInTable;
 
 namespace Курсовой_проект_Тепляков.Pages
 {
@@ -77,11 +79,18 @@ namespace Курсовой_проект_Тепляков.Pages
                     {
                         Dispatcher.InvokeAsync(async () =>
                         {
-                            await Task.Delay(90);
+                            MainWindow.connect.LoadData(ClassConnection.Connection.Tables.parts);
+                            foreach (ClassModules.Parts parts_items in MainWindow.connect.parts)
+                            {
+                                if (page_select == page_main.parts)
+                                {
+                                    parrent.Children.Add(new Elements.Parts_items(parts_items));
+                                    await Task.Delay(90);
+                                }
+                            }
                             if (page_select == page_main.parts)
                             {
-                                parrent.Children.Add(new Elements.Parts_items()); //Для демонстрации
-                                var add = new Pages.PagesInTable.Parts();
+                                var add = new Pages.PagesInTable.Parts(new ClassModules.Parts());
                                 parrent.Children.Add(new Elements.Add(add));
                             }
                         });
@@ -113,11 +122,18 @@ namespace Курсовой_проект_Тепляков.Pages
                     {
                         Dispatcher.InvokeAsync(async () =>
                         {
-                            await Task.Delay(90);
+                            MainWindow.connect.LoadData(ClassConnection.Connection.Tables.locations);
+                            foreach (ClassModules.Locations locations_items in MainWindow.connect.locations)
+                            {
+                                if (page_select == page_main.locations)
+                                {
+                                    parrent.Children.Add(new Elements.Locations_items(locations_items));
+                                    await Task.Delay(90);
+                                }
+                            }
                             if (page_select == page_main.locations)
                             {
-                                parrent.Children.Add(new Elements.Locations_items()); //Для демонстрации
-                                var add = new PagesInTable.Locations();
+                                var add = new Pages.PagesInTable.Locations(new ClassModules.Locations());
                                 parrent.Children.Add(new Elements.Add(add));
                             }
                         });
@@ -149,11 +165,18 @@ namespace Курсовой_проект_Тепляков.Pages
                     {
                         Dispatcher.InvokeAsync(async () =>
                         {
-                            await Task.Delay(90);
-                            if (page_select == page_main.companies)
+                            MainWindow.connect.LoadData(ClassConnection.Connection.Tables.companies);
+                            foreach(ClassModules.Companies companies_items in MainWindow.connect.companies)
                             {
-                                parrent.Children.Add(new Elements.Companies_items()); //Для демонстрации
-                                var add = new PagesInTable.Companies();
+                                if(page_select == page_main.companies)
+                                {
+                                    parrent.Children.Add(new Elements.Companies_items(companies_items));
+                                    await Task.Delay(90);
+                                }
+                            }
+                            if(page_select == page_main.companies)
+                            {
+                                var add = new Pages.PagesInTable.Companies(new ClassModules.Companies());
                                 parrent.Children.Add(new Elements.Add(add));
                             }
                         });
@@ -185,11 +208,18 @@ namespace Курсовой_проект_Тепляков.Pages
                     {
                         Dispatcher.InvokeAsync(async () =>
                         {
-                            await Task.Delay(90);
+                            MainWindow.connect.LoadData(ClassConnection.Connection.Tables.technique);
+                            foreach (ClassModules.Technique technique_items in MainWindow.connect.technique)
+                            {
+                                if (page_select == page_main.technique)
+                                {
+                                    parrent.Children.Add(new Elements.Technique_items(technique_items));
+                                    await Task.Delay(90);
+                                }
+                            }
                             if (page_select == page_main.technique)
                             {
-                                parrent.Children.Add(new Elements.Technique_items()); //Для демонстрации
-                                var add = new PagesInTable.Technique();
+                                var add = new Pages.PagesInTable.Technique(new ClassModules.Technique());
                                 parrent.Children.Add(new Elements.Add(add));
                             }
                         });
@@ -221,11 +251,18 @@ namespace Курсовой_проект_Тепляков.Pages
                     {
                         Dispatcher.InvokeAsync(async () =>
                         {
-                            await Task.Delay(90);
+                            MainWindow.connect.LoadData(ClassConnection.Connection.Tables.type_of_troops);
+                            foreach (ClassModules.Type_of_troops type_of_troops_items in MainWindow.connect.type_of_troops)
+                            {
+                                if (page_select == page_main.type_of_troops)
+                                {
+                                    parrent.Children.Add(new Elements.TypeOfTroops_items(type_of_troops_items));
+                                    await Task.Delay(90);
+                                }
+                            }
                             if (page_select == page_main.type_of_troops)
                             {
-                                parrent.Children.Add(new Elements.TypeOfTroops_items()); //Для демонстрации
-                                var add = new PagesInTable.Type_of_troops();
+                                var add = new Pages.PagesInTable.Type_of_troops(new ClassModules.Type_of_troops());
                                 parrent.Children.Add(new Elements.Add(add));
                             }
                         });
@@ -257,11 +294,18 @@ namespace Курсовой_проект_Тепляков.Pages
                     {
                         Dispatcher.InvokeAsync(async () =>
                         {
-                            await Task.Delay(90);
+                            MainWindow.connect.LoadData(ClassConnection.Connection.Tables.weapons);
+                            foreach (ClassModules.Weapons weapons_items in MainWindow.connect.weapons)
+                            {
+                                if (page_select == page_main.weapons)
+                                {
+                                    parrent.Children.Add(new Elements.Weapons_items(weapons_items));
+                                    await Task.Delay(90);
+                                }
+                            }
                             if (page_select == page_main.weapons)
                             {
-                                parrent.Children.Add(new Elements.Weapons_items()); //Для демонстрации
-                                var add = new PagesInTable.Weapons();
+                                var add = new Pages.PagesInTable.Weapons(new ClassModules.Weapons());
                                 parrent.Children.Add(new Elements.Add(add));
                             }
                         });

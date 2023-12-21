@@ -355,6 +355,10 @@
       <Project>{A92362A1-BAF6-4796-AD36-55F00F908C2C}</Project>
       <Name>ClassConnection</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ClassModules\ClassModules.csproj">
+      <Project>{65111B32-66AF-4F8A-BF7A-1B2A7E4928DB}</Project>
+      <Name>ClassModules</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\logo.png" />

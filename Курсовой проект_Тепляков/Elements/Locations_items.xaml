@@ -10,11 +10,11 @@
             <Grid.Resources>
                 <ResourceDictionary Source="/Resource/Dictionary.xaml"/>
             </Grid.Resources>
-            <Label Content="Страна"                Margin="19,5,101,0"   Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" Height="35" VerticalAlignment="Top" FontWeight="Bold" FontSize="18"/>
-            <Label Content="Город"                 Margin="19,36,101,0"  Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
-            <Label Content="Адрес"                 Margin="19,61,101,0"  Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
-            <Label Content="Занимаемая площадь"    Margin="450,36,101,0" Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
-            <Label Content="Количество сооружений" Margin="450,61,101,0" Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
+            <Label x:Name="Country"  Content="Страна"                Margin="19,5,101,0"   Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" Height="35" VerticalAlignment="Top" FontWeight="Bold" FontSize="18"/>
+            <Label x:Name="City"  Content="Город"                 Margin="19,36,101,0"  Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
+            <Label x:Name="Address" Content="Адрес"                 Margin="19,61,101,0"  Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
+            <Label x:Name="Square" Content="Занимаемая площадь"    Margin="450,36,101,0" Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
+            <Label x:Name="Count_structures"  Content="Количество сооружений" Margin="450,61,101,0" Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
             <Button Style="{StaticResource BtnRedac}" Background="#FF2C2C2C" Margin="0,5,9.6,0" VerticalAlignment="Top" Height="40" Width="63" Click="Click_redact" HorizontalAlignment="Right">
                 <Image Source="/Images/redac.png" Width="20" Height="20"/>
             </Button>

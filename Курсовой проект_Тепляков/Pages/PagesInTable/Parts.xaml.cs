@@ -20,9 +20,11 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
     /// </summary>
     public partial class Parts : Page
     {
-        public Parts()
+        ClassModules.Parts parts;
+        public Parts(ClassModules.Parts _parts)
         {
             InitializeComponent();
+            parts = _parts;
         }
 
         private void Click_Parts_Redact(object sender, RoutedEventArgs e)

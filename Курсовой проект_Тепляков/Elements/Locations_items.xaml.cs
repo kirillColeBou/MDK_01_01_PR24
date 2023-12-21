@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClassModules;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,14 +21,23 @@ namespace Курсовой_проект_Тепляков.Elements
     /// </summary>
     public partial class Locations_items : UserControl
     {
-        public Locations_items()
+        Locations locations;
+        public Locations_items(Locations _locations)
         {
             InitializeComponent();
+            locations = _locations;
+            if(_locations.Count_structures != null)
+            {
+                Country.Content = _locations.Country;
+                City.Content = "Город: " + _locations.City;
+                Address.Content = "Адрес: " + _locations.Address;
+                Square.Content = "Занимаемая площадь в м^2: " + _locations.Square;
+            }
         }
 
         private void Click_redact(object sender, RoutedEventArgs e)
         {
-            MainWindow.main.Animation_move(MainWindow.main.scroll_main, MainWindow.main.frame_main, MainWindow.main.frame_main, new Pages.PagesInTable.Locations());
+            MainWindow.main.Animation_move(MainWindow.main.scroll_main, MainWindow.main.frame_main, MainWindow.main.frame_main, new Pages.PagesInTable.Locations(locations));
         }
 
         private void Click_remove(object sender, RoutedEventArgs e)

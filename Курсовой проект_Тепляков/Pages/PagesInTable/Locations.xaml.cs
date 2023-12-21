@@ -20,9 +20,11 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
     /// </summary>
     public partial class Locations : Page
     {
-        public Locations()
+        ClassModules.Locations locations;
+        public Locations(ClassModules.Locations _locations)
         {
             InitializeComponent();
+            locations = _locations;
         }
 
         private void Click_Locations_Redact(object sender, RoutedEventArgs e)

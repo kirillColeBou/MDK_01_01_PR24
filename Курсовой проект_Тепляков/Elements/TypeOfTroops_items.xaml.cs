@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClassModules;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,14 +21,20 @@ namespace Курсовой_проект_Тепляков.Elements
     /// </summary>
     public partial class TypeOfTroops_items : UserControl
     {
-        public TypeOfTroops_items()
+        Type_of_troops type_of_troops;
+        public TypeOfTroops_items(Type_of_troops _type_of_troops)
         {
             InitializeComponent();
+            type_of_troops = _type_of_troops;
+            if(_type_of_troops.Name_type_of_troops != null)
+            {
+                Name_type_of_troops.Content = _type_of_troops.Name_type_of_troops;
+            }
         }
 
         private void Click_redact(object sender, RoutedEventArgs e)
         {
-            MainWindow.main.Animation_move(MainWindow.main.scroll_main, MainWindow.main.frame_main, MainWindow.main.frame_main, new Pages.PagesInTable.Type_of_troops());
+            MainWindow.main.Animation_move(MainWindow.main.scroll_main, MainWindow.main.frame_main, MainWindow.main.frame_main, new Pages.PagesInTable.Type_of_troops(type_of_troops));
         }
 
         private void Click_remove(object sender, RoutedEventArgs e)

@@ -10,8 +10,8 @@
             <Grid.Resources>
                 <ResourceDictionary Source="/Resource/Dictionary.xaml"/>
             </Grid.Resources>
-            <Label Content="Вооружение" Margin="19,10,101,0" Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" Height="35" VerticalAlignment="Top" FontWeight="Bold" FontSize="18"/>
-            <Label Content="Название вооружения" Margin="19,50,101,0" Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
+            <Label x:Name="Id_weapons" Content="Вооружение" Margin="19,10,101,0" Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" Height="35" VerticalAlignment="Top" FontWeight="Bold" FontSize="18"/>
+            <Label x:Name="Name_weapons" Content="Название вооружения" Margin="19,50,101,0" Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
             <Button Style="{StaticResource BtnRedac}" Background="#FF2C2C2C" Margin="0,5,9.6,0" VerticalAlignment="Top" Height="40" Width="63" Click="Click_redact" HorizontalAlignment="Right">
                 <Image Source="/Images/redac.png" Width="20" Height="20"/>
             </Button>

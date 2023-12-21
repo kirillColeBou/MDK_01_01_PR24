@@ -20,9 +20,11 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
     /// </summary>
     public partial class Technique : Page
     {
-        public Technique()
+        ClassModules.Technique technique;
+        public Technique(ClassModules.Technique _technique)
         {
             InitializeComponent();
+            technique = _technique;
         }
 
         private void Click_Technique_Redact(object sender, RoutedEventArgs e)
