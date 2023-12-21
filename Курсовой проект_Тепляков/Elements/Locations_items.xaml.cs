@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Курсовой_проект_Тепляков.Pages.PagesInTable;
 
 namespace Курсовой_проект_Тепляков.Elements
 {
@@ -21,8 +22,8 @@ namespace Курсовой_проект_Тепляков.Elements
     /// </summary>
     public partial class Locations_items : UserControl
     {
-        Locations locations;
-        public Locations_items(Locations _locations)
+        ClassModules.Locations locations;
+        public Locations_items(ClassModules.Locations _locations)
         {
             InitializeComponent();
             locations = _locations;
@@ -42,7 +43,23 @@ namespace Курсовой_проект_Тепляков.Elements
 
         private void Click_remove(object sender, RoutedEventArgs e)
         {
-            MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Pages.Main.page_main.locations);
+            try
+            {
+                MainWindow.connect.LoadData(ClassConnection.Connection.Tables.locations);
+                string query = $"Delete From Locations Where Id_locations = " + locations.Id_locations.ToString() + "";
+                var query_apply = MainWindow.connect.Query(query);
+                if (query_apply != null)
+                {
+                    MessageBox.Show("Успешное удаление места дислокации!", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MainWindow.connect.LoadData(ClassConnection.Connection.Tables.locations);
+                    MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Pages.Main.page_main.locations);
+                }
+                else MessageBox.Show("Запрос на удаление места дислокации не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
         }
     }
 }

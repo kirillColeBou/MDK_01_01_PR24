@@ -40,7 +40,23 @@ namespace Курсовой_проект_Тепляков.Elements
 
         private void Click_remove(object sender, RoutedEventArgs e)
         {
-            MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Pages.Main.page_main.technique);
+            try
+            {
+                MainWindow.connect.LoadData(ClassConnection.Connection.Tables.technique);
+                string query = $"Delete From Technique Where Id_technique = " + technique.Id_technique.ToString() + "";
+                var query_apply = MainWindow.connect.Query(query);
+                if (query_apply != null)
+                {
+                    MessageBox.Show("Успешное удаление техники!", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MainWindow.connect.LoadData(ClassConnection.Connection.Tables.technique);
+                    MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Pages.Main.page_main.technique);
+                }
+                else MessageBox.Show("Запрос на удаление техники не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
         }
     }
 }

@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Курсовой_проект_Тепляков.Pages.PagesInTable;
 
 namespace Курсовой_проект_Тепляков.Elements
 {
@@ -21,8 +22,8 @@ namespace Курсовой_проект_Тепляков.Elements
     /// </summary>
     public partial class Parts_items : UserControl
     {
-        Parts parts;
-        public Parts_items(Parts _parts)
+        ClassModules.Parts parts;
+        public Parts_items(ClassModules.Parts _parts)
         {
             InitializeComponent();
             parts = _parts;
@@ -47,7 +48,23 @@ namespace Курсовой_проект_Тепляков.Elements
 
         private void Click_remove(object sender, RoutedEventArgs e)
         {
-            MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Pages.Main.page_main.parts);
+            try
+            {
+                MainWindow.connect.LoadData(ClassConnection.Connection.Tables.parts);
+                string query = $"Delete From Parts Where Id_part = " + parts.Id_part.ToString() + "";
+                var query_apply = MainWindow.connect.Query(query);
+                if (query_apply != null)
+                {
+                    MessageBox.Show("Успешное удаление части!", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MainWindow.connect.LoadData(ClassConnection.Connection.Tables.parts);
+                    MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Pages.Main.page_main.parts);
+                }
+                else MessageBox.Show("Запрос на удаление части не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
         }
     }
 }
