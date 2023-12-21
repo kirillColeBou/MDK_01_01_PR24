@@ -100,9 +100,9 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
         private void Login_Click(object sender, KeyEventArgs e)
         {
             if(e.Key == Key.Enter)
-            {
                 Login_to_Main();
-            }
+            if (e.Key == Key.Escape)
+                MainWindow.init.Close();
         }
 
         private void Regin_Click(object sender, MouseButtonEventArgs e)

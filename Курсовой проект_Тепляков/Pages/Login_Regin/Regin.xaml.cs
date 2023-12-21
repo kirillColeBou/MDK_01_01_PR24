@@ -45,7 +45,7 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
             password_new_user_second.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#3D3D3D"));
         }
 
-        private void Login_Click(object sender, MouseButtonEventArgs e)
+        public void Regin_to_Main()
         {
             login_incorrect.Visibility = Visibility.Hidden;
             password_incorrect_first.Content = "Пароли не совпадают";
@@ -81,7 +81,7 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
                 login_incorrect.Content = "Введите логин";
                 login_incorrect.Visibility = Visibility.Visible;
             }
-            if(login_new_user.Text == "" && password_new_user_first.Password == "" && password_new_user_second.Password == "")
+            if (login_new_user.Text == "" && password_new_user_first.Password == "" && password_new_user_second.Password == "")
             {
                 login_new_user.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
                 login_incorrect.Content = "Введите логин";
@@ -93,6 +93,19 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
                 password_incorrect_second.Content = "Введите пароль";
                 password_incorrect_second.Visibility = Visibility.Visible;
             }
+        }
+
+        private void Login_Click(object sender, MouseButtonEventArgs e)
+        {
+            Regin_to_Main();
+        }
+
+        private void Regin_Click(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                Regin_to_Main();
+            else if (e.Key == Key.Escape)
+                MainWindow.main.OpenPageLogin();
         }
     }
 }
