@@ -8,7 +8,7 @@
       d:DesignHeight="750" d:DesignWidth="1050"
       Title="Login">
 
-    <Grid Background="#545454">
+    <Grid Background="#545454" KeyUp="Login_Click">
         <Grid.Resources>
             <ResourceDictionary Source="/Resource/Dictionary.xaml"/>
         </Grid.Resources>

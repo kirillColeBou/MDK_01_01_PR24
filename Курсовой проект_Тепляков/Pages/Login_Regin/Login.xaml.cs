@@ -59,13 +59,12 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
             password_user.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#3D3D3D"));
         }
 
-        private void Login_Click(object sender, MouseButtonEventArgs e)
+        public void Login_to_Main()
         {
             login_incorrect.Content = "Логин не верный";
             login_incorrect.Visibility = Visibility.Hidden;
             password_incorrect.Content = "Пароль не верный";
             password_incorrect.Visibility = Visibility.Hidden;
-
             if (login_user.Text != "" && password_user.Password != "")
                 if (login_user.Text == "kirill")
                     if (password_user.Password == "1234")
@@ -93,6 +92,18 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
             }
         }
 
+        private void Login_Click(object sender, MouseButtonEventArgs e)
+        {
+            Login_to_Main();
+        }
+
+        private void Login_Click(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                Login_to_Main();
+            }
+        }
 
         private void Regin_Click(object sender, MouseButtonEventArgs e)
         {
