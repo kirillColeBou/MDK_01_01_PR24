@@ -173,9 +173,9 @@ namespace ClassConnection
                             Type_of_troops = Convert.ToInt32(itemsParts.GetValue(2)),
                             Weapons = Convert.ToInt32(itemsParts.GetValue(3)),
                             Companies = Convert.ToInt32(itemsParts.GetValue(4)),
-                            Count_companies = Convert.ToInt32(itemsParts.GetValue(5)),
-                            Count_technique = Convert.ToInt32(itemsParts.GetValue(6)),
-                            Count_weapons = Convert.ToInt32(itemsParts.GetValue(7)),
+                            Count_companies = Convert.ToString(itemsParts.GetValue(5)),
+                            Count_technique = Convert.ToString(itemsParts.GetValue(6)),
+                            Count_weapons = Convert.ToString(itemsParts.GetValue(7)),
                             Date_of_foundation = Convert.ToDateTime(itemsParts.GetValue(8))
                         };
                         parts.Add(newParts);

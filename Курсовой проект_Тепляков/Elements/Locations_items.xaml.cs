@@ -33,6 +33,7 @@ namespace Курсовой_проект_Тепляков.Elements
                 City.Content = "Город: " + _locations.City;
                 Address.Content = "Адрес: " + _locations.Address;
                 Square.Content = "Занимаемая площадь в м^2: " + _locations.Square;
+                Count_structures.Content = "Количество сооружений: " + _locations.Count_structures;
             }
         }
 

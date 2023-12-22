@@ -13,9 +13,9 @@ namespace ClassModules
         public int Type_of_troops { get; set; }
         public int Weapons { get; set; }
         public int Companies { get; set; }
-        public int Count_companies { get; set; }
-        public int Count_technique { get; set; }
-        public int Count_weapons { get; set; }
+        public string Count_companies { get; set; }
+        public string Count_technique { get; set; }
+        public string Count_weapons { get; set; }
         public DateTime Date_of_foundation { get; set; }
     }
 }

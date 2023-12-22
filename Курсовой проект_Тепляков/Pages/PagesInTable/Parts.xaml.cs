@@ -27,11 +27,11 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
         {
             InitializeComponent();
             parts = _parts;
-            if (_parts != null)
+            if (Count_companies.Text != null)
             {
-                Count_companies.Text = _parts.Count_companies.ToString();
-                Count_technique.Text = _parts.Count_technique.ToString();
-                Count_weapons.Text = _parts.Count_weapons.ToString();
+                Count_companies.Text = _parts.Count_companies;
+                Count_technique.Text = _parts.Count_technique;
+                Count_weapons.Text = _parts.Count_weapons;
                 Date_of_foundation.Text = _parts.Date_of_foundation.ToString("dd.MM.yyyy");
             }
             MainWindow.connect.LoadData(ClassConnection.Connection.Tables.locations);
@@ -85,7 +85,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                 id_weapons_temp = MainWindow.connect.weapons.Find(x => x.Id_weapons == Convert.ToInt32(((ComboBoxItem)Weapons.SelectedItem).Tag));
                 id_companies_temp = MainWindow.connect.companies.Find(x => x.Id_companies == Convert.ToInt32(((ComboBoxItem)Companies.SelectedItem).Tag));
                 int id = MainWindow.connect.SetLastId(ClassConnection.Connection.Tables.parts);
-                if (parts.Date_of_foundation == null)
+                if (parts.Count_weapons == null)
                 {
                     string query = $"Insert Into parts ([Id_part], [Locations], [Type_of_troops], [Weapons], [Companies], [Count_companies], [Count_technique], [Count_weapons], [Date_of_foundation]) Values ({id.ToString()}, '{id_locations_temp.Id_locations.ToString()}', '{id_typeOfTroops_temp.Id_type_of_troops.ToString()}', '{id_weapons_temp.Id_weapons.ToString()}', '{id_companies_temp.Id_companies.ToString()}', '{Count_companies.Text}', '{Count_technique.Text}', '{Count_weapons.Text}', '{Date_of_foundation.Text}')";
                     var query_apply = MainWindow.connect.Query(query);
