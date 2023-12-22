@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClassModules;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,11 +26,43 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
         {
             InitializeComponent();
             type_of_troops = _type_of_troops;
+            if (_type_of_troops.Name_type_of_troops != null) 
+            {
+                Name_type_of_troops.Text = _type_of_troops.Name_type_of_troops;
+            }
         }
 
         private void Click_TypeOfTroops_Redact(object sender, RoutedEventArgs e)
         {
-            MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.type_of_troops);
+            if (Name_type_of_troops.Text != "")
+            {
+                int id = MainWindow.connect.SetLastId(ClassConnection.Connection.Tables.type_of_troops);
+                if (type_of_troops.Name_type_of_troops == null)
+                {
+                    string query = $"Insert Into type_of_troops ([Id_type_of_troops], [Name_type_of_troops]) Values ({id.ToString()}, '{Name_type_of_troops.Text}')";
+                    var query_apply = MainWindow.connect.Query(query);
+                    if (query_apply != null)
+                    {
+                        MainWindow.connect.LoadData(ClassConnection.Connection.Tables.type_of_troops);
+                        MessageBox.Show("Успешное добавление вида войск!", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.type_of_troops);
+                    }
+                    else MessageBox.Show("Запрос на добавление вида войск не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else
+                {
+                    string query = $"Update type_of_troops Set Name_type_of_troops = '{Name_type_of_troops.Text}' Where Id_type_of_troops = {type_of_troops.Id_type_of_troops}";
+                    var query_apply = MainWindow.connect.Query(query);
+                    if (query_apply != null)
+                    {
+                        MainWindow.connect.LoadData(ClassConnection.Connection.Tables.type_of_troops);
+                        MessageBox.Show("Успешное изменение вида войск!", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.type_of_troops);
+                    }
+                    else MessageBox.Show("Запрос на изменение вида войск не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            else MessageBox.Show("Вы не ввели название вида войск!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         private void Click_Cancel_TypeOfTroops_Redact(object sender, RoutedEventArgs e)
@@ -39,7 +72,23 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
 
         private void Click_Remove_TypeOfTroops_Redact(object sender, RoutedEventArgs e)
         {
-            MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.type_of_troops);
+            try
+            {
+                MainWindow.connect.LoadData(ClassConnection.Connection.Tables.type_of_troops);
+                string query = "Delete From type_of_troops Where [Id_type_of_troops] = " + type_of_troops.Id_type_of_troops.ToString() + "";
+                var query_apply = MainWindow.connect.Query(query);
+                if (query_apply != null)
+                {
+                    MessageBox.Show("Успешное удаление вида войск!", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MainWindow.connect.LoadData(ClassConnection.Connection.Tables.type_of_troops);
+                    MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.type_of_troops);
+                }
+                else MessageBox.Show("Запрос на удаление вида войск не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
