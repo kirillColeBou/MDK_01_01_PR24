@@ -35,12 +35,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
 
         private void Click_Companies_Redact(object sender, RoutedEventArgs e)
         {
-            if(!Regex.IsMatch(Commander.Text, @"[А-Яа-я.,'0-9 ]*"))
-            {
-                MessageBox.Show("ФИО командира введено не правильно!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-            if (Commander.Text != null)
+            if (Commander.Text != "")
             {
                 int id = MainWindow.connect.SetLastId(ClassConnection.Connection.Tables.companies);
                 if (companies.Commander == null)

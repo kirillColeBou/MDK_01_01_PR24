@@ -36,12 +36,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
 
         private void Click_Weapons_Redact(object sender, RoutedEventArgs e)
         {
-            if (!Regex.IsMatch(Name_weapons.Text, @"[А-Яа-я.,'0-9 ]*"))
-            {
-                MessageBox.Show("Название вооружения введено не правильно!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-            if (Name_weapons.Text != null)
+            if (Name_weapons.Text != "")
             {
                 int id = MainWindow.connect.SetLastId(ClassConnection.Connection.Tables.weapons);
                 if (weapons.Name_weapons == null)
@@ -58,7 +53,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                 }
                 else
                 {
-                    string query = $"Update weapons Set Name_weapons = '{Name_weapons.Text}' Where Id_companies = {weapons.Id_weapons}";
+                    string query = $"Update weapons Set Name_weapons = '{Name_weapons.Text}' Where Id_weapons = {weapons.Id_weapons}";
                     var query_apply = MainWindow.connect.Query(query);
                     if (query_apply != null)
                     {

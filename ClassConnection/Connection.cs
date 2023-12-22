@@ -45,7 +45,7 @@ namespace ClassConnection
                 }
                 else
                 {
-                    SqlConnection connect = new SqlConnection(Path_PAT);
+                    SqlConnection connect = new SqlConnection(Path_Home);
                     connect.Open();
                     SqlCommand command = new SqlCommand(query, connect);
                     SqlDataReader reader = command.ExecuteReader();

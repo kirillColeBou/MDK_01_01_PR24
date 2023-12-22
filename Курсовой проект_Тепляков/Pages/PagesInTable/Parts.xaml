@@ -17,7 +17,7 @@
                 <ResourceDictionary Source="/Resource/Dictionary.xaml"/>
             </Grid.Resources>
             <ScrollViewer>
-                <Border MinHeight="720">
+                <Border MinHeight="800">
                     <Grid>
                         <Label Content="Часть" Margin="39,28,26,0" Foreground="White" FontSize="30" FontFamily="Yu Gothic UI Semibold" HorizontalContentAlignment="Left" Height="52" VerticalAlignment="Top"/>
                         <Label Content="Дислокация" Margin="39,85,26,0" Foreground="White" FontSize="15" FontFamily="Yu Gothic UI Semilight" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
