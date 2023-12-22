@@ -14,7 +14,7 @@ namespace ClassConnection
     {
         #region Connection_strings_depending_on_the_place_of_work
         public static readonly string Path_Home = "Server=KIRILL\\SQLExpress;Database=military_district;User Id=sa;Password=sa";
-        public static readonly string Path_PAT = "Server=10.0.181.170;Database=military_district;User Id=galkin_teplyakov;Password=QweqweQwe123$123_123;TrustServerCertificate=True";
+        public static readonly string Path_PAT  = "Server=10.0.181.170;database=military_district;uid=galkin_teplyakov;pwd=QweqweQwe123$123_123;";
         #endregion
 
         #region All_Lists
@@ -35,7 +35,7 @@ namespace ClassConnection
         {
             try
             {
-                try
+                if (File.Exists(Path_Home))
                 {
                     SqlConnection connect = new SqlConnection(Path_Home);
                     connect.Open();
@@ -43,7 +43,7 @@ namespace ClassConnection
                     SqlDataReader reader = command.ExecuteReader();
                     return reader;
                 }
-                catch
+                else
                 {
                     SqlConnection connect = new SqlConnection(Path_PAT);
                     connect.Open();
