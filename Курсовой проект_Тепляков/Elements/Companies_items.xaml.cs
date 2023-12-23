@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,10 +25,16 @@ namespace Курсовой_проект_Тепляков.Elements
     /// </summary>
     public partial class Companies_items : UserControl
     {
+        ClassConnection.Connection connection;
         ClassModules.Companies companies;
         public Companies_items(ClassModules.Companies _companies)
         {
             InitializeComponent();
+            connection = new ClassConnection.Connection();
+            if (connection.RoleUser() != "admin")
+            { 
+                Buttons.Visibility = Visibility.Hidden;
+            }
             companies = _companies;
             if(_companies.Commander != null)
             {

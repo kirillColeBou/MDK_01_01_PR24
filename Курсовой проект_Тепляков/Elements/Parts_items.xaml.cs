@@ -23,10 +23,16 @@ namespace Курсовой_проект_Тепляков.Elements
     /// </summary>
     public partial class Parts_items : UserControl
     {
+        ClassConnection.Connection connection;
         ClassModules.Parts parts;
         public Parts_items(ClassModules.Parts _parts)
         {
             InitializeComponent();
+            connection = new ClassConnection.Connection();
+            if (connection.RoleUser() != "admin")
+            {
+                Buttons.Visibility = Visibility.Hidden;
+            }
             parts = _parts;
             if(_parts.Date_of_foundation != null)
             {

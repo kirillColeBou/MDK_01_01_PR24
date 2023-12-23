@@ -76,6 +76,27 @@ namespace ClassConnection
             }
         }
 
+        public string RoleUser()
+        {
+            string role = "";
+            SqlConnection connect = new SqlConnection(Path_Home);
+            connect.Open();
+            using (SqlCommand cmd = new SqlCommand("SELECT IS_MEMBER('db_owner');", connect))
+            {
+                int isMember = (int)cmd.ExecuteScalar();
+                if (isMember != 1)
+                {
+                    role = "db_datareader";
+                }
+                else
+                {
+                    role = "admin";
+                }
+            }
+            connect.Close();
+            return role;
+        }
+
         public SqlDataReader Query(string query)
         {
             try

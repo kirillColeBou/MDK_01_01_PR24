@@ -15,12 +15,14 @@
             <Label x:Name="Address" Content="Адрес"                 Margin="19,61,101,0"  Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
             <Label x:Name="Square" Content="Занимаемая площадь"    Margin="450,36,101,0" Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
             <Label x:Name="Count_structures"  Content="Количество сооружений" Margin="450,61,101,0" Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
-            <Button Style="{StaticResource BtnRedac}" Background="#FF2C2C2C" Margin="0,5,9.6,0" VerticalAlignment="Top" Height="40" Width="63" Click="Click_redact" HorizontalAlignment="Right">
-                <Image Source="/Images/redac.png" Width="20" Height="20"/>
-            </Button>
-            <Button Style="{StaticResource BtnRedac}" Background="#FFE42B2B" Margin="0,0,9.6,10" VerticalAlignment="Bottom" Height="40" Width="63" Click="Click_remove" HorizontalAlignment="Right">
-                <Image Source="/Images/del.png" Width="20" Height="20"/>
-            </Button>
+            <Grid x:Name="Buttons">
+                <Button Style="{StaticResource BtnRedac}" Background="#FF2C2C2C" Margin="0,5,9.6,0" VerticalAlignment="Top" Height="40" Width="63" Click="Click_redact" HorizontalAlignment="Right">
+                    <Image Source="/Images/redac.png" Width="20" Height="20"/>
+                </Button>
+                <Button Style="{StaticResource BtnRedac}" Background="#FFE42B2B" Margin="0,0,9.6,10" VerticalAlignment="Bottom" Height="40" Width="63" Click="Click_remove" HorizontalAlignment="Right">
+                    <Image Source="/Images/del.png" Width="20" Height="20"/>
+                </Button>
+            </Grid>
         </Grid>
     </Border>
 </UserControl>

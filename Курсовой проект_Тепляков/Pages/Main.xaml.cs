@@ -2,6 +2,7 @@
 using ClassModules;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
@@ -108,8 +109,11 @@ namespace Курсовой_проект_Тепляков.Pages
                             }
                             if (page_select == page_main.parts)
                             {
-                                var add = new Pages.PagesInTable.Parts(new ClassModules.Parts());
-                                parrent.Children.Add(new Elements.Add(add));
+                                if (connect.RoleUser() == "admin")
+                                {
+                                    var add = new Pages.PagesInTable.Parts(new ClassModules.Parts());
+                                    parrent.Children.Add(new Elements.Add(add));
+                                }
                             }
                         });
                     };
@@ -151,8 +155,11 @@ namespace Курсовой_проект_Тепляков.Pages
                             }
                             if (page_select == page_main.locations)
                             {
-                                var add = new Pages.PagesInTable.Locations(new ClassModules.Locations());
-                                parrent.Children.Add(new Elements.Add(add));
+                                if (connect.RoleUser() == "admin")
+                                {
+                                    var add = new Pages.PagesInTable.Locations(new ClassModules.Locations());
+                                    parrent.Children.Add(new Elements.Add(add));
+                                }
                             }
                         });
                     };
@@ -194,8 +201,11 @@ namespace Курсовой_проект_Тепляков.Pages
                             }
                             if(page_select == page_main.companies)
                             {
-                                var add = new Pages.PagesInTable.Companies(new ClassModules.Companies());
-                                parrent.Children.Add(new Elements.Add(add));
+                                if (connect.RoleUser() == "admin")
+                                {
+                                    var add = new Pages.PagesInTable.Companies(new ClassModules.Companies());
+                                    parrent.Children.Add(new Elements.Add(add));
+                                }
                             }
                         });
                     };
@@ -237,8 +247,11 @@ namespace Курсовой_проект_Тепляков.Pages
                             }
                             if (page_select == page_main.technique)
                             {
-                                var add = new Pages.PagesInTable.Technique(new ClassModules.Technique());
-                                parrent.Children.Add(new Elements.Add(add));
+                                if (connect.RoleUser() == "admin")
+                                {
+                                    var add = new Pages.PagesInTable.Technique(new ClassModules.Technique());
+                                    parrent.Children.Add(new Elements.Add(add));
+                                }
                             }
                         });
                     };
@@ -280,8 +293,11 @@ namespace Курсовой_проект_Тепляков.Pages
                             }
                             if (page_select == page_main.type_of_troops)
                             {
-                                var add = new Pages.PagesInTable.Type_of_troops(new ClassModules.Type_of_troops());
-                                parrent.Children.Add(new Elements.Add(add));
+                                if (connect.RoleUser() == "admin")
+                                {
+                                    var add = new Pages.PagesInTable.Type_of_troops(new ClassModules.Type_of_troops());
+                                    parrent.Children.Add(new Elements.Add(add));
+                                }
                             }
                         });
                     };
@@ -323,8 +339,11 @@ namespace Курсовой_проект_Тепляков.Pages
                             }
                             if (page_select == page_main.weapons)
                             {
-                                var add = new Pages.PagesInTable.Weapons(new ClassModules.Weapons());
-                                parrent.Children.Add(new Elements.Add(add));
+                                if (connect.RoleUser() == "admin")
+                                {
+                                    var add = new Pages.PagesInTable.Weapons(new ClassModules.Weapons());
+                                    parrent.Children.Add(new Elements.Add(add));
+                                }
                             }
                         });
                     };
@@ -336,6 +355,8 @@ namespace Курсовой_проект_Тепляков.Pages
 
         private void Click_Back(object sender, RoutedEventArgs e)
         {
+            parrent.Children.Clear();
+            page_select = page_main.none;
             OpenPageLogin();
         }
 

@@ -21,10 +21,16 @@ namespace Курсовой_проект_Тепляков.Elements
     /// </summary>
     public partial class Technique_items : UserControl
     {
+        ClassConnection.Connection connection;
         ClassModules.Technique technique;
         public Technique_items(ClassModules.Technique _technique)
         {
             InitializeComponent();
+            connection = new ClassConnection.Connection();
+            if (connection.RoleUser() != "admin")
+            {
+                Buttons.Visibility = Visibility.Hidden;
+            }
             technique = _technique;
             if(_technique.Characteristics != null)
             {

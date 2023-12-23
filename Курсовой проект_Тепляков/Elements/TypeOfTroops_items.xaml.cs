@@ -23,10 +23,16 @@ namespace Курсовой_проект_Тепляков.Elements
     /// </summary>
     public partial class TypeOfTroops_items : UserControl
     {
+        ClassConnection.Connection connection;
         ClassModules.Type_of_troops type_of_troops;
         public TypeOfTroops_items(ClassModules.Type_of_troops _type_of_troops)
         {
             InitializeComponent();
+            connection = new ClassConnection.Connection();
+            if (connection.RoleUser() != "admin")
+            {
+                Buttons.Visibility = Visibility.Hidden;
+            }
             type_of_troops = _type_of_troops;
             if(_type_of_troops.Name_type_of_troops != null)
             {

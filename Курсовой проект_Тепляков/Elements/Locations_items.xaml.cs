@@ -1,4 +1,5 @@
-﻿using ClassModules;
+﻿using ClassConnection;
+using ClassModules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,10 +24,16 @@ namespace Курсовой_проект_Тепляков.Elements
     /// </summary>
     public partial class Locations_items : UserControl
     {
+        ClassConnection.Connection connection;
         ClassModules.Locations locations;
         public Locations_items(ClassModules.Locations _locations)
         {
             InitializeComponent();
+            connection = new ClassConnection.Connection();
+            if (connection.RoleUser() != "admin")
+            {
+                Buttons.Visibility = Visibility.Hidden;
+            }
             locations = _locations;
             if(_locations.Count_structures != null)
             {
