@@ -64,7 +64,7 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
                             MainWindow.init.OpenPageMain();
                             Main.main.CreateConnect(true);
                         }
-                        if (connection.CreateUser(login_new_user.Text, password_new_user_first.Password) == false)
+                        else
                         {
                             login_new_user.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
                             login_incorrect.Visibility = Visibility.Visible;
