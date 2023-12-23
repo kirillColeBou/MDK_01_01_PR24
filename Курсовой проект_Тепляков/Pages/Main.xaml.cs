@@ -39,15 +39,23 @@ namespace Курсовой_проект_Тепляков.Pages
         public Main()
         {
             InitializeComponent();
-            connect = new Connection();
-            connect.LoadData(Connection.Tables.companies);
-            connect.LoadData(Connection.Tables.locations);
-            connect.LoadData(Connection.Tables.parts);
-            connect.LoadData(Connection.Tables.technique);
-            connect.LoadData(Connection.Tables.type_of_troops);
-            connect.LoadData(Connection.Tables.weapons);
+
             main = this;
             page_select = page_main.none;
+        }
+
+        public void CreateConnect(bool connectApply)
+        {
+            if (connectApply == true)
+            {
+                connect = new Connection();
+                connect.LoadData(Connection.Tables.companies);
+                connect.LoadData(Connection.Tables.locations);
+                connect.LoadData(Connection.Tables.parts);
+                connect.LoadData(Connection.Tables.technique);
+                connect.LoadData(Connection.Tables.type_of_troops);
+                connect.LoadData(Connection.Tables.weapons);
+            } 
         }
 
         public void OpenPageLogin()

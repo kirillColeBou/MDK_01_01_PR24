@@ -58,6 +58,7 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
                     if (password_new_user_first.Password == password_new_user_second.Password)
                     {
                         MainWindow.init.OpenPageMain();
+                        Main.main.CreateConnect(true);
                     }
                     else
                     {
