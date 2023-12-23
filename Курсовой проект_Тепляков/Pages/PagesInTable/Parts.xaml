@@ -21,21 +21,21 @@
                     <Grid>
                         <Label Content="Часть" Margin="39,28,26,0" Foreground="White" FontSize="30" FontFamily="Yu Gothic UI Semibold" HorizontalContentAlignment="Left" Height="52" VerticalAlignment="Top"/>
                         <Label Content="Дислокация" Margin="39,85,26,0" Foreground="White" FontSize="15" FontFamily="Yu Gothic UI Semilight" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
-                        <ComboBox x:Name="Locations" FontFamily="Yu Gothic UI Semilight" Height="30" Margin="42,125,0,0" VerticalAlignment="Top" FontSize="14" HorizontalAlignment="Left" Width="696"/>
+                        <ComboBox x:Name="Locations" FontFamily="Yu Gothic UI Semilight" Height="30" Margin="42,125,195,0" VerticalAlignment="Top" FontSize="14"/>
                         <Label Content="Вид войск" Margin="39,165,26,0" Foreground="White" FontSize="15" FontFamily="Yu Gothic UI Semilight" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
-                        <ComboBox x:Name="Type_of_troops" FontFamily="Yu Gothic UI Semilight" Height="30" Margin="42,205,0,0" VerticalAlignment="Top" FontSize="14" HorizontalAlignment="Left" Width="696"/>
+                        <ComboBox x:Name="Type_of_troops" FontFamily="Yu Gothic UI Semilight" Height="30" Margin="42,205,195,0" VerticalAlignment="Top" FontSize="14"/>
                         <Label Content="Вид вооружения" Margin="39,245,26,0" Foreground="White" FontSize="15" FontFamily="Yu Gothic UI Semilight" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
-                        <ComboBox x:Name="Weapons" FontFamily="Yu Gothic UI Semilight" Height="30" Margin="42,285,0,0" VerticalAlignment="Top" FontSize="14" HorizontalAlignment="Left" Width="696"/>
+                        <ComboBox x:Name="Weapons" FontFamily="Yu Gothic UI Semilight" Height="30" Margin="42,285,195,0" VerticalAlignment="Top" FontSize="14"/>
                         <Label Content="Рота" Margin="39,325,26,0" Foreground="White" FontSize="15" FontFamily="Yu Gothic UI Semilight" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
-                        <ComboBox x:Name="Companies"  FontFamily="Yu Gothic UI Semilight" Height="30" Margin="42,365,0,0" VerticalAlignment="Top" FontSize="14" HorizontalAlignment="Left" Width="696"/>
+                        <ComboBox x:Name="Companies"  FontFamily="Yu Gothic UI Semilight" Height="30" Margin="42,365,195,0" VerticalAlignment="Top" FontSize="14"/>
                         <Label Content="Количество рот" Margin="39,405,26,0" Foreground="White" FontSize="15" FontFamily="Yu Gothic UI Semilight" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
-                        <TextBox x:Name="Count_companies" Style="{StaticResource BaseBox}" Height="35" Background="#FFDEDEDE" Margin="42,445,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="700"/>
+                        <TextBox x:Name="Count_companies" Style="{StaticResource BaseBox}" Height="35" Background="#FFDEDEDE" Margin="42,445,191,0" VerticalAlignment="Top"/>
                         <Label Content="Количество техники" Margin="39,485,26,0" Foreground="White" FontSize="15" FontFamily="Yu Gothic UI Semilight" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
-                        <TextBox x:Name="Count_technique" Style="{StaticResource BaseBox}" Height="35" Background="#FFDEDEDE" Margin="42,525,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="700"/>
+                        <TextBox x:Name="Count_technique" Style="{StaticResource BaseBox}" Height="35" Background="#FFDEDEDE" Margin="42,525,191,0" VerticalAlignment="Top"/>
                         <Label Content="Количество вооружений" Margin="39,565,26,0" Foreground="White" FontSize="15" FontFamily="Yu Gothic UI Semilight" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
-                        <TextBox x:Name="Count_weapons" Style="{StaticResource BaseBox}" Height="35" Background="#FFDEDEDE" Margin="42,605,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="700"/>
+                        <TextBox x:Name="Count_weapons" Style="{StaticResource BaseBox}" Height="35" Background="#FFDEDEDE" Margin="42,605,191,0" VerticalAlignment="Top"/>
                         <Label Content="Дата основания" Margin="39,645,26,0" Foreground="White" FontSize="15" FontFamily="Yu Gothic UI Semilight" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
-                        <DatePicker x:Name="Date_of_foundation" Style="{StaticResource styleDatepicker}" Height="35" Background="#FFDEDEDE" Margin="42,685,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="700"/>
+                        <DatePicker x:Name="Date_of_foundation" Style="{StaticResource styleDatepicker}" Height="35" Background="#FFDEDEDE" Margin="42,685,191,0" VerticalAlignment="Top"/>
                         <Button Style="{StaticResource BtnRedac}" Margin="0,0,136.2,24" VerticalAlignment="Bottom" Height="40" Width="105" Click="Click_Parts_Redact" HorizontalAlignment="Right">
                             <Image Source="/Images/redac.png" Width="20" Height="20"/>
                         </Button>
