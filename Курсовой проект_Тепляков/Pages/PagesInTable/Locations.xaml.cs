@@ -48,14 +48,14 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                         {
                             if (Count_structures.Text != "")
                             {
-                                int id = MainWindow.connect.SetLastId(ClassConnection.Connection.Tables.locations);
+                                int id = Main.connect.SetLastId(ClassConnection.Connection.Tables.locations);
                                 if (locations.Country == null)
                                 {
                                     string query = $"Insert Into locations ([Id_locations], [Country], [City], [Address], [Square], [Count_structures]) Values ({id.ToString()}, '{Country.Text}', '{City.Text}', '{Address.Text}', '{Square.Text}', '{Count_structures.Text}')";
-                                    var query_apply = MainWindow.connect.Query(query);
+                                    var query_apply = Main.connect.Query(query);
                                     if (query_apply != null)
                                     {
-                                        MainWindow.connect.LoadData(ClassConnection.Connection.Tables.locations);
+                                        Main.connect.LoadData(ClassConnection.Connection.Tables.locations);
                                         MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.locations);
                                     }
                                     else MessageBox.Show("Запрос на добавление места дислокации не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -63,10 +63,10 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                                 else
                                 {
                                     string query = $"Update locations Set [Country] = '{Country.Text}', [City] = '{City.Text}', [Address] = '{Address.Text}', [Square] = '{Square.Text}', [Count_structures] = '{Count_structures.Text}' Where [Id_locations] = {locations.Id_locations}";
-                                    var query_apply = MainWindow.connect.Query(query);
+                                    var query_apply = Main.connect.Query(query);
                                     if (query_apply != null)
                                     {
-                                        MainWindow.connect.LoadData(ClassConnection.Connection.Tables.locations);
+                                        Main.connect.LoadData(ClassConnection.Connection.Tables.locations);
                                         MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.locations);
                                     }
                                     else MessageBox.Show("Запрос на изменение места дислокации не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -107,12 +107,12 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
         {
             try
             {
-                MainWindow.connect.LoadData(ClassConnection.Connection.Tables.locations);
+                Main.connect.LoadData(ClassConnection.Connection.Tables.locations);
                 string query = "Delete From locations Where [Id_locations] = " + locations.Id_locations.ToString() + "";
-                var query_apply = MainWindow.connect.Query(query);
+                var query_apply = Main.connect.Query(query);
                 if (query_apply != null)
                 {
-                    MainWindow.connect.LoadData(ClassConnection.Connection.Tables.locations);
+                    Main.connect.LoadData(ClassConnection.Connection.Tables.locations);
                     MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.locations);
                 }
                 else MessageBox.Show("Запрос на удаление места дислокации не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);

@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Курсовой_проект_Тепляков.Pages;
 
 namespace Курсовой_проект_Тепляков.Elements
 {
@@ -42,12 +43,12 @@ namespace Курсовой_проект_Тепляков.Elements
         {
             try
             {
-                MainWindow.connect.LoadData(ClassConnection.Connection.Tables.weapons);
+                Main.connect.LoadData(ClassConnection.Connection.Tables.weapons);
                 string query = $"Delete From Weapons Where Id_weapons = " + weapons.Id_weapons.ToString() + "";
-                var query_apply = MainWindow.connect.Query(query);
+                var query_apply = Main.connect.Query(query);
                 if (query_apply != null)
                 {
-                    MainWindow.connect.LoadData(ClassConnection.Connection.Tables.weapons);
+                    Main.connect.LoadData(ClassConnection.Connection.Tables.weapons);
                     MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Pages.Main.page_main.weapons);
                 }
                 else MessageBox.Show("Запрос на удаление вида вооружения не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);

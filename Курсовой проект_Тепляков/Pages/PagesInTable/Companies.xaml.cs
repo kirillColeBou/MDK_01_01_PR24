@@ -37,14 +37,14 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
         {
             if (Commander.Text != "")
             {
-                int id = MainWindow.connect.SetLastId(ClassConnection.Connection.Tables.companies);
+                int id = Main.connect.SetLastId(ClassConnection.Connection.Tables.companies);
                 if (companies.Commander == null)
                 {
                     string query = $"INSERT INTO companies ([Id_companies], [Commander]) VALUES ({id.ToString()}, '{Commander.Text}')";
-                    var query_apply = MainWindow.connect.Query(query);
+                    var query_apply = Main.connect.Query(query);
                     if (query_apply != null)
                     {
-                        MainWindow.connect.LoadData(ClassConnection.Connection.Tables.companies);
+                        Main.connect.LoadData(ClassConnection.Connection.Tables.companies);
                         MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.companies);
                     }
                     else MessageBox.Show("Запрос на добавление роты не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -52,10 +52,10 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                 else
                 {
                     string query = $"UPDATE companies SET Commander = '{Commander.Text}' WHERE Id_companies = {companies.Id_companies}";
-                    var query_apply = MainWindow.connect.Query(query);
+                    var query_apply = Main.connect.Query(query);
                     if (query_apply != null)
                     {
-                        MainWindow.connect.LoadData(ClassConnection.Connection.Tables.companies);
+                        Main.connect.LoadData(ClassConnection.Connection.Tables.companies);
                         MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.companies);
                     }
                     else MessageBox.Show("Запрос на изменение роты не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -76,12 +76,12 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
         {
             try
             {
-                MainWindow.connect.LoadData(ClassConnection.Connection.Tables.companies);
+                Main.connect.LoadData(ClassConnection.Connection.Tables.companies);
                 string query = "Delete From companies Where [Id_companies] = " + companies.Id_companies.ToString() + "";
-                var query_apply = MainWindow.connect.Query(query);
+                var query_apply = Main.connect.Query(query);
                 if(query_apply != null)
                 {
-                    MainWindow.connect.LoadData(ClassConnection.Connection.Tables.companies);
+                    Main.connect.LoadData(ClassConnection.Connection.Tables.companies);
                     MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.companies);
                 }
                 else MessageBox.Show("Запрос на удаление роты не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);

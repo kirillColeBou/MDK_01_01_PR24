@@ -38,14 +38,14 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
         {
             if (Name_weapons.Text != "")
             {
-                int id = MainWindow.connect.SetLastId(ClassConnection.Connection.Tables.weapons);
+                int id = Main.connect.SetLastId(ClassConnection.Connection.Tables.weapons);
                 if (weapons.Name_weapons == null)
                 {
                     string query = $"Insert Into weapons ([Id_weapons], [Name_weapons]) Values ({id.ToString()}, '{Name_weapons.Text}')";
-                    var query_apply = MainWindow.connect.Query(query);
+                    var query_apply = Main.connect.Query(query);
                     if (query_apply != null)
                     {
-                        MainWindow.connect.LoadData(ClassConnection.Connection.Tables.weapons);
+                        Main.connect.LoadData(ClassConnection.Connection.Tables.weapons);
                         MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.weapons);
                     }
                     else MessageBox.Show("Запрос на добавление вооружения не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -53,10 +53,10 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                 else
                 {
                     string query = $"Update weapons Set Name_weapons = '{Name_weapons.Text}' Where Id_weapons = {weapons.Id_weapons}";
-                    var query_apply = MainWindow.connect.Query(query);
+                    var query_apply = Main.connect.Query(query);
                     if (query_apply != null)
                     {
-                        MainWindow.connect.LoadData(ClassConnection.Connection.Tables.weapons);
+                        Main.connect.LoadData(ClassConnection.Connection.Tables.weapons);
                         MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.weapons);
                     }
                     else MessageBox.Show("Запрос на изменение вооружения не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -77,12 +77,12 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
         {
             try
             {
-                MainWindow.connect.LoadData(ClassConnection.Connection.Tables.weapons);
+                Main.connect.LoadData(ClassConnection.Connection.Tables.weapons);
                 string query = "Delete From weapons Where [Id_weapons] = " + weapons.Id_weapons.ToString() + "";
-                var query_apply = MainWindow.connect.Query(query);
+                var query_apply = Main.connect.Query(query);
                 if (query_apply != null)
                 {
-                    MainWindow.connect.LoadData(ClassConnection.Connection.Tables.weapons);
+                    Main.connect.LoadData(ClassConnection.Connection.Tables.weapons);
                     MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.weapons);
                 }
                 else MessageBox.Show("Запрос на удаление вооружения не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);

@@ -31,8 +31,8 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                 Name_technique.Text = _technique.Name_technique;
                 Characteristics.Text = _technique.Characteristics;
             }
-            MainWindow.connect.LoadData(ClassConnection.Connection.Tables.parts);
-            foreach (ClassModules.Parts item in MainWindow.connect.parts)
+            Main.connect.LoadData(ClassConnection.Connection.Tables.parts);
+            foreach (ClassModules.Parts item in Main.connect.parts)
             {
                 ComboBoxItem cb_parts = new ComboBoxItem();
                 cb_parts.Tag = item.Id_part;
@@ -52,15 +52,15 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                     if (Characteristics.Text != "")
                     {
                         ClassModules.Parts id_part_temp;
-                        id_part_temp = MainWindow.connect.parts.Find(x => x.Id_part == Convert.ToInt32(((ComboBoxItem)Id_part.SelectedItem).Tag));
-                        int id = MainWindow.connect.SetLastId(ClassConnection.Connection.Tables.technique);
+                        id_part_temp = Main.connect.parts.Find(x => x.Id_part == Convert.ToInt32(((ComboBoxItem)Id_part.SelectedItem).Tag));
+                        int id = Main.connect.SetLastId(ClassConnection.Connection.Tables.technique);
                         if (technique.Characteristics == null)
                         {
                             string query = $"Insert Into technique ([Id_technique], [Name_technique], [Parts], [Characteristics]) Values ({id.ToString()}, '{Name_technique.Text}', '{id_part_temp.Id_part.ToString()}', '{Characteristics.Text}')";
-                            var query_apply = MainWindow.connect.Query(query);
+                            var query_apply = Main.connect.Query(query);
                             if (query_apply != null)
                             {
-                                MainWindow.connect.LoadData(ClassConnection.Connection.Tables.technique);
+                                Main.connect.LoadData(ClassConnection.Connection.Tables.technique);
                                 MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.technique);
                             }
                             else MessageBox.Show("Запрос на добавление техники не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -68,10 +68,10 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                         else
                         {
                             string query = $"Update technique Set Name_technique = '{Name_technique.Text}', Parts = '{id_part_temp.Id_part.ToString()}', Characteristics = '{Characteristics.Text}' Where Id_technique = {technique.Id_technique}";
-                            var query_apply = MainWindow.connect.Query(query);
+                            var query_apply = Main.connect.Query(query);
                             if (query_apply != null)
                             {
-                                MainWindow.connect.LoadData(ClassConnection.Connection.Tables.technique);
+                                Main.connect.LoadData(ClassConnection.Connection.Tables.technique);
                                 MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.technique);
                             }
                             else MessageBox.Show("Запрос на изменение техники не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -102,12 +102,12 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
         {
             try
             {
-                MainWindow.connect.LoadData(ClassConnection.Connection.Tables.technique);
+                Main.connect.LoadData(ClassConnection.Connection.Tables.technique);
                 string query = "Delete From technique Where [Id_technique] = " + technique.Id_technique.ToString() + "";
-                var query_apply = MainWindow.connect.Query(query);
+                var query_apply = Main.connect.Query(query);
                 if (query_apply != null)
                 {
-                    MainWindow.connect.LoadData(ClassConnection.Connection.Tables.technique);
+                    Main.connect.LoadData(ClassConnection.Connection.Tables.technique);
                     MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.technique);
                 }
                 else MessageBox.Show("Запрос на удаление техники не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);

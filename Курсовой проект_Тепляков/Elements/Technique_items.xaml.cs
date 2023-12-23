@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Курсовой_проект_Тепляков.Pages;
 
 namespace Курсовой_проект_Тепляков.Elements
 {
@@ -42,12 +43,12 @@ namespace Курсовой_проект_Тепляков.Elements
         {
             try
             {
-                MainWindow.connect.LoadData(ClassConnection.Connection.Tables.technique);
+                Main.connect.LoadData(ClassConnection.Connection.Tables.technique);
                 string query = $"Delete From Technique Where Id_technique = " + technique.Id_technique.ToString() + "";
-                var query_apply = MainWindow.connect.Query(query);
+                var query_apply = Main.connect.Query(query);
                 if (query_apply != null)
                 {
-                    MainWindow.connect.LoadData(ClassConnection.Connection.Tables.technique);
+                    Main.connect.LoadData(ClassConnection.Connection.Tables.technique);
                     MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Pages.Main.page_main.technique);
                 }
                 else MessageBox.Show("Запрос на удаление техники не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);

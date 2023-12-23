@@ -1,7 +1,9 @@
-﻿using ClassModules;
+﻿using ClassConnection;
+using ClassModules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -30,12 +32,20 @@ namespace Курсовой_проект_Тепляков.Pages
             companies, locations, parts, technique, type_of_troops, weapons, none
         }
 
+        public static Connection connect;
         public static page_main page_select;
         public static Main main;
 
         public Main()
         {
             InitializeComponent();
+            connect = new Connection();
+            connect.LoadData(Connection.Tables.companies);
+            connect.LoadData(Connection.Tables.locations);
+            connect.LoadData(Connection.Tables.parts);
+            connect.LoadData(Connection.Tables.technique);
+            connect.LoadData(Connection.Tables.type_of_troops);
+            connect.LoadData(Connection.Tables.weapons);
             main = this;
             page_select = page_main.none;
         }
@@ -79,8 +89,8 @@ namespace Курсовой_проект_Тепляков.Pages
                     {
                         Dispatcher.InvokeAsync(async () =>
                         {
-                            MainWindow.connect.LoadData(ClassConnection.Connection.Tables.parts);
-                            foreach (ClassModules.Parts parts_items in MainWindow.connect.parts)
+                            connect.LoadData(ClassConnection.Connection.Tables.parts);
+                            foreach (ClassModules.Parts parts_items in connect.parts)
                             {
                                 if (page_select == page_main.parts)
                                 {
@@ -122,8 +132,8 @@ namespace Курсовой_проект_Тепляков.Pages
                     {
                         Dispatcher.InvokeAsync(async () =>
                         {
-                            MainWindow.connect.LoadData(ClassConnection.Connection.Tables.locations);
-                            foreach (ClassModules.Locations locations_items in MainWindow.connect.locations)
+                            connect.LoadData(ClassConnection.Connection.Tables.locations);
+                            foreach (ClassModules.Locations locations_items in connect.locations)
                             {
                                 if (page_select == page_main.locations)
                                 {
@@ -165,8 +175,8 @@ namespace Курсовой_проект_Тепляков.Pages
                     {
                         Dispatcher.InvokeAsync(async () =>
                         {
-                            MainWindow.connect.LoadData(ClassConnection.Connection.Tables.companies);
-                            foreach(ClassModules.Companies companies_items in MainWindow.connect.companies)
+                            connect.LoadData(ClassConnection.Connection.Tables.companies);
+                            foreach(ClassModules.Companies companies_items in connect.companies)
                             {
                                 if(page_select == page_main.companies)
                                 {
@@ -208,8 +218,8 @@ namespace Курсовой_проект_Тепляков.Pages
                     {
                         Dispatcher.InvokeAsync(async () =>
                         {
-                            MainWindow.connect.LoadData(ClassConnection.Connection.Tables.technique);
-                            foreach (ClassModules.Technique technique_items in MainWindow.connect.technique)
+                            connect.LoadData(ClassConnection.Connection.Tables.technique);
+                            foreach (ClassModules.Technique technique_items in connect.technique)
                             {
                                 if (page_select == page_main.technique)
                                 {
@@ -251,8 +261,8 @@ namespace Курсовой_проект_Тепляков.Pages
                     {
                         Dispatcher.InvokeAsync(async () =>
                         {
-                            MainWindow.connect.LoadData(ClassConnection.Connection.Tables.type_of_troops);
-                            foreach (ClassModules.Type_of_troops type_of_troops_items in MainWindow.connect.type_of_troops)
+                            connect.LoadData(ClassConnection.Connection.Tables.type_of_troops);
+                            foreach (ClassModules.Type_of_troops type_of_troops_items in connect.type_of_troops)
                             {
                                 if (page_select == page_main.type_of_troops)
                                 {
@@ -294,8 +304,8 @@ namespace Курсовой_проект_Тепляков.Pages
                     {
                         Dispatcher.InvokeAsync(async () =>
                         {
-                            MainWindow.connect.LoadData(ClassConnection.Connection.Tables.weapons);
-                            foreach (ClassModules.Weapons weapons_items in MainWindow.connect.weapons)
+                            connect.LoadData(ClassConnection.Connection.Tables.weapons);
+                            foreach (ClassModules.Weapons weapons_items in connect.weapons)
                             {
                                 if (page_select == page_main.weapons)
                                 {

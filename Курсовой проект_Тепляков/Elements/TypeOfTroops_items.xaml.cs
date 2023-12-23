@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Курсовой_проект_Тепляков.Pages;
 using Курсовой_проект_Тепляков.Pages.PagesInTable;
 
 namespace Курсовой_проект_Тепляков.Elements
@@ -42,12 +43,12 @@ namespace Курсовой_проект_Тепляков.Elements
         {
             try
             {
-                MainWindow.connect.LoadData(ClassConnection.Connection.Tables.type_of_troops);
+                Main.connect.LoadData(ClassConnection.Connection.Tables.type_of_troops);
                 string query = $"Delete From Type_of_troops Where Id_type_of_troops = " + type_of_troops.Id_type_of_troops.ToString() + "";
-                var query_apply = MainWindow.connect.Query(query);
+                var query_apply = Main.connect.Query(query);
                 if (query_apply != null)
                 {
-                    MainWindow.connect.LoadData(ClassConnection.Connection.Tables.type_of_troops);
+                    Main.connect.LoadData(ClassConnection.Connection.Tables.type_of_troops);
                     MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Pages.Main.page_main.type_of_troops);
                 }
                 else MessageBox.Show("Запрос на удаление вида войск не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);

@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Курсовой_проект_Тепляков.Pages;
 using Курсовой_проект_Тепляков.Pages.PagesInTable;
 
 namespace Курсовой_проект_Тепляков.Elements
@@ -46,12 +47,12 @@ namespace Курсовой_проект_Тепляков.Elements
         {
             try
             {
-                MainWindow.connect.LoadData(ClassConnection.Connection.Tables.locations);
+                Main.connect.LoadData(ClassConnection.Connection.Tables.locations);
                 string query = $"Delete From Locations Where Id_locations = " + locations.Id_locations.ToString() + "";
-                var query_apply = MainWindow.connect.Query(query);
+                var query_apply = Main.connect.Query(query);
                 if (query_apply != null)
                 {
-                    MainWindow.connect.LoadData(ClassConnection.Connection.Tables.locations);
+                    Main.connect.LoadData(ClassConnection.Connection.Tables.locations);
                     MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Pages.Main.page_main.locations);
                 }
                 else MessageBox.Show("Запрос на удаление места дислокации не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);

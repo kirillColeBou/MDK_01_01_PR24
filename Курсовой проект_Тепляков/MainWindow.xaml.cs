@@ -22,20 +22,12 @@ namespace Курсовой_проект_Тепляков
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static Connection connect;
         public static Pages.Main main;
         public static MainWindow init;
         public static Pages.Login_Regin.Login login;
         public MainWindow()
         {
             InitializeComponent();
-            connect = new Connection();
-            connect.LoadData(Connection.Tables.companies);
-            connect.LoadData(Connection.Tables.locations);
-            connect.LoadData(Connection.Tables.parts);
-            connect.LoadData(Connection.Tables.technique);
-            connect.LoadData(Connection.Tables.type_of_troops);
-            connect.LoadData(Connection.Tables.weapons);
             init = this;
             main = new Pages.Main();
             login = new Pages.Login_Regin.Login();
