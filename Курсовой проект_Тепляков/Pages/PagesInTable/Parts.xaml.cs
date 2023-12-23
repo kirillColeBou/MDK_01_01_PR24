@@ -35,7 +35,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                 Date_of_foundation.Text = _parts.Date_of_foundation.ToString("dd.MM.yyyy");
             }
             Main.connect.LoadData(ClassConnection.Connection.Tables.locations);
-            foreach (ClassModules.Locations item in Main.connect.locations)
+            foreach (ClassModules.Locations item in ClassConnection.Connection.locations)
             {
                 ComboBoxItem cb_locations = new ComboBoxItem();
                 cb_locations.Tag = item.Id_locations;
@@ -44,7 +44,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                 Locations.Items.Add(cb_locations);
             }
             Main.connect.LoadData(ClassConnection.Connection.Tables.type_of_troops);
-            foreach (ClassModules.Type_of_troops item in Main.connect.type_of_troops)
+            foreach (ClassModules.Type_of_troops item in ClassConnection.Connection.type_of_troops)
             {
                 ComboBoxItem cb_typeOfTroops = new ComboBoxItem();
                 cb_typeOfTroops.Tag = item.Id_type_of_troops;
@@ -53,7 +53,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                 Type_of_troops.Items.Add(cb_typeOfTroops);
             }
             Main.connect.LoadData(ClassConnection.Connection.Tables.weapons);
-            foreach (ClassModules.Weapons item in Main.connect.weapons)
+            foreach (ClassModules.Weapons item in ClassConnection.Connection.weapons)
             {
                 ComboBoxItem cb_weapons = new ComboBoxItem();
                 cb_weapons.Tag = item.Id_weapons;
@@ -99,16 +99,16 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                                             ClassModules.Type_of_troops id_typeOfTroops_temp;
                                             ClassModules.Weapons id_weapons_temp;
                                             ClassModules.Companies id_companies_temp;
-                                            id_locations_temp = Main.connect.locations.Find(x => x.Id_locations == Convert.ToInt32(((ComboBoxItem)Locations.SelectedItem).Tag));
-                                            id_typeOfTroops_temp = Main.connect.type_of_troops.Find(x => x.Id_type_of_troops == Convert.ToInt32(((ComboBoxItem)Type_of_troops.SelectedItem).Tag));
-                                            id_weapons_temp = Main.connect.weapons.Find(x => x.Id_weapons == Convert.ToInt32(((ComboBoxItem)Weapons.SelectedItem).Tag));
+                                            id_locations_temp = ClassConnection.Connection.locations.Find(x => x.Id_locations == Convert.ToInt32(((ComboBoxItem)Locations.SelectedItem).Tag));
+                                            id_typeOfTroops_temp = ClassConnection.Connection.type_of_troops.Find(x => x.Id_type_of_troops == Convert.ToInt32(((ComboBoxItem)Type_of_troops.SelectedItem).Tag));
+                                            id_weapons_temp = ClassConnection.Connection.weapons.Find(x => x.Id_weapons == Convert.ToInt32(((ComboBoxItem)Weapons.SelectedItem).Tag));
                                             id_companies_temp = Main.connect.companies.Find(x => x.Id_companies == Convert.ToInt32(((ComboBoxItem)Companies.SelectedItem).Tag));
                                             int id = Main.connect.SetLastId(ClassConnection.Connection.Tables.parts);
                                             if (parts.Count_weapons == null)
                                             {
                                                 string query = $"Insert Into parts ([Id_part], [Locations], [Type_of_troops], [Weapons], [Companies], [Count_companies], [Count_technique], [Count_weapons], [Date_of_foundation])" +
-                                                    "Values ({id.ToString()}, '{id_locations_temp.Id_locations.ToString()}', '{id_typeOfTroops_temp.Id_type_of_troops.ToString()}', '{id_weapons_temp.Id_weapons.ToString()}'," + 
-                                                    " '{id_companies_temp.Id_companies.ToString()}', '{Count_companies.Text}', '{Count_technique.Text}', '{Count_weapons.Text}', '{Date_of_foundation.Text}')";
+                                                    $"Values ({id.ToString()}, '{id_locations_temp.Id_locations.ToString()}', '{id_typeOfTroops_temp.Id_type_of_troops.ToString()}', '{id_weapons_temp.Id_weapons.ToString()}'," + 
+                                                    $" '{id_companies_temp.Id_companies.ToString()}', '{Count_companies.Text}', '{Count_technique.Text}', '{Count_weapons.Text}', '{Date_of_foundation.Text}')";
                                                 var query_apply = Main.connect.Query(query);
                                                 if (query_apply != null)
                                                 {
@@ -120,8 +120,8 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                                             else
                                             {
                                                 string query = $"Update parts Set Locations = '{id_locations_temp.Id_locations.ToString()}', Type_of_troops = '{id_typeOfTroops_temp.Id_type_of_troops.ToString()}'," + 
-                                                    " Weapons = '{id_weapons_temp.Id_weapons.ToString()}', Companies = '{id_companies_temp.Id_companies.ToString()}', Count_companies = '{Count_companies.Text}'," + "" +
-                                                    " Count_technique = '{Count_technique.Text}', Count_weapons = '{Count_weapons.Text}', Date_of_foundation = '{Date_of_foundation.Text}' Where Id_part = {parts.Id_part}";
+                                                    $" Weapons = '{id_weapons_temp.Id_weapons.ToString()}', Companies = '{id_companies_temp.Id_companies.ToString()}', Count_companies = '{Count_companies.Text}'," + "" +
+                                                    $" Count_technique = '{Count_technique.Text}', Count_weapons = '{Count_weapons.Text}', Date_of_foundation = '{Date_of_foundation.Text}' Where Id_part = {parts.Id_part}";
                                                 var query_apply = Main.connect.Query(query);
                                                 if (query_apply != null)
                                                 {

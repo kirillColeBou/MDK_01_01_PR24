@@ -133,7 +133,7 @@ namespace Курсовой_проект_Тепляков.Pages
                         Dispatcher.InvokeAsync(async () =>
                         {
                             connect.LoadData(ClassConnection.Connection.Tables.locations);
-                            foreach (ClassModules.Locations locations_items in connect.locations)
+                            foreach (ClassModules.Locations locations_items in ClassConnection.Connection.locations)
                             {
                                 if (page_select == page_main.locations)
                                 {
@@ -262,7 +262,7 @@ namespace Курсовой_проект_Тепляков.Pages
                         Dispatcher.InvokeAsync(async () =>
                         {
                             connect.LoadData(ClassConnection.Connection.Tables.type_of_troops);
-                            foreach (ClassModules.Type_of_troops type_of_troops_items in connect.type_of_troops)
+                            foreach (ClassModules.Type_of_troops type_of_troops_items in ClassConnection.Connection.type_of_troops)
                             {
                                 if (page_select == page_main.type_of_troops)
                                 {
@@ -305,7 +305,7 @@ namespace Курсовой_проект_Тепляков.Pages
                         Dispatcher.InvokeAsync(async () =>
                         {
                             connect.LoadData(ClassConnection.Connection.Tables.weapons);
-                            foreach (ClassModules.Weapons weapons_items in connect.weapons)
+                            foreach (ClassModules.Weapons weapons_items in ClassConnection.Connection.weapons)
                             {
                                 if (page_select == page_main.weapons)
                                 {

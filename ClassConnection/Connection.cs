@@ -19,11 +19,11 @@ namespace ClassConnection
 
         #region All_Lists
         public List<Companies> companies = new List<Companies>();
-        public List<Locations> locations = new List<Locations>();
+        public static List<Locations> locations = new List<Locations>();
         public List<Parts> parts = new List<Parts>();
         public List<Technique> technique = new List<Technique>();
-        public List<Type_of_troops> type_of_troops = new List<Type_of_troops>();
-        public List<Weapons> weapons = new List<Weapons>();
+        public static List<Type_of_troops> type_of_troops = new List<Type_of_troops>();
+        public static List<Weapons> weapons = new List<Weapons>();
         #endregion
 
         public enum Tables

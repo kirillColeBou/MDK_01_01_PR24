@@ -31,10 +31,13 @@ namespace Курсовой_проект_Тепляков.Elements
             if(_parts.Date_of_foundation != null)
             {
                 Id_part.Content = "Часть № " + _parts.Id_part;
-                Locations.Content = "Место дислокации: " + _parts.Locations;
-                Type_of_troops.Content = "Вид войск: " + _parts.Type_of_troops;
-                Weapons.Content = "Вид вооружения: " + _parts.Weapons;
-                Companies.Content = "Рота: " + _parts.Companies;
+                ClassModules.Locations item_location = ClassConnection.Connection.locations.Find(x => x.Id_locations == _parts.Locations);
+                Locations.Content = "Место дислокации: " + item_location.Country;
+                ClassModules.Type_of_troops item_typeOfTroops = ClassConnection.Connection.type_of_troops.Find(x => x.Id_type_of_troops == _parts.Type_of_troops);
+                Type_of_troops.Content = "Вид войск: " + item_typeOfTroops.Name_type_of_troops;
+                ClassModules.Weapons item_weapons = ClassConnection.Connection.weapons.Find(x => x.Id_weapons == _parts.Weapons);
+                Weapons.Content = "Вид вооружения: " + item_weapons.Name_weapons;
+                Companies.Content = "Рота №" + _parts.Companies;
                 Count_companies.Content = "Количество рот: " + _parts.Count_companies;
                 Count_technique.Content = "Количество техники: " + _parts.Count_technique;
                 Count_weapons.Content = "Количество вооружений: " + _parts.Count_weapons;
