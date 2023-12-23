@@ -13,7 +13,7 @@ namespace ClassConnection
     public class Connection
     {
         #region Connection_strings_depending_on_the_place_of_work
-        public static readonly string Path_Home = "Server=KIRILL\\SQLExpress;Database=military_district;User Id=sa;Password=sa";
+        public static string Path_Home;
         public static readonly string Path_PAT  = "Server=10.0.181.170;database=military_district;uid=galkin_teplyakov;pwd=QweqweQwe123$123_123;";
         #endregion
 
@@ -29,6 +29,51 @@ namespace ClassConnection
         public enum Tables
         {
             companies, locations, parts, technique, type_of_troops, weapons
+        }
+
+        public bool Connect(string login, string password)
+        {
+            string Path = $"Server=KIRILL\\SQLExpress;Database=military_district;User Id={login};Password={password}";
+            SqlConnection connection = new SqlConnection(Path);
+            try
+            {
+                connection.Open();
+                Path_Home = Path;
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool CreateUser(string login, string password)
+        {
+            string Path = "Server=KIRILL\\SQLExpress;Database=military_district;User Id=sa;Password=sa";
+            SqlConnection connection = new SqlConnection(Path);
+
+            try
+            {
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand($"CREATE LOGIN {login} WITH PASSWORD = '{password}';", connection))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                using (SqlCommand cmd = new SqlCommand($"USE military_district; CREATE USER {login} FOR LOGIN {login};", connection))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                using (SqlCommand cmd = new SqlCommand($"USE military_district; EXEC sp_addrolemember 'db_datareader', '{login}';", connection))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                Path_Home = $"Server=KIRILL\\SQLExpress;Database=military_district;User Id={login};Password={password}";
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public SqlDataReader Query(string query)

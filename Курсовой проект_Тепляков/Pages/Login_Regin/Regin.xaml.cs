@@ -21,9 +21,11 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
     /// </summary>
     public partial class Regin : Page
     {
+        ClassConnection.Connection connection;
         public Regin()
         {
             InitializeComponent();
+            connection = new ClassConnection.Connection();
         }
 
         private void Back_Click(object sender, MouseButtonEventArgs e)
@@ -54,11 +56,13 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
             password_incorrect_second.Visibility = Visibility.Hidden;
             if (login_new_user.Text != "")
                 if (password_new_user_first.Password != "" && password_new_user_second.Password != "")
-
                     if (password_new_user_first.Password == password_new_user_second.Password)
                     {
-                        MainWindow.init.OpenPageMain();
-                        Main.main.CreateConnect(true);
+                        if (connection.CreateUser(login_new_user.Text, password_new_user_first.Password) == true)
+                        {
+                            MainWindow.init.OpenPageMain();
+                            Main.main.CreateConnect(true);
+                        }
                     }
                     else
                     {

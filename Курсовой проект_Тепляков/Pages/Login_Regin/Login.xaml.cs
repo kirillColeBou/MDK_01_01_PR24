@@ -21,11 +21,13 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
     /// </summary>
     public partial class Login : Page
     {
+        ClassConnection.Connection connection;
         public static Regin regin;
 
         public Login()
         {
             InitializeComponent();
+            connection = new ClassConnection.Connection();
             regin = new Regin();
         }
 
@@ -66,17 +68,11 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
             password_incorrect.Content = "Пароль не верный";
             password_incorrect.Visibility = Visibility.Hidden;
             if (login_user.Text != "" && password_user.Password != "")
-                if (login_user.Text == "kirill")
-                    if (password_user.Password == "1234")
-                    {
-                        Main.main.CreateConnect(true);
-                        MainWindow.init.OpenPageMain();
-                    }
-                    else
-                    {
-                        password_user.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
-                        password_incorrect.Visibility = Visibility.Visible;
-                    }
+                if (connection.Connect(login_user.Text, password_user.Password) == true)
+                {
+                    Main.main.CreateConnect(true);
+                    MainWindow.init.OpenPageMain();
+                }
                 else
                 {
                     login_user.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
