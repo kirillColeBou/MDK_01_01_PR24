@@ -46,7 +46,6 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                     if (query_apply != null)
                     {
                         MainWindow.connect.LoadData(ClassConnection.Connection.Tables.weapons);
-                        MessageBox.Show("Успешное добавление вооружения!", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
                         MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.weapons);
                     }
                     else MessageBox.Show("Запрос на добавление вооружения не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -58,13 +57,15 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                     if (query_apply != null)
                     {
                         MainWindow.connect.LoadData(ClassConnection.Connection.Tables.weapons);
-                        MessageBox.Show("Успешное изменение вооружения!", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
                         MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.weapons);
                     }
                     else MessageBox.Show("Запрос на изменение вооружения не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            else MessageBox.Show("Вы не ввели вооружение!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+            else
+            {
+                Name_weapons.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+            }
         }
 
         private void Click_Cancel_Weapons_Redact(object sender, RoutedEventArgs e)
@@ -81,7 +82,6 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                 var query_apply = MainWindow.connect.Query(query);
                 if (query_apply != null)
                 {
-                    MessageBox.Show("Успешное удаление вооружения!", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
                     MainWindow.connect.LoadData(ClassConnection.Connection.Tables.weapons);
                     MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.weapons);
                 }

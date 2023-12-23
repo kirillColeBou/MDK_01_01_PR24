@@ -74,43 +74,98 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
 
         private void Click_Parts_Redact(object sender, RoutedEventArgs e)
         {
-            if (Locations.SelectedItem != null && Type_of_troops.SelectedItem != null && Weapons.SelectedItem != null && Companies.SelectedItem != null && Count_companies.Text != "" && Count_technique.Text != "" && Count_weapons.Text != "" && Date_of_foundation.SelectedDate != null)
+            Id_locations_border.GotFocus += Id_locations_gotFocus;
+            Id_typeOfTroops_border.GotFocus += Id_typeOfTroops_gotFocus;
+            Id_weapons_border.GotFocus += Id_companies_gotFocus;
+            Id_companies_border.GotFocus += Id_companies_gotFocus;
+            Id_dateOfFoundation_border.GotFocus += Id_dateOfFoundation_gotFocus;
+            if (Locations.SelectedItem != null)
             {
-                ClassModules.Locations id_locations_temp;
-                ClassModules.Type_of_troops id_typeOfTroops_temp;
-                ClassModules.Weapons id_weapons_temp;
-                ClassModules.Companies id_companies_temp;
-                id_locations_temp = MainWindow.connect.locations.Find(x => x.Id_locations == Convert.ToInt32(((ComboBoxItem)Locations.SelectedItem).Tag));
-                id_typeOfTroops_temp = MainWindow.connect.type_of_troops.Find(x => x.Id_type_of_troops == Convert.ToInt32(((ComboBoxItem)Type_of_troops.SelectedItem).Tag));
-                id_weapons_temp = MainWindow.connect.weapons.Find(x => x.Id_weapons == Convert.ToInt32(((ComboBoxItem)Weapons.SelectedItem).Tag));
-                id_companies_temp = MainWindow.connect.companies.Find(x => x.Id_companies == Convert.ToInt32(((ComboBoxItem)Companies.SelectedItem).Tag));
-                int id = MainWindow.connect.SetLastId(ClassConnection.Connection.Tables.parts);
-                if (parts.Count_weapons == null)
+                if (Type_of_troops.SelectedItem != null)
                 {
-                    string query = $"Insert Into parts ([Id_part], [Locations], [Type_of_troops], [Weapons], [Companies], [Count_companies], [Count_technique], [Count_weapons], [Date_of_foundation]) Values ({id.ToString()}, '{id_locations_temp.Id_locations.ToString()}', '{id_typeOfTroops_temp.Id_type_of_troops.ToString()}', '{id_weapons_temp.Id_weapons.ToString()}', '{id_companies_temp.Id_companies.ToString()}', '{Count_companies.Text}', '{Count_technique.Text}', '{Count_weapons.Text}', '{Date_of_foundation.Text}')";
-                    var query_apply = MainWindow.connect.Query(query);
-                    if (query_apply != null)
+                    if (Weapons.SelectedItem != null)
                     {
-                        MainWindow.connect.LoadData(ClassConnection.Connection.Tables.parts);
-                        MessageBox.Show("Успешное добавление части!", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
-                        MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.parts);
+                        if (Companies.SelectedItem != null)
+                        {
+                            if (Count_companies.Text != "")
+                            {
+                                if (Count_technique.Text != "")
+                                {
+                                    if (Count_weapons.Text != "")
+                                    {
+                                        if (Date_of_foundation.Text != "01.01.0001" && Date_of_foundation.Text != "")
+                                        {
+                                            ClassModules.Locations id_locations_temp;
+                                            ClassModules.Type_of_troops id_typeOfTroops_temp;
+                                            ClassModules.Weapons id_weapons_temp;
+                                            ClassModules.Companies id_companies_temp;
+                                            id_locations_temp = MainWindow.connect.locations.Find(x => x.Id_locations == Convert.ToInt32(((ComboBoxItem)Locations.SelectedItem).Tag));
+                                            id_typeOfTroops_temp = MainWindow.connect.type_of_troops.Find(x => x.Id_type_of_troops == Convert.ToInt32(((ComboBoxItem)Type_of_troops.SelectedItem).Tag));
+                                            id_weapons_temp = MainWindow.connect.weapons.Find(x => x.Id_weapons == Convert.ToInt32(((ComboBoxItem)Weapons.SelectedItem).Tag));
+                                            id_companies_temp = MainWindow.connect.companies.Find(x => x.Id_companies == Convert.ToInt32(((ComboBoxItem)Companies.SelectedItem).Tag));
+                                            int id = MainWindow.connect.SetLastId(ClassConnection.Connection.Tables.parts);
+                                            if (parts.Count_weapons == null)
+                                            {
+                                                string query = $"Insert Into parts ([Id_part], [Locations], [Type_of_troops], [Weapons], [Companies], [Count_companies], [Count_technique], [Count_weapons], [Date_of_foundation]) Values ({id.ToString()}, '{id_locations_temp.Id_locations.ToString()}', '{id_typeOfTroops_temp.Id_type_of_troops.ToString()}', '{id_weapons_temp.Id_weapons.ToString()}', '{id_companies_temp.Id_companies.ToString()}', '{Count_companies.Text}', '{Count_technique.Text}', '{Count_weapons.Text}', '{Date_of_foundation.Text}')";
+                                                var query_apply = MainWindow.connect.Query(query);
+                                                if (query_apply != null)
+                                                {
+                                                    MainWindow.connect.LoadData(ClassConnection.Connection.Tables.parts);
+                                                    MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.parts);
+                                                }
+                                                else MessageBox.Show("Запрос на добавление части не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                            }
+                                            else
+                                            {
+                                                string query = $"Update parts Set Locations = '{id_locations_temp.Id_locations.ToString()}', Type_of_troops = '{id_typeOfTroops_temp.Id_type_of_troops.ToString()}', Weapons = '{id_weapons_temp.Id_weapons.ToString()}', Companies = '{id_companies_temp.Id_companies.ToString()}', Count_companies = '{Count_companies.Text}', Count_technique = '{Count_technique.Text}', Count_weapons = '{Count_weapons.Text}', Date_of_foundation = '{Date_of_foundation.Text}' Where Id_part = {parts.Id_part}";
+                                                var query_apply = MainWindow.connect.Query(query);
+                                                if (query_apply != null)
+                                                {
+                                                    MainWindow.connect.LoadData(ClassConnection.Connection.Tables.parts);
+                                                    MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.parts);
+                                                }
+                                                else MessageBox.Show("Запрос на изменение части не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            Id_dateOfFoundation_border.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                                        }
+                                    }
+                                    else 
+                                    {
+                                        Count_weapons.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                                    }
+                                }
+                                else
+                                {
+                                    Count_technique.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                                }
+                            }
+                            else
+                            {
+                                Count_companies.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                            }
+                        }
+                        else
+                        {
+                            Id_companies_border.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                        }
                     }
-                    else MessageBox.Show("Запрос на добавление части не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    else
+                    {
+                        Id_weapons_border.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                    }
                 }
                 else
                 {
-                    string query = $"Update parts Set Locations = '{id_locations_temp.Id_locations.ToString()}', Type_of_troops = '{id_typeOfTroops_temp.Id_type_of_troops.ToString()}', Weapons = '{id_weapons_temp.Id_weapons.ToString()}', Companies = '{id_companies_temp.Id_companies.ToString()}', Count_companies = '{Count_companies.Text}', Count_technique = '{Count_technique.Text}', Count_weapons = '{Count_weapons.Text}', Date_of_foundation = '{Date_of_foundation.Text}' Where Id_part = {parts.Id_part}";
-                    var query_apply = MainWindow.connect.Query(query);
-                    if (query_apply != null)
-                    {
-                        MainWindow.connect.LoadData(ClassConnection.Connection.Tables.parts);
-                        MessageBox.Show("Успешное изменение части!", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
-                        MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.parts);
-                    }
-                    else MessageBox.Show("Запрос на изменение части не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    Id_typeOfTroops_border.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
                 }
             }
-            else MessageBox.Show("Вы не ввели данные!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+            else
+            {
+                Id_locations_border.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+            }
         }
 
         private void Click_Cancel_Parts_Redact(object sender, RoutedEventArgs e)
@@ -127,7 +182,6 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                 var query_apply = MainWindow.connect.Query(query);
                 if (query_apply != null)
                 {
-                    MessageBox.Show("Успешное удаление части!", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
                     MainWindow.connect.LoadData(ClassConnection.Connection.Tables.parts);
                     MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.parts);
                 }
@@ -137,6 +191,31 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void Id_locations_gotFocus(object sender, RoutedEventArgs e)
+        {
+            Id_locations_border.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#545454"));
+        }
+
+        private void Id_typeOfTroops_gotFocus(object sender, RoutedEventArgs e)
+        {
+            Id_typeOfTroops_border.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#545454"));
+        }
+
+        private void Id_weapons_gotFocus(object sender, RoutedEventArgs e)
+        {
+            Id_weapons_border.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#545454"));
+        }
+
+        private void Id_companies_gotFocus(object sender, RoutedEventArgs e)
+        {
+            Id_companies_border.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#545454"));
+        }
+
+        private void Id_dateOfFoundation_gotFocus(object sender, RoutedEventArgs e)
+        {
+            Id_dateOfFoundation_border.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#545454"));
         }
     }
 }

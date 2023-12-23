@@ -44,7 +44,6 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                     if (query_apply != null)
                     {
                         MainWindow.connect.LoadData(ClassConnection.Connection.Tables.type_of_troops);
-                        MessageBox.Show("Успешное добавление вида войск!", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
                         MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.type_of_troops);
                     }
                     else MessageBox.Show("Запрос на добавление вида войск не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -56,13 +55,15 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                     if (query_apply != null)
                     {
                         MainWindow.connect.LoadData(ClassConnection.Connection.Tables.type_of_troops);
-                        MessageBox.Show("Успешное изменение вида войск!", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
                         MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.type_of_troops);
                     }
                     else MessageBox.Show("Запрос на изменение вида войск не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            else MessageBox.Show("Вы не ввели название вида войск!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+            else
+            {
+                Name_type_of_troops.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+            }
         }
 
         private void Click_Cancel_TypeOfTroops_Redact(object sender, RoutedEventArgs e)
@@ -79,7 +80,6 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                 var query_apply = MainWindow.connect.Query(query);
                 if (query_apply != null)
                 {
-                    MessageBox.Show("Успешное удаление вида войск!", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
                     MainWindow.connect.LoadData(ClassConnection.Connection.Tables.type_of_troops);
                     MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.type_of_troops);
                 }

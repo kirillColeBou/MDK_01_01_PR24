@@ -45,7 +45,6 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                     if (query_apply != null)
                     {
                         MainWindow.connect.LoadData(ClassConnection.Connection.Tables.companies);
-                        MessageBox.Show("Успешное добавление роты!", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
                         MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.companies);
                     }
                     else MessageBox.Show("Запрос на добавление роты не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -57,13 +56,15 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                     if (query_apply != null)
                     {
                         MainWindow.connect.LoadData(ClassConnection.Connection.Tables.companies);
-                        MessageBox.Show("Успешное изменение роты!", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
                         MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.companies);
                     }
                     else MessageBox.Show("Запрос на изменение роты не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            else MessageBox.Show("Вы не ввели ФИО командира!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+            else
+            {
+                Commander.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+            }
         }
 
         private void Click_Cancel_Companies_Redact(object sender, RoutedEventArgs e)
@@ -80,7 +81,6 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                 var query_apply = MainWindow.connect.Query(query);
                 if(query_apply != null)
                 {
-                    MessageBox.Show("Успешное удаление роты!", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
                     MainWindow.connect.LoadData(ClassConnection.Connection.Tables.companies);
                     MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.companies);
                 }
