@@ -73,6 +73,7 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
                 if (connection.Connect(login_user.Text, password_user.Password) == true)
                 {
                     Main.main.CreateConnect(true);
+                    Main.main.CreateWhoAmI(true, login_user.Text);
                     MainWindow.init.OpenPageMain();
                 }
                 else

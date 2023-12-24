@@ -40,7 +40,6 @@ namespace Курсовой_проект_Тепляков.Pages
         public Main()
         {
             InitializeComponent();
-
             main = this;
             page_select = page_main.none;
         }
@@ -57,6 +56,21 @@ namespace Курсовой_проект_Тепляков.Pages
                 connect.LoadData(Connection.Tables.type_of_troops);
                 connect.LoadData(Connection.Tables.weapons);
             } 
+        }
+
+        public void CreateWhoAmI(bool connectApply, string login)
+        {
+            if (connectApply == true)
+            {
+                if (connect.RoleUser() == "admin")
+                {
+                    WhoAmI.Content = $"Здравствуйте, {login}! (admin)";
+                }
+                else
+                {
+                    WhoAmI.Content = $"Здравствуйте, {login}! (public)";
+                }
+            }
         }
 
         public void OpenPageLogin()
