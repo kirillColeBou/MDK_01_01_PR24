@@ -59,6 +59,8 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
         {
             password_incorrect.Visibility = Visibility.Hidden;
             password_user.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#3D3D3D"));
+            login_incorrect.Visibility = Visibility.Hidden;
+            login_user.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#3D3D3D"));
         }
 
         public void Login_to_Main()
