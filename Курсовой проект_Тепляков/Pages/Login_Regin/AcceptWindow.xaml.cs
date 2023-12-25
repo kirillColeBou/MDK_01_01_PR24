@@ -47,6 +47,7 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
                     }
                     else
                     {
+                        login_incorrect.Visibility = Visibility.Visible;
                         login_admin.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
                         return;
                     }
@@ -60,6 +61,11 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
             {
                 login_admin.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
             }
+        }
+
+        private void login_user_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            login_incorrect.Visibility = Visibility.Hidden;
         }
     }
 }
