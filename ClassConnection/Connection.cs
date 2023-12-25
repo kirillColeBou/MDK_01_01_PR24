@@ -2,19 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.SqlClient;
-using System.Data.OleDb;
 using System.IO;
+using System.Security.Cryptography;
 
 namespace ClassConnection
 {
     public class Connection
     {
-        #region Connection_strings_depending_on_the_place_of_work
-        public static string Path_Home;
-        public static readonly string Path_PAT  = "Server=10.0.181.170;database=military_district;uid=galkin_teplyakov;pwd=QweqweQwe123$123_123;";
+        #region Connection
+        public static string Path_connection;
         #endregion
 
         #region All_Lists
@@ -33,12 +30,13 @@ namespace ClassConnection
 
         public bool Connect(string login, string password)
         {
+            //string Path = $"Server=10.0.181.170;Database=military_district;User Id={login};Password={password}";
             string Path = $"Server=KIRILL\\SQLExpress;Database=military_district;User Id={login};Password={password}";
             SqlConnection connection = new SqlConnection(Path);
             try
             {
                 connection.Open();
-                Path_Home = Path;
+                Path_connection = Path;
                 return true;
             }
             catch
@@ -47,11 +45,11 @@ namespace ClassConnection
             }
         }
 
-        public bool CreateUser(string login, string password)
+        public bool CreateUser(string login, string password, string login_admin, string password_admin)
         {
-            string Path = "Server=KIRILL\\SQLExpress;Database=military_district;User Id=sa;Password=sa";
+            //string Path = $"Server=10.0.181.170;Database=military_district;User Id={login_admin};Password={password_admin}";
+            string Path = $"Server=KIRILL\\SQLExpress;Database=military_district;User Id={login_admin};Password={password_admin}";
             SqlConnection connection = new SqlConnection(Path);
-
             try
             {
                 connection.Open();
@@ -67,7 +65,8 @@ namespace ClassConnection
                 {
                     cmd.ExecuteNonQuery();
                 }
-                Path_Home = $"Server=KIRILL\\SQLExpress;Database=military_district;User Id={login};Password={password}";
+                //Path_connection = $"Server=10.0.181.170;Database=military_district;User Id={login};Password={password}";
+                Path_connection = $"Server=KIRILL\\SQLExpress;Database=military_district;User Id={login};Password={password}";
                 return true;
             }
             catch
@@ -79,9 +78,9 @@ namespace ClassConnection
         public string RoleUser()
         {
             string role = "";
-            SqlConnection connect = new SqlConnection(Path_Home);
-            connect.Open();
-            using (SqlCommand cmd = new SqlCommand("SELECT IS_MEMBER('db_owner');", connect))
+            SqlConnection connection = new SqlConnection(Path_connection);
+            connection.Open();
+            using (SqlCommand cmd = new SqlCommand("SELECT IS_MEMBER('db_owner');", connection))
             {
                 int isMember = (int)cmd.ExecuteScalar();
                 if (isMember != 1)
@@ -93,30 +92,50 @@ namespace ClassConnection
                     role = "admin";
                 }
             }
-            connect.Close();
+            connection.Close();
             return role;
+        }
+
+        public string RoleUser(string login, string password)
+        {
+            try
+            {
+                //Path_connection = $"Server=10.0.181.170;Database=military_district;User Id={login};Password={password}";
+                Path_connection = $"Server=KIRILL\\SQLExpress;Database=military_district;User Id={login};Password={password}";
+                string role = "";
+                SqlConnection connection = new SqlConnection(Path_connection);
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand("SELECT IS_MEMBER('db_owner')", connection))
+                {
+                    int isMember = (int)cmd.ExecuteScalar();
+                    if (isMember != 1)
+                    {
+                        role = "db_datareader";
+                    }
+                    else
+                    {
+                        role = "admin";
+                    }
+                }
+                connection.Close();
+                return role;
+            }
+            catch
+            {
+                return null;
+            }
+            
         }
 
         public SqlDataReader Query(string query)
         {
             try
             {
-                if (File.Exists(Path_Home))
-                {
-                    SqlConnection connect = new SqlConnection(Path_Home);
-                    connect.Open();
-                    SqlCommand command = new SqlCommand(query, connect);
-                    SqlDataReader reader = command.ExecuteReader();
-                    return reader;
-                }
-                else
-                {
-                    SqlConnection connect = new SqlConnection(Path_Home);
-                    connect.Open();
-                    SqlCommand command = new SqlCommand(query, connect);
-                    SqlDataReader reader = command.ExecuteReader();
-                    return reader;
-                }
+                SqlConnection connect = new SqlConnection(Path_connection);
+                connect.Open();
+                SqlCommand command = new SqlCommand(query, connect);
+                SqlDataReader reader = command.ExecuteReader();
+                return reader;
             }
             catch
             {

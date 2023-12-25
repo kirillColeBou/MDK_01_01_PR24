@@ -49,6 +49,7 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
 
         public void Regin_to_Main()
         {
+            var accept = new AcceptWindow();
             login_incorrect.Content = "Данный пользователь уже существует";
             login_incorrect.Visibility = Visibility.Hidden;
             password_incorrect_first.Content = "Пароли не совпадают";
@@ -59,15 +60,26 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
                 if (password_new_user_first.Password != "" && password_new_user_second.Password != "")
                     if (password_new_user_first.Password == password_new_user_second.Password)
                     {
-                        if (connection.CreateUser(login_new_user.Text, password_new_user_first.Password) == true)
+                        accept.ShowDialog();
+                        if (accept.IsApply)
                         {
-                            Main.main.CreateConnect(true);
-                            Main.main.CreateWhoAmI(true, login_new_user.Text);
-                            MainWindow.init.OpenPageMain();
+                            if (connection.CreateUser(login_new_user.Text, password_new_user_first.Password, accept.Login_admin, accept.Password_admin) == true)
+                            {
+                                Main.main.CreateConnect(true);
+                                Main.main.CreateWhoAmI(true, login_new_user.Text);
+                                MainWindow.init.OpenPageMain();
+                                accept.IsApply = false;
+                            }
+                            else
+                            {
+                                login_new_user.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                                login_incorrect.Visibility = Visibility.Visible;
+                            }
                         }
                         else
                         {
                             login_new_user.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                            login_incorrect.Content = "Нету подтверждения администратора";
                             login_incorrect.Visibility = Visibility.Visible;
                         }
                     }
@@ -105,6 +117,8 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
                 password_incorrect_second.Content = "Введите пароль";
                 password_incorrect_second.Visibility = Visibility.Visible;
             }
+            accept.IsApply = false;
+            accept.Close();
         }
 
         private void Login_Click(object sender, MouseButtonEventArgs e)
