@@ -58,19 +58,10 @@ namespace Курсовой_проект_Тепляков.Pages
             } 
         }
 
-        public void CreateWhoAmI(bool connectApply, string login)
+        public void RoleUser()
         {
-            if (connectApply == true)
-            {
-                if (connect.RoleUser() == "admin")
-                {
-                    WhoAmI.Content = $"Здравствуйте, {login}! (admin)";
-                }
-                else
-                {
-                    WhoAmI.Content = $"Здравствуйте, {login}! (public)";
-                }
-            }
+            if (Login.UserInfo[1] == "admin") WhoAmI.Content = $"Здравствуйте, {Login.UserInfo[0]}! {Login.UserInfo[1]}";
+            else WhoAmI.Content = $"Здравствуйте, {Login.UserInfo[0]}! {Login.UserInfo[1]}";
         }
 
         public void OpenPageLogin()
@@ -123,7 +114,7 @@ namespace Курсовой_проект_Тепляков.Pages
                             }
                             if (page_select == page_main.parts)
                             {
-                                if (connect.RoleUser() == "admin")
+                                if (Login.UserInfo[1] == "admin")
                                 {
                                     var add = new Pages.PagesInTable.Parts(new ClassModules.Parts());
                                     parrent.Children.Add(new Elements.Add(add));
@@ -169,7 +160,7 @@ namespace Курсовой_проект_Тепляков.Pages
                             }
                             if (page_select == page_main.locations)
                             {
-                                if (connect.RoleUser() == "admin")
+                                if (Login.UserInfo[1] == "admin")
                                 {
                                     var add = new Pages.PagesInTable.Locations(new ClassModules.Locations());
                                     parrent.Children.Add(new Elements.Add(add));
@@ -215,7 +206,7 @@ namespace Курсовой_проект_Тепляков.Pages
                             }
                             if(page_select == page_main.companies)
                             {
-                                if (connect.RoleUser() == "admin")
+                                if (Login.UserInfo[1] == "admin")
                                 {
                                     var add = new Pages.PagesInTable.Companies(new ClassModules.Companies());
                                     parrent.Children.Add(new Elements.Add(add));
@@ -261,7 +252,7 @@ namespace Курсовой_проект_Тепляков.Pages
                             }
                             if (page_select == page_main.technique)
                             {
-                                if (connect.RoleUser() == "admin")
+                                if (Login.UserInfo[1] == "admin")
                                 {
                                     var add = new Pages.PagesInTable.Technique(new ClassModules.Technique());
                                     parrent.Children.Add(new Elements.Add(add));
@@ -307,7 +298,7 @@ namespace Курсовой_проект_Тепляков.Pages
                             }
                             if (page_select == page_main.type_of_troops)
                             {
-                                if (connect.RoleUser() == "admin")
+                                if (Login.UserInfo[1] == "admin")
                                 {
                                     var add = new Pages.PagesInTable.Type_of_troops(new ClassModules.Type_of_troops());
                                     parrent.Children.Add(new Elements.Add(add));
@@ -353,7 +344,7 @@ namespace Курсовой_проект_Тепляков.Pages
                             }
                             if (page_select == page_main.weapons)
                             {
-                                if (connect.RoleUser() == "admin")
+                                if (Login.UserInfo[1] == "admin")
                                 {
                                     var add = new Pages.PagesInTable.Weapons(new ClassModules.Weapons());
                                     parrent.Children.Add(new Elements.Add(add));
@@ -371,6 +362,7 @@ namespace Курсовой_проект_Тепляков.Pages
         {
             parrent.Children.Clear();
             page_select = page_main.none;
+            Login.UserInfo[0] = ""; Login.UserInfo[1] = "";
             OpenPageLogin();
         }
 

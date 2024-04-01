@@ -28,7 +28,7 @@ namespace Курсовой_проект_Тепляков.Elements
         {
             InitializeComponent();
             connection = new ClassConnection.Connection();
-            if (connection.RoleUser() != "admin")
+            if (Pages.Login_Regin.Login.UserInfo[1] != "admin")
             {
                 Buttons.Visibility = Visibility.Hidden;
             }

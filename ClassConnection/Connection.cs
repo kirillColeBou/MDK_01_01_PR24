@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data.SqlClient;
-using System.IO;
-using System.Security.Cryptography;
 
 namespace ClassConnection
 {
@@ -21,17 +19,17 @@ namespace ClassConnection
         public List<Technique> technique = new List<Technique>();
         public static List<Type_of_troops> type_of_troops = new List<Type_of_troops>();
         public static List<Weapons> weapons = new List<Weapons>();
+        public List<Users> users = new List<Users>();
         #endregion
 
         public enum Tables
         {
-            companies, locations, parts, technique, type_of_troops, weapons
+            companies, locations, parts, technique, type_of_troops, weapons, users
         }
 
-        public bool Connect(string login, string password)
+        public bool Connect()
         {
-            //string Path = $"Server=10.0.181.170;Database=military_district;User Id={login};Password={password}";
-            string Path = $"Server=KIRILL\\SQLExpress;Database=military_district;User Id={login};Password={password}";
+            string Path = $@"Server=USER\SQLEXPRESS;Database=military_district;User Id=sa;Password=Asdfg123";
             SqlConnection connection = new SqlConnection(Path);
             try
             {
@@ -43,89 +41,7 @@ namespace ClassConnection
             {
                 return false;
             }
-        }
-
-        public bool CreateUser(string login, string password, string login_admin, string password_admin)
-        {
-            //string Path = $"Server=10.0.181.170;Database=military_district;User Id={login_admin};Password={password_admin}";
-            string Path = $"Server=KIRILL\\SQLExpress;Database=military_district;User Id={login_admin};Password={password_admin}";
-            SqlConnection connection = new SqlConnection(Path);
-            try
-            {
-                connection.Open();
-                using (SqlCommand cmd = new SqlCommand($"CREATE LOGIN {login} WITH PASSWORD = '{password}';", connection))
-                {
-                    cmd.ExecuteNonQuery();
-                }
-                using (SqlCommand cmd = new SqlCommand($"USE military_district; CREATE USER {login} FOR LOGIN {login};", connection))
-                {
-                    cmd.ExecuteNonQuery();
-                }
-                using (SqlCommand cmd = new SqlCommand($"USE military_district; EXEC sp_addrolemember 'db_datareader', '{login}';", connection))
-                {
-                    cmd.ExecuteNonQuery();
-                }
-                //Path_connection = $"Server=10.0.181.170;Database=military_district;User Id={login};Password={password}";
-                Path_connection = $"Server=KIRILL\\SQLExpress;Database=military_district;User Id={login};Password={password}";
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public string RoleUser()
-        {
-            string role = "";
-            SqlConnection connection = new SqlConnection(Path_connection);
-            connection.Open();
-            using (SqlCommand cmd = new SqlCommand("SELECT IS_MEMBER('db_owner');", connection))
-            {
-                int isMember = (int)cmd.ExecuteScalar();
-                if (isMember != 1)
-                {
-                    role = "db_datareader";
-                }
-                else
-                {
-                    role = "admin";
-                }
-            }
-            connection.Close();
-            return role;
-        }
-
-        public string RoleUser(string login, string password)
-        {
-            try
-            {
-                //Path_connection = $"Server=10.0.181.170;Database=military_district;User Id={login};Password={password}";
-                Path_connection = $"Server=KIRILL\\SQLExpress;Database=military_district;User Id={login};Password={password}";
-                string role = "";
-                SqlConnection connection = new SqlConnection(Path_connection);
-                connection.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT IS_MEMBER('db_owner')", connection))
-                {
-                    int isMember = (int)cmd.ExecuteScalar();
-                    if (isMember != 1)
-                    {
-                        role = "db_datareader";
-                    }
-                    else
-                    {
-                        role = "admin";
-                    }
-                }
-                connection.Close();
-                return role;
-            }
-            catch
-            {
-                return null;
-            }
-            
-        }
+        }        
 
         public SqlDataReader Query(string query)
         {
@@ -195,6 +111,14 @@ namespace ClassConnection
                         {
                             int max_status = weapons[0].Id_weapons;
                             max_status = weapons.Max(x => x.Id_weapons);
+                            return max_status + 1;
+                        }
+                        else return 1;
+                    case "users":
+                        if (users.Count >= 1)
+                        {
+                            int max_status = users[0].Id;
+                            max_status = users.Max(x => x.Id);
                             return max_status + 1;
                         }
                         else return 1;
@@ -313,6 +237,23 @@ namespace ClassConnection
                         weapons.Add(newWeapons);
                     }
                     itemsWeapons.Close();
+                }
+                if (tables.ToString() == "users")
+                {
+                    SqlDataReader itemsUsers = Query("Select * From " + tables.ToString() + " Order By [Id]");
+                    users.Clear();
+                    while (itemsUsers.Read())
+                    {
+                        Users newUsers = new Users
+                        {
+                            Id = Convert.ToInt32(itemsUsers.GetValue(0)),
+                            Login = Convert.ToString(itemsUsers.GetValue(1)),
+                            Password = Convert.ToString(itemsUsers.GetValue(2)),
+                            Role = Convert.ToString(itemsUsers.GetValue(3))
+                        };
+                        users.Add(newUsers);
+                    }
+                    itemsUsers.Close();
                 }
             }
             catch

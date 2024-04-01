@@ -25,6 +25,7 @@ namespace Курсовой_проект_Тепляков
         public static Pages.Main main;
         public static MainWindow init;
         public static Pages.Login_Regin.Login login;
+        
         public MainWindow()
         {
             InitializeComponent();

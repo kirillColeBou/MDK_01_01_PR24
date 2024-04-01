@@ -30,11 +30,12 @@ namespace Курсовой_проект_Тепляков.Elements
         {
             InitializeComponent();
             connection = new ClassConnection.Connection();
-            if (connection.RoleUser() != "admin")
+            if (Pages.Login_Regin.Login.UserInfo[1] != "admin")
             {
                 Buttons.Visibility = Visibility.Hidden;
             }
             locations = _locations;
+#pragma warning disable
             if(_locations.Count_structures != null)
             {
                 Country.Content = _locations.Country;
@@ -44,7 +45,6 @@ namespace Курсовой_проект_Тепляков.Elements
                 Count_structures.Content = "Количество сооружений: " + _locations.Count_structures;
             }
         }
-
         private void Click_redact(object sender, RoutedEventArgs e)
         {
             MainWindow.main.Animation_move(MainWindow.main.scroll_main, MainWindow.main.frame_main, MainWindow.main.frame_main, new Pages.PagesInTable.Locations(locations));
