@@ -1,8 +1,10 @@
 ﻿using ClassModules;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,6 +12,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -120,6 +123,154 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void TextBox_PreviewTextInput_1(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex(@"^[А-Яа-яA-Za-z\s]*$");
+            if (!regex.IsMatch(e.Text))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void TextBox_LostFocus_1(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            string[] words = textBox.Text.Split(' ');
+
+            if (words.Any(word => word.Length == 0))
+            {
+                textBox.Text = "Ошибка: введите название страны";
+                Country.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+            }
+        }
+
+        private void TextBox_GotFocus_1(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (textBox.Text.StartsWith("Ошибка:"))
+            {
+                textBox.Text = "";
+                ColorAnimation animation = new ColorAnimation();
+                animation.From = (Color)ColorConverter.ConvertFromString("#FB3F51");
+                animation.To = Colors.Transparent;
+                animation.Duration = new Duration(TimeSpan.FromSeconds(2));
+                SolidColorBrush brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                brush.BeginAnimation(SolidColorBrush.ColorProperty, animation);
+                Country.BorderBrush = brush;
+            }
+        }
+
+        private void TextBox_PreviewTextInput_2(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex(@"^[А-Яа-яA-Za-z\s]*$");
+            if (!regex.IsMatch(e.Text))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void TextBox_LostFocus_2(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            string[] words = textBox.Text.Split(' ');
+
+            if (words.Any(word => word.Length == 0))
+            {
+                textBox.Text = "Ошибка: введите название города";
+                City.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+            }
+        }
+
+        private void TextBox_GotFocus_2(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (textBox.Text.StartsWith("Ошибка:"))
+            {
+                textBox.Text = "";
+                ColorAnimation animation = new ColorAnimation();
+                animation.From = (Color)ColorConverter.ConvertFromString("#FB3F51");
+                animation.To = Colors.Transparent;
+                animation.Duration = new Duration(TimeSpan.FromSeconds(2));
+                SolidColorBrush brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                brush.BeginAnimation(SolidColorBrush.ColorProperty, animation);
+                City.BorderBrush = brush;
+            }
+        }
+
+        private void TextBox_PreviewTextInput_3(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex(@"^[0-9\s]*$");
+            if (!regex.IsMatch(e.Text))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void TextBox_LostFocus_3(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            string[] words = textBox.Text.Split(' ');
+
+            if (words.Any(word => word.Length == 0))
+            {
+                textBox.Text = "Ошибка: введите занимаемую площадь";
+                Square.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+            }
+        }
+
+        private void TextBox_GotFocus_3(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (textBox.Text.StartsWith("Ошибка:"))
+            {
+                textBox.Text = "";
+                ColorAnimation animation = new ColorAnimation();
+                animation.From = (Color)ColorConverter.ConvertFromString("#FB3F51");
+                animation.To = Colors.Transparent;
+                animation.Duration = new Duration(TimeSpan.FromSeconds(2));
+                SolidColorBrush brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                brush.BeginAnimation(SolidColorBrush.ColorProperty, animation);
+                Square.BorderBrush = brush;
+            }
+        }
+
+        private void TextBox_PreviewTextInput_4(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex(@"^[0-9\s]*$");
+            if (!regex.IsMatch(e.Text))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void TextBox_LostFocus_4(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            string[] words = textBox.Text.Split(' ');
+
+            if (words.Any(word => word.Length == 0))
+            {
+                textBox.Text = "Ошибка: введите количество строений";
+                Count_structures.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+            }
+        }
+
+        private void TextBox_GotFocus_4(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (textBox.Text.StartsWith("Ошибка:"))
+            {
+                textBox.Text = "";
+                ColorAnimation animation = new ColorAnimation();
+                animation.From = (Color)ColorConverter.ConvertFromString("#FB3F51");
+                animation.To = Colors.Transparent;
+                animation.Duration = new Duration(TimeSpan.FromSeconds(2));
+                SolidColorBrush brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                brush.BeginAnimation(SolidColorBrush.ColorProperty, animation);
+                Count_structures.BorderBrush = brush;
             }
         }
     }

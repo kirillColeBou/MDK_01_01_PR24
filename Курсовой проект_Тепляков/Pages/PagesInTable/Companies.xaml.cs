@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -28,14 +29,13 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             InitializeComponent();
             companies = _companies;
             if (_companies.Commander != null)
-            {
                 Commander.Text = _companies.Commander;
-            }
         }
 
         private void Click_Companies_Redact(object sender, RoutedEventArgs e)
         {
-            if (Commander.Text != "")
+            string[] FIOCommander = Commander.Text.Split(' ');
+            if (FIOCommander.Length <= 3)
             {
                 int id = Main.connect.SetLastId(ClassConnection.Connection.Tables.companies);
                 if (companies.Commander == null)
@@ -61,16 +61,9 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                     else MessageBox.Show("Запрос на изменение роты не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            else
-            {
-                Commander.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
-            }
         }
 
-        private void Click_Cancel_Companies_Redact(object sender, RoutedEventArgs e)
-        {
-            MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main);
-        }
+        private void Click_Cancel_Companies_Redact(object sender, RoutedEventArgs e) => MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main);
 
         private void Click_Remove_Companies_Redact(object sender, RoutedEventArgs e)
         {
@@ -89,6 +82,43 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex(@"^[А-Яа-яA-Za-z\s]*$");
+            if (!regex.IsMatch(e.Text))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            string[] words = textBox.Text.Split(' ');
+
+            if (words.Length != 3 || words.Any(word => word.Length == 0))
+            {
+                textBox.Text = "Ошибка: введите ровно три слова";
+                Commander.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+            }
+        }
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (textBox.Text.StartsWith("Ошибка:"))
+            {
+                textBox.Text = "";
+                ColorAnimation animation = new ColorAnimation();
+                animation.From = (Color)ColorConverter.ConvertFromString("#FB3F51");
+                animation.To = Colors.Transparent;
+                animation.Duration = new Duration(TimeSpan.FromSeconds(2));
+                SolidColorBrush brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                brush.BeginAnimation(SolidColorBrush.ColorProperty, animation);
+                Commander.BorderBrush = brush;
             }
         }
     }
