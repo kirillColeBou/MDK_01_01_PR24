@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Курсовой_проект_Тепляков.Pages"
         mc:Ignorable="d"
-        Title="Выбрать для экспорта" Width="280" Height="320" ResizeMode="NoResize">
+        Title="Выбрать для экспорта" Width="280" Height="320" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid Background="#FF2C2C2C" >
         <Grid.Resources>
             <ResourceDictionary Source="/Resource/Dictionary.xaml"/>
