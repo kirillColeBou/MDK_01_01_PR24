@@ -41,63 +41,28 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
 
         private void Click_Locations_Redact(object sender, RoutedEventArgs e)
         {
-            if (Country.Text != "")
+            int id = Main.connect.SetLastId(ClassConnection.Connection.Tables.locations);
+            if (locations.Country == null)
             {
-                if (City.Text != "")
+                string query = $"Insert Into locations ([Id_locations], [Country], [City], [Address], [Square], [Count_structures]) Values ({id.ToString()}, '{Country.Text}', '{City.Text}', '{Address.Text}', '{Square.Text}', '{Count_structures.Text}')";
+                var query_apply = Main.connect.Query(query);
+                if (query_apply != null)
                 {
-                    if (Address.Text != "")
-                    {
-                        if (Square.Text != "")
-                        {
-                            if (Count_structures.Text != "")
-                            {
-                                int id = Main.connect.SetLastId(ClassConnection.Connection.Tables.locations);
-                                if (locations.Country == null)
-                                {
-                                    string query = $"Insert Into locations ([Id_locations], [Country], [City], [Address], [Square], [Count_structures]) Values ({id.ToString()}, '{Country.Text}', '{City.Text}', '{Address.Text}', '{Square.Text}', '{Count_structures.Text}')";
-                                    var query_apply = Main.connect.Query(query);
-                                    if (query_apply != null)
-                                    {
-                                        Main.connect.LoadData(ClassConnection.Connection.Tables.locations);
-                                        MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.locations);
-                                    }
-                                    else MessageBox.Show("Запрос на добавление места дислокации не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                                }
-                                else
-                                {
-                                    string query = $"Update locations Set [Country] = '{Country.Text}', [City] = '{City.Text}', [Address] = '{Address.Text}', [Square] = '{Square.Text}', [Count_structures] = '{Count_structures.Text}' Where [Id_locations] = {locations.Id_locations}";
-                                    var query_apply = Main.connect.Query(query);
-                                    if (query_apply != null)
-                                    {
-                                        Main.connect.LoadData(ClassConnection.Connection.Tables.locations);
-                                        MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.locations);
-                                    }
-                                    else MessageBox.Show("Запрос на изменение места дислокации не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                                }
-                            }
-                            else
-                            {
-                                Count_structures.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
-                            }
-                        }
-                        else
-                        {
-                            Square.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
-                        }
-                    }
-                    else
-                    {
-                        Address.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
-                    }
+                    Main.connect.LoadData(ClassConnection.Connection.Tables.locations);
+                    MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.locations);
                 }
-                else
-                {
-                    City.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
-                }
+                else MessageBox.Show("Запрос на добавление места дислокации не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
-                Country.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                string query = $"Update locations Set [Country] = '{Country.Text}', [City] = '{City.Text}', [Address] = '{Address.Text}', [Square] = '{Square.Text}', [Count_structures] = '{Count_structures.Text}' Where [Id_locations] = {locations.Id_locations}";
+                var query_apply = Main.connect.Query(query);
+                if (query_apply != null)
+                {
+                    Main.connect.LoadData(ClassConnection.Connection.Tables.locations);
+                    MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.locations);
+                }
+                else MessageBox.Show("Запрос на изменение места дислокации не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -139,10 +104,9 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
         {
             TextBox textBox = (TextBox)sender;
             string[] words = textBox.Text.Split(' ');
-
             if (words.Any(word => word.Length == 0))
             {
-                textBox.Text = "Ошибка: введите название страны";
+                textBox.Text = "Ошибка: введите значение";
                 Country.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
             }
         }
@@ -176,10 +140,9 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
         {
             TextBox textBox = (TextBox)sender;
             string[] words = textBox.Text.Split(' ');
-
             if (words.Any(word => word.Length == 0))
             {
-                textBox.Text = "Ошибка: введите название города";
+                textBox.Text = "Ошибка: введите значение";
                 City.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
             }
         }
@@ -200,24 +163,14 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             }
         }
 
-        private void TextBox_PreviewTextInput_3(object sender, TextCompositionEventArgs e)
-        {
-            Regex regex = new Regex(@"^[0-9\s]*$");
-            if (!regex.IsMatch(e.Text))
-            {
-                e.Handled = true;
-            }
-        }
-
         private void TextBox_LostFocus_3(object sender, RoutedEventArgs e)
         {
             TextBox textBox = (TextBox)sender;
             string[] words = textBox.Text.Split(' ');
-
             if (words.Any(word => word.Length == 0))
             {
-                textBox.Text = "Ошибка: введите занимаемую площадь";
-                Square.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                textBox.Text = "Ошибка: введите значение";
+                Address.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
             }
         }
 
@@ -233,7 +186,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                 animation.Duration = new Duration(TimeSpan.FromSeconds(2));
                 SolidColorBrush brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
                 brush.BeginAnimation(SolidColorBrush.ColorProperty, animation);
-                Square.BorderBrush = brush;
+                City.BorderBrush = brush;
             }
         }
 
@@ -250,15 +203,50 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
         {
             TextBox textBox = (TextBox)sender;
             string[] words = textBox.Text.Split(' ');
-
             if (words.Any(word => word.Length == 0))
             {
-                textBox.Text = "Ошибка: введите количество строений";
-                Count_structures.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                textBox.Text = "Ошибка: введите значение";
+                Square.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
             }
         }
 
         private void TextBox_GotFocus_4(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (textBox.Text.StartsWith("Ошибка:"))
+            {
+                textBox.Text = "";
+                ColorAnimation animation = new ColorAnimation();
+                animation.From = (Color)ColorConverter.ConvertFromString("#FB3F51");
+                animation.To = Colors.Transparent;
+                animation.Duration = new Duration(TimeSpan.FromSeconds(2));
+                SolidColorBrush brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                brush.BeginAnimation(SolidColorBrush.ColorProperty, animation);
+                Square.BorderBrush = brush;
+            }
+        }
+
+        private void TextBox_PreviewTextInput_5(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex(@"^[0-9\s]*$");
+            if (!regex.IsMatch(e.Text))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void TextBox_LostFocus_5(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            string[] words = textBox.Text.Split(' ');
+            if (words.Any(word => word.Length == 0))
+            {
+                textBox.Text = "Ошибка: введите значение";
+                Count_structures.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+            }
+        }
+
+        private void TextBox_GotFocus_5(object sender, RoutedEventArgs e)
         {
             TextBox textBox = (TextBox)sender;
             if (textBox.Text.StartsWith("Ошибка:"))

@@ -62,10 +62,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             }
         }
 
-        private void Click_Cancel_TypeOfTroops_Redact(object sender, RoutedEventArgs e)
-        {
-            MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main);
-        }
+        private void Click_Cancel_TypeOfTroops_Redact(object sender, RoutedEventArgs e) => MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main);
 
         private void Click_Remove_TypeOfTroops_Redact(object sender, RoutedEventArgs e)
         {
@@ -102,7 +99,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             string[] words = textBox.Text.Split(' ');
             if (words.Any(word => word.Length == 0))
             {
-                textBox.Text = "Ошибка: при вводе названия";
+                textBox.Text = "Ошибка: введите значение";
                 Name_type_of_troops.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
             }
         }

@@ -98,7 +98,6 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
         {
             TextBox textBox = (TextBox)sender;
             string[] words = textBox.Text.Split(' ');
-
             if (words.Length != 3 || words.Any(word => word.Length == 0))
             {
                 textBox.Text = "Ошибка: введите ровно три слова";

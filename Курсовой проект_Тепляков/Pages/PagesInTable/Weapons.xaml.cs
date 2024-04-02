@@ -12,6 +12,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -36,42 +37,32 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
 
         private void Click_Weapons_Redact(object sender, RoutedEventArgs e)
         {
-            if (Name_weapons.Text != "")
+            int id = Main.connect.SetLastId(ClassConnection.Connection.Tables.weapons);
+            if (weapons.Name_weapons == null)
             {
-                int id = Main.connect.SetLastId(ClassConnection.Connection.Tables.weapons);
-                if (weapons.Name_weapons == null)
+                string query = $"Insert Into weapons ([Id_weapons], [Name_weapons]) Values ({id.ToString()}, '{Name_weapons.Text}')";
+                var query_apply = Main.connect.Query(query);
+                if (query_apply != null)
                 {
-                    string query = $"Insert Into weapons ([Id_weapons], [Name_weapons]) Values ({id.ToString()}, '{Name_weapons.Text}')";
-                    var query_apply = Main.connect.Query(query);
-                    if (query_apply != null)
-                    {
-                        Main.connect.LoadData(ClassConnection.Connection.Tables.weapons);
-                        MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.weapons);
-                    }
-                    else MessageBox.Show("Запрос на добавление вооружения не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    Main.connect.LoadData(ClassConnection.Connection.Tables.weapons);
+                    MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.weapons);
                 }
-                else
-                {
-                    string query = $"Update weapons Set Name_weapons = '{Name_weapons.Text}' Where Id_weapons = {weapons.Id_weapons}";
-                    var query_apply = Main.connect.Query(query);
-                    if (query_apply != null)
-                    {
-                        Main.connect.LoadData(ClassConnection.Connection.Tables.weapons);
-                        MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.weapons);
-                    }
-                    else MessageBox.Show("Запрос на изменение вооружения не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
+                else MessageBox.Show("Запрос на добавление вооружения не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
-                Name_weapons.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                string query = $"Update weapons Set Name_weapons = '{Name_weapons.Text}' Where Id_weapons = {weapons.Id_weapons}";
+                var query_apply = Main.connect.Query(query);
+                if (query_apply != null)
+                {
+                    Main.connect.LoadData(ClassConnection.Connection.Tables.weapons);
+                    MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.weapons);
+                }
+                else MessageBox.Show("Запрос на изменение вооружения не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
-        private void Click_Cancel_Weapons_Redact(object sender, RoutedEventArgs e)
-        {
-            MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main);
-        }
+        private void Click_Cancel_Weapons_Redact(object sender, RoutedEventArgs e) => MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main);
 
         private void Click_Remove_Weapons_Redact(object sender, RoutedEventArgs e)
         {
@@ -90,6 +81,33 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            string[] words = textBox.Text.Split(' ');
+            if (words.Any(word => word.Length == 0))
+            {
+                textBox.Text = "Ошибка: введите значение";
+                Name_weapons.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+            }
+        }
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (textBox.Text.StartsWith("Ошибка:"))
+            {
+                textBox.Text = "";
+                ColorAnimation animation = new ColorAnimation();
+                animation.From = (Color)ColorConverter.ConvertFromString("#FB3F51");
+                animation.To = Colors.Transparent;
+                animation.Duration = new Duration(TimeSpan.FromSeconds(2));
+                SolidColorBrush brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                brush.BeginAnimation(SolidColorBrush.ColorProperty, animation);
+                Name_weapons.BorderBrush = brush;
             }
         }
     }

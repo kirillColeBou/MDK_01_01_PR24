@@ -37,11 +37,11 @@
                             <ComboBox x:Name="Companies" FontFamily="Yu Gothic UI Semilight" Margin="2,2,2,2" Height="30" FontSize="14" GotFocus="Id_companies_gotFocus"/>
                         </Border>
                         <Label Content="Количество рот" Margin="39,405,26,0" Foreground="White" FontSize="15" FontFamily="Yu Gothic UI Semilight" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
-                        <TextBox x:Name="Count_companies" Style="{StaticResource BaseBox}" Height="35" Background="#FFDEDEDE" Margin="42,445,191,0" VerticalAlignment="Top"/>
+                        <TextBox x:Name="Count_companies" Style="{StaticResource BaseBox}" Height="35" Background="#FFDEDEDE" Margin="42,445,191,0" VerticalAlignment="Top" PreviewTextInput="TextBox_PreviewTextInput_1" LostFocus="TextBox_LostFocus_1" GotFocus="TextBox_GotFocus_1"/>
                         <Label Content="Количество техники" Margin="39,485,26,0" Foreground="White" FontSize="15" FontFamily="Yu Gothic UI Semilight" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
-                        <TextBox x:Name="Count_technique" Style="{StaticResource BaseBox}" Height="35" Background="#FFDEDEDE" Margin="42,525,191,0" VerticalAlignment="Top"/>
+                        <TextBox x:Name="Count_technique" Style="{StaticResource BaseBox}" Height="35" Background="#FFDEDEDE" Margin="42,525,191,0" VerticalAlignment="Top" PreviewTextInput="TextBox_PreviewTextInput_2" LostFocus="TextBox_LostFocus_2" GotFocus="TextBox_GotFocus_2"/>
                         <Label Content="Количество вооружений" Margin="39,565,26,0" Foreground="White" FontSize="15" FontFamily="Yu Gothic UI Semilight" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
-                        <TextBox x:Name="Count_weapons" Style="{StaticResource BaseBox}" Height="35" Background="#FFDEDEDE" Margin="42,605,191,0" VerticalAlignment="Top"/>
+                        <TextBox x:Name="Count_weapons" Style="{StaticResource BaseBox}" Height="35" Background="#FFDEDEDE" Margin="42,605,191,0" VerticalAlignment="Top" PreviewTextInput="TextBox_PreviewTextInput_3" LostFocus="TextBox_LostFocus_3" GotFocus="TextBox_GotFocus_3"/>
                         <Label Content="Дата основания" Margin="39,645,26,0" Foreground="White" FontSize="15" FontFamily="Yu Gothic UI Semilight" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
                         <Border x:Name="Id_dateOfFoundation_border" Margin="42,685,191,0" Height="42" VerticalAlignment="Top" BorderThickness="1.5" CornerRadius="6,6,6,6">
                             <DatePicker x:Name="Date_of_foundation" Style="{StaticResource styleDatepicker}" Height="35" Background="#FFDEDEDE" Margin="2,2,2,2" VerticalAlignment="Top" GotFocus="Id_dateOfFoundation_gotFocus"/>

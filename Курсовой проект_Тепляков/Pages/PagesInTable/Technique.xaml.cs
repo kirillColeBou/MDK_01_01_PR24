@@ -10,6 +10,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -45,51 +46,39 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
         private void Click_Technique_Redact(object sender, RoutedEventArgs e)
         {
             Id_part_border.GotFocus += Id_part_gotFocus;
-            if (Name_technique.Text != "")
+            if (Id_part.SelectedItem != null)
             {
-                if (Id_part.SelectedItem != null)
+
+                ClassModules.Parts id_part_temp;
+                id_part_temp = Main.connect.parts.Find(x => x.Id_part == Convert.ToInt32(((ComboBoxItem)Id_part.SelectedItem).Tag));
+                int id = Main.connect.SetLastId(ClassConnection.Connection.Tables.technique);
+                if (technique.Characteristics == null)
                 {
-                    if (Characteristics.Text != "")
+                    string query = $"Insert Into technique ([Id_technique], [Name_technique], [Parts], [Characteristics]) Values ({id.ToString()}, '{Name_technique.Text}', '{id_part_temp.Id_part.ToString()}', '{Characteristics.Text}')";
+                    var query_apply = Main.connect.Query(query);
+                    if (query_apply != null)
                     {
-                        ClassModules.Parts id_part_temp;
-                        id_part_temp = Main.connect.parts.Find(x => x.Id_part == Convert.ToInt32(((ComboBoxItem)Id_part.SelectedItem).Tag));
-                        int id = Main.connect.SetLastId(ClassConnection.Connection.Tables.technique);
-                        if (technique.Characteristics == null)
-                        {
-                            string query = $"Insert Into technique ([Id_technique], [Name_technique], [Parts], [Characteristics]) Values ({id.ToString()}, '{Name_technique.Text}', '{id_part_temp.Id_part.ToString()}', '{Characteristics.Text}')";
-                            var query_apply = Main.connect.Query(query);
-                            if (query_apply != null)
-                            {
-                                Main.connect.LoadData(ClassConnection.Connection.Tables.technique);
-                                MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.technique);
-                            }
-                            else MessageBox.Show("Запрос на добавление техники не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                        }
-                        else
-                        {
-                            string query = $"Update technique Set Name_technique = '{Name_technique.Text}', Parts = '{id_part_temp.Id_part.ToString()}', Characteristics = '{Characteristics.Text}' Where Id_technique = {technique.Id_technique}";
-                            var query_apply = Main.connect.Query(query);
-                            if (query_apply != null)
-                            {
-                                Main.connect.LoadData(ClassConnection.Connection.Tables.technique);
-                                MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.technique);
-                            }
-                            else MessageBox.Show("Запрос на изменение техники не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                        }
+                        Main.connect.LoadData(ClassConnection.Connection.Tables.technique);
+                        MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.technique);
                     }
-                    else
-                    {
-                        Characteristics.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
-                    }
+                    else MessageBox.Show("Запрос на добавление техники не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 else
                 {
-                    Id_part_border.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                    string query = $"Update technique Set Name_technique = '{Name_technique.Text}', Parts = '{id_part_temp.Id_part.ToString()}', Characteristics = '{Characteristics.Text}' Where Id_technique = {technique.Id_technique}";
+                    var query_apply = Main.connect.Query(query);
+                    if (query_apply != null)
+                    {
+                        Main.connect.LoadData(ClassConnection.Connection.Tables.technique);
+                        MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.technique);
+                    }
+                    else MessageBox.Show("Запрос на изменение техники не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
+
             }
             else
             {
-                Name_technique.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                Id_part_border.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
             }
         }
 
@@ -118,9 +107,60 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             }
         }
 
-        private void Id_part_gotFocus(object sender, RoutedEventArgs e)
+        private void Id_part_gotFocus(object sender, RoutedEventArgs e) => Id_part_border.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#545454"));
+
+        private void TextBox_LostFocus_1(object sender, RoutedEventArgs e)
         {
-            Id_part_border.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#545454"));
+            TextBox textBox = (TextBox)sender;
+            string[] words = textBox.Text.Split(' ');
+            if (words.Any(word => word.Length == 0))
+            {
+                textBox.Text = "Ошибка: введите значение";
+                Name_technique.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+            }
+        }
+
+        private void TextBox_GotFocus_1(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (textBox.Text.StartsWith("Ошибка:"))
+            {
+                textBox.Text = "";
+                ColorAnimation animation = new ColorAnimation();
+                animation.From = (Color)ColorConverter.ConvertFromString("#FB3F51");
+                animation.To = Colors.Transparent;
+                animation.Duration = new Duration(TimeSpan.FromSeconds(2));
+                SolidColorBrush brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                brush.BeginAnimation(SolidColorBrush.ColorProperty, animation);
+                Name_technique.BorderBrush = brush;
+            }
+        }
+
+        private void TextBox_LostFocus_2(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            string[] words = textBox.Text.Split(' ');
+            if (words.Any(word => word.Length == 0))
+            {
+                textBox.Text = "Ошибка: введите значение";
+                Characteristics.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+            }
+        }
+
+        private void TextBox_GotFocus_2(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (textBox.Text.StartsWith("Ошибка:"))
+            {
+                textBox.Text = "";
+                ColorAnimation animation = new ColorAnimation();
+                animation.From = (Color)ColorConverter.ConvertFromString("#FB3F51");
+                animation.To = Colors.Transparent;
+                animation.Duration = new Duration(TimeSpan.FromSeconds(2));
+                SolidColorBrush brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                brush.BeginAnimation(SolidColorBrush.ColorProperty, animation);
+                Characteristics.BorderBrush = brush;
+            }
         }
     }
 }
