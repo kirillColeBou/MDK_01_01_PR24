@@ -2,6 +2,7 @@
 using ClassModules;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition.Primitives;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
@@ -104,7 +105,7 @@ namespace Курсовой_проект_Тепляков.Pages
                         Dispatcher.InvokeAsync(async () =>
                         {
                             connect.LoadData(ClassConnection.Connection.Tables.parts);
-                            foreach (ClassModules.Parts parts_items in connect.parts)
+                            foreach (ClassModules.Parts parts_items in ClassConnection.Connection.parts)
                             {
                                 if (page_select == page_main.parts)
                                 {
@@ -196,7 +197,7 @@ namespace Курсовой_проект_Тепляков.Pages
                         Dispatcher.InvokeAsync(async () =>
                         {
                             connect.LoadData(ClassConnection.Connection.Tables.companies);
-                            foreach(ClassModules.Companies companies_items in connect.companies)
+                            foreach(ClassModules.Companies companies_items in ClassConnection.Connection.companies)
                             {
                                 if(page_select == page_main.companies)
                                 {
@@ -242,7 +243,7 @@ namespace Курсовой_проект_Тепляков.Pages
                         Dispatcher.InvokeAsync(async () =>
                         {
                             connect.LoadData(ClassConnection.Connection.Tables.technique);
-                            foreach (ClassModules.Technique technique_items in connect.technique)
+                            foreach (ClassModules.Technique technique_items in ClassConnection.Connection.technique)
                             {
                                 if (page_select == page_main.technique)
                                 {
@@ -360,7 +361,8 @@ namespace Курсовой_проект_Тепляков.Pages
 
         private void Click_Export(object sender, MouseButtonEventArgs e)
         {
-
+            var export = new ExportWindow();
+            export.ShowDialog();
         }
 
         private void Click_Back(object sender, RoutedEventArgs e)

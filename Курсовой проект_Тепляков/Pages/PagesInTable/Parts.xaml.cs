@@ -65,7 +65,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                 Weapons.Items.Add(cb_weapons);
             }
             Main.connect.LoadData(ClassConnection.Connection.Tables.companies);
-            foreach (ClassModules.Companies item in Main.connect.companies)
+            foreach (ClassModules.Companies item in ClassConnection.Connection.companies)
             {
                 ComboBoxItem cb_companies = new ComboBoxItem();
                 cb_companies.Tag = item.Id_companies;
@@ -99,7 +99,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                                 id_locations_temp = ClassConnection.Connection.locations.Find(x => x.Id_locations == Convert.ToInt32(((ComboBoxItem)Locations.SelectedItem).Tag));
                                 id_typeOfTroops_temp = ClassConnection.Connection.type_of_troops.Find(x => x.Id_type_of_troops == Convert.ToInt32(((ComboBoxItem)Type_of_troops.SelectedItem).Tag));
                                 id_weapons_temp = ClassConnection.Connection.weapons.Find(x => x.Id_weapons == Convert.ToInt32(((ComboBoxItem)Weapons.SelectedItem).Tag));
-                                id_companies_temp = Main.connect.companies.Find(x => x.Id_companies == Convert.ToInt32(((ComboBoxItem)Companies.SelectedItem).Tag));
+                                id_companies_temp = ClassConnection.Connection.companies.Find(x => x.Id_companies == Convert.ToInt32(((ComboBoxItem)Companies.SelectedItem).Tag));
                                 int id = Main.connect.SetLastId(ClassConnection.Connection.Tables.parts);
                                 if (parts.Count_weapons == null)
                                 {
@@ -191,7 +191,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
         {
             TextBox textBox = (TextBox)sender;
             string[] words = textBox.Text.Split(' ');
-            if (words.Length != 3 || words.Any(word => word.Length == 0))
+            if (words.Any(word => word.Length == 0))
             {
                 textBox.Text = "Ошибка: введите значение";
                 Count_companies.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
@@ -227,7 +227,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
         {
             TextBox textBox = (TextBox)sender;
             string[] words = textBox.Text.Split(' ');
-            if (words.Length != 3 || words.Any(word => word.Length == 0))
+            if (words.Any(word => word.Length == 0))
             {
                 textBox.Text = "Ошибка: введите значение";
                 Count_technique.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
@@ -263,7 +263,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
         {
             TextBox textBox = (TextBox)sender;
             string[] words = textBox.Text.Split(' ');
-            if (words.Length != 3 || words.Any(word => word.Length == 0))
+            if (words.Any(word => word.Length == 0))
             {
                 textBox.Text = "Ошибка: введите значение";
                 Count_weapons.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));

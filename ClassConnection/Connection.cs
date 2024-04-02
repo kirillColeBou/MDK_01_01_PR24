@@ -3,6 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data.SqlClient;
+using System.ComponentModel;
+using System.IO;
+using OfficeOpenXml;
 
 namespace ClassConnection
 {
@@ -13,10 +16,10 @@ namespace ClassConnection
         #endregion
 
         #region All_Lists
-        public List<Companies> companies = new List<Companies>();
+        public static List<Companies> companies = new List<Companies>();
         public static List<Locations> locations = new List<Locations>();
-        public List<Parts> parts = new List<Parts>();
-        public List<Technique> technique = new List<Technique>();
+        public static List<Parts> parts = new List<Parts>();
+        public static List<Technique> technique = new List<Technique>();
         public static List<Type_of_troops> type_of_troops = new List<Type_of_troops>();
         public static List<Weapons> weapons = new List<Weapons>();
         public List<Users> users = new List<Users>();
@@ -259,6 +262,152 @@ namespace ClassConnection
             catch
             {
                 Console.WriteLine("null");
+            }
+        }
+
+        public static void PartsExport(string filePath, IEnumerable<Parts> parts)
+        {
+            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+            using (ExcelPackage package = new ExcelPackage())
+            {
+                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Записи (части)");
+                worksheet.Cells[1, 1].Value = "Код части";
+                worksheet.Cells[1, 2].Value = "Место дислокации";
+                worksheet.Cells[1, 3].Value = "Вид войск";
+                worksheet.Cells[1, 4].Value = "Вооружение";
+                worksheet.Cells[1, 5].Value = "Рота";
+                worksheet.Cells[1, 6].Value = "Количество рот";
+                worksheet.Cells[1, 7].Value = "Количество техники";
+                worksheet.Cells[1, 8].Value = "Количество вооружений";
+                worksheet.Cells[1, 9].Value = "Дата основания";
+                int row = 2;
+                foreach (var record in parts)
+                {
+                    worksheet.Cells[row, 1].Value = record.Id_part;
+                    worksheet.Cells[row, 2].Value = locations.First(x => x.Id_locations == record.Locations).Country;
+                    worksheet.Cells[row, 3].Value = type_of_troops.First(x => x.Id_type_of_troops == record.Type_of_troops).Name_type_of_troops;
+                    worksheet.Cells[row, 4].Value = weapons.First(x => x.Id_weapons == record.Weapons).Name_weapons;
+                    worksheet.Cells[row, 5].Value = record.Companies;
+                    worksheet.Cells[row, 6].Value = record.Count_companies;
+                    worksheet.Cells[row, 7].Value = record.Count_technique;
+                    worksheet.Cells[row, 8].Value = record.Count_weapons;
+                    worksheet.Cells[row, 9].Value = record.Date_of_foundation.ToString("dd.MM.yyyy");
+                    row++;
+                }
+                FileInfo fileInfo = new FileInfo(filePath);
+                package.SaveAs(fileInfo);
+            }
+        }
+
+        public static void LocationsExport(string filePath, IEnumerable<Locations> locations)
+        {
+            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+            using (ExcelPackage package = new ExcelPackage())
+            {
+                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Записи (места дислокации)");
+                worksheet.Cells[1, 1].Value = "Код места дислокации";
+                worksheet.Cells[1, 2].Value = "Страна";
+                worksheet.Cells[1, 3].Value = "Город";
+                worksheet.Cells[1, 4].Value = "Адрес";
+                worksheet.Cells[1, 5].Value = "Занимаемая площадь";
+                worksheet.Cells[1, 6].Value = "Количество строений";
+                int row = 2;
+                foreach (var record in locations)
+                {
+                    worksheet.Cells[row, 1].Value = record.Id_locations;
+                    worksheet.Cells[row, 2].Value = record.Country;
+                    worksheet.Cells[row, 3].Value = record.City;
+                    worksheet.Cells[row, 4].Value = record.Address;
+                    worksheet.Cells[row, 5].Value = record.Square;
+                    worksheet.Cells[row, 6].Value = record.Count_structures;
+                    row++;
+                }
+                FileInfo fileInfo = new FileInfo(filePath);
+                package.SaveAs(fileInfo);
+            }
+        }
+
+        public static void CompaniesExport(string filePath, IEnumerable<Companies> companies)
+        {
+            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+            using (ExcelPackage package = new ExcelPackage())
+            {
+                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Записи (роты)");
+                worksheet.Cells[1, 1].Value = "Код роты";
+                worksheet.Cells[1, 2].Value = "ФИО главнокомандующего";
+                int row = 2;
+                foreach (var record in companies)
+                {
+                    worksheet.Cells[row, 1].Value = record.Id_companies;
+                    worksheet.Cells[row, 2].Value = record.Commander;
+                    row++;
+                }
+                FileInfo fileInfo = new FileInfo(filePath);
+                package.SaveAs(fileInfo);
+            }
+        }
+
+        public static void TechniqueExport(string filePath, IEnumerable<Technique> technique)
+        {
+            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+            using (ExcelPackage package = new ExcelPackage())
+            {
+                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Записи (техника)");
+                worksheet.Cells[1, 1].Value = "Код техники";
+                worksheet.Cells[1, 2].Value = "Название техники";
+                worksheet.Cells[1, 3].Value = "Номер части";
+                worksheet.Cells[1, 4].Value = "Характеристики";
+                int row = 2;
+                foreach (var record in technique)
+                {
+                    worksheet.Cells[row, 1].Value = record.Id_technique;
+                    worksheet.Cells[row, 2].Value = record.Name_technique;
+                    worksheet.Cells[row, 3].Value = parts.First(x => x.Id_part == record.Parts).Id_part;
+                    worksheet.Cells[row, 4].Value = record.Characteristics;
+                    row++;
+                }
+                FileInfo fileInfo = new FileInfo(filePath);
+                package.SaveAs(fileInfo);
+            }
+        }
+
+        public static void TypeOfTroopsExport(string filePath, IEnumerable<Type_of_troops> typeOfTroops)
+        {
+            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+            using (ExcelPackage package = new ExcelPackage())
+            {
+                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Записи (виды войск)");
+                worksheet.Cells[1, 1].Value = "Код вида войск";
+                worksheet.Cells[1, 2].Value = "Название вида войск";
+                int row = 2;
+                foreach (var record in typeOfTroops)
+                {
+                    worksheet.Cells[row, 1].Value = record.Id_type_of_troops;
+                    worksheet.Cells[row, 2].Value = record.Name_type_of_troops;
+                    row++;
+                }
+                FileInfo fileInfo = new FileInfo(filePath);
+                package.SaveAs(fileInfo);
+            }
+        }
+
+        public static void WeaponsExport(string filePath, IEnumerable<Weapons> weapons)
+        {
+            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+            using (ExcelPackage package = new ExcelPackage())
+            {
+                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Записи (вооружения)");
+                worksheet.Cells[1, 1].Value = "Код вооружения";
+                worksheet.Cells[1, 2].Value = "Название вооружения";
+                int row = 2;
+                foreach (var record in weapons)
+                {
+                    worksheet.Cells[row, 1].Value = record.Id_weapons;
+                    worksheet.Cells[row, 2].Value = record.Name_weapons;
+                    row++;
+                }
+                FileInfo fileInfo = new FileInfo(filePath);
+                package.SaveAs(fileInfo);
             }
         }
     }

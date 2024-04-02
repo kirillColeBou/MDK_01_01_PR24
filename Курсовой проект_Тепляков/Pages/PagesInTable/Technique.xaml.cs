@@ -33,7 +33,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                 Characteristics.Text = _technique.Characteristics;
             }
             Main.connect.LoadData(ClassConnection.Connection.Tables.parts);
-            foreach (ClassModules.Parts item in Main.connect.parts)
+            foreach (ClassModules.Parts item in ClassConnection.Connection.parts)
             {
                 ComboBoxItem cb_parts = new ComboBoxItem();
                 cb_parts.Tag = item.Id_part;
@@ -50,7 +50,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             {
 
                 ClassModules.Parts id_part_temp;
-                id_part_temp = Main.connect.parts.Find(x => x.Id_part == Convert.ToInt32(((ComboBoxItem)Id_part.SelectedItem).Tag));
+                id_part_temp = ClassConnection.Connection.parts.Find(x => x.Id_part == Convert.ToInt32(((ComboBoxItem)Id_part.SelectedItem).Tag));
                 int id = Main.connect.SetLastId(ClassConnection.Connection.Tables.technique);
                 if (technique.Characteristics == null)
                 {

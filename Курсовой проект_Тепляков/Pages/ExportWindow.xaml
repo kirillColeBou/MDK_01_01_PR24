@@ -1,0 +1,26 @@
+﻿<Window x:Class="Курсовой_проект_Тепляков.Pages.ExportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Курсовой_проект_Тепляков.Pages"
+        mc:Ignorable="d"
+        Title="Выбрать для экспорта" Width="280" Height="320" ResizeMode="NoResize">
+    <Grid Background="#FF2C2C2C" >
+        <Grid.Resources>
+            <ResourceDictionary Source="/Resource/Dictionary.xaml"/>
+        </Grid.Resources>
+        <RadioButton GroupName="Export" Content="Части" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0" FontSize="20" x:Name="PartsExport"/>
+        <RadioButton GroupName="Export" Content="Места дислокации" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,50,0,0" FontSize="20" x:Name="LocationsExport"/>
+        <RadioButton GroupName="Export" Content="Роты" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,80,0,0" FontSize="20" x:Name="CompaniesExport"/>
+        <RadioButton GroupName="Export" Content="Техника" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,110,0,0" FontSize="20" x:Name="TechniqueExport"/>
+        <RadioButton GroupName="Export" Content="Виды войск" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,140,0,0" FontSize="20" x:Name="TypeOfTroopsExport"/>
+        <RadioButton GroupName="Export" Content="Вооружения" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,170,0,0" FontSize="20" x:Name="WeaponsExport"/>
+        <Border x:Name="parts_itms" Margin="20,210,20,20" Height="45" CornerRadius="5,5,5,5" Background="AliceBlue" MouseDown="ExportAccept" Padding="7,7,7,7" Cursor="Hand" VerticalAlignment="Top">
+            <Grid Height="30">
+                <Image Source="/Images/Export.png" Margin="5,0,0,0" HorizontalAlignment="Left" Width="29" Height="30" VerticalAlignment="Top"/>
+                <Label Content="Экспортировать" Margin="44,0,0,0" Foreground="#FF2C2C2C" FontSize="15" FontFamily="Corbel" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
