@@ -284,5 +284,8 @@
   <ItemGroup>
     <Resource Include="Images\calendar.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Export.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

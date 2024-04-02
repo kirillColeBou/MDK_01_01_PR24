@@ -358,6 +358,11 @@ namespace Курсовой_проект_Тепляков.Pages
             }
         }
 
+        private void Click_Export(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
         private void Click_Back(object sender, RoutedEventArgs e)
         {
             parrent.Children.Clear();
