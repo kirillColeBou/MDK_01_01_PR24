@@ -147,7 +147,10 @@ namespace ClassConnection
                         Companies newCompanies = new Companies
                         {
                             Id_companies = Convert.ToInt32(itemsCompanies.GetValue(0)),
-                            Commander = Convert.ToString(itemsCompanies.GetValue(1))
+                            Name_companies = Convert.ToString(itemsCompanies.GetValue(1)),
+                            Commander = Convert.ToString(itemsCompanies.GetValue(2)),
+                            Date_foundation = Convert.ToDateTime(itemsCompanies.GetValue(3)),
+                            Date_update_information = Convert.ToDateTime(itemsCompanies.GetValue(4))
                         };
                         companies.Add(newCompanies);
                     }
@@ -220,7 +223,10 @@ namespace ClassConnection
                         Type_of_troops newType_of_troops = new Type_of_troops
                         {
                             Id_type_of_troops = Convert.ToInt32(itemsType_of_troops.GetValue(0)),
-                            Name_type_of_troops = Convert.ToString(itemsType_of_troops.GetValue(1))
+                            Name_type_of_troops = Convert.ToString(itemsType_of_troops.GetValue(1)),
+                            Description = Convert.ToString(itemsType_of_troops.GetValue(2)),
+                            Count_serviceman = Convert.ToInt32(itemsType_of_troops.GetValue(3)),
+                            Date_foundation = Convert.ToDateTime(itemsType_of_troops.GetValue(4))
                         };
                         type_of_troops.Add(newType_of_troops);
                     }
@@ -235,7 +241,9 @@ namespace ClassConnection
                         Weapons newWeapons = new Weapons
                         {
                             Id_weapons = Convert.ToInt32(itemsWeapons.GetValue(0)),
-                            Name_weapons = Convert.ToString(itemsWeapons.GetValue(1))
+                            Name_weapons = Convert.ToString(itemsWeapons.GetValue(1)),
+                            Desription = Convert.ToString(itemsWeapons.GetValue(2)),
+                            Date_update_information = Convert.ToDateTime(itemsWeapons.GetValue(3))
                         };
                         weapons.Add(newWeapons);
                     }
@@ -334,12 +342,18 @@ namespace ClassConnection
             {
                 ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Записи (роты)");
                 worksheet.Cells[1, 1].Value = "Код роты";
-                worksheet.Cells[1, 2].Value = "ФИО главнокомандующего";
+                worksheet.Cells[1, 2].Value = "Название роты";
+                worksheet.Cells[1, 3].Value = "ФИО главнокомандующег";
+                worksheet.Cells[1, 2].Value = "Дата создания";
+                worksheet.Cells[1, 1].Value = "Дата последнего обновления информации";
                 int row = 2;
                 foreach (var record in companies)
                 {
                     worksheet.Cells[row, 1].Value = record.Id_companies;
-                    worksheet.Cells[row, 2].Value = record.Commander;
+                    worksheet.Cells[row, 2].Value = record.Name_companies;
+                    worksheet.Cells[row, 1].Value = record.Commander;
+                    worksheet.Cells[row, 2].Value = record.Date_foundation.ToString("dd.MM.yyyy");
+                    worksheet.Cells[row, 1].Value = record.Date_update_information.ToString("dd.MM.yyyy");
                     row++;
                 }
                 FileInfo fileInfo = new FileInfo(filePath);
@@ -379,11 +393,17 @@ namespace ClassConnection
                 ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Записи (виды войск)");
                 worksheet.Cells[1, 1].Value = "Код вида войск";
                 worksheet.Cells[1, 2].Value = "Название вида войск";
+                worksheet.Cells[1, 3].Value = "Описание";
+                worksheet.Cells[1, 4].Value = "Количество военнослужащих";
+                worksheet.Cells[1, 5].Value = "Дата создания";
                 int row = 2;
                 foreach (var record in typeOfTroops)
                 {
                     worksheet.Cells[row, 1].Value = record.Id_type_of_troops;
                     worksheet.Cells[row, 2].Value = record.Name_type_of_troops;
+                    worksheet.Cells[row, 3].Value = record.Description;
+                    worksheet.Cells[row, 4].Value = record.Count_serviceman;
+                    worksheet.Cells[row, 5].Value = record.Date_foundation.ToString("dd.MM.yyyy");
                     row++;
                 }
                 FileInfo fileInfo = new FileInfo(filePath);
@@ -399,11 +419,15 @@ namespace ClassConnection
                 ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Записи (вооружения)");
                 worksheet.Cells[1, 1].Value = "Код вооружения";
                 worksheet.Cells[1, 2].Value = "Название вооружения";
+                worksheet.Cells[1, 2].Value = "Описание";
+                worksheet.Cells[1, 4].Value = "Дата обновления информации";
                 int row = 2;
                 foreach (var record in weapons)
                 {
                     worksheet.Cells[row, 1].Value = record.Id_weapons;
                     worksheet.Cells[row, 2].Value = record.Name_weapons;
+                    worksheet.Cells[row, 3].Value = record.Desription;
+                    worksheet.Cells[row, 4].Value = record.Date_update_information.ToString("dd.MM.yyyy");
                     row++;
                 }
                 FileInfo fileInfo = new FileInfo(filePath);
