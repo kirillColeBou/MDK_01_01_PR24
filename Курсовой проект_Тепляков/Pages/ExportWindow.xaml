@@ -10,16 +10,16 @@
         <Grid.Resources>
             <ResourceDictionary Source="/Resource/Dictionary.xaml"/>
         </Grid.Resources>
-        <RadioButton GroupName="Export" Content="Части" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0" FontSize="20" x:Name="PartsExport"/>
-        <RadioButton GroupName="Export" Content="Места дислокации" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,50,0,0" FontSize="20" x:Name="LocationsExport"/>
-        <RadioButton GroupName="Export" Content="Роты" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,80,0,0" FontSize="20" x:Name="CompaniesExport"/>
-        <RadioButton GroupName="Export" Content="Техника" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,110,0,0" FontSize="20" x:Name="TechniqueExport"/>
-        <RadioButton GroupName="Export" Content="Виды войск" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,140,0,0" FontSize="20" x:Name="TypeOfTroopsExport"/>
-        <RadioButton GroupName="Export" Content="Вооружения" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,170,0,0" FontSize="20" x:Name="WeaponsExport"/>
+        <RadioButton GroupName="Export" Content="Части" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0" FontSize="20" x:Name="PartsExport" Foreground="#3DAEFF" FontWeight="Bold"/>
+        <RadioButton GroupName="Export" Content="Места дислокации" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,50,0,0" FontSize="20" x:Name="LocationsExport" Foreground="#3DAEFF" FontWeight="Bold"/>
+        <RadioButton GroupName="Export" Content="Роты" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,80,0,0" FontSize="20" x:Name="CompaniesExport" Foreground="#3DAEFF" FontWeight="Bold"/>
+        <RadioButton GroupName="Export" Content="Техника" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,110,0,0" FontSize="20" x:Name="TechniqueExport" Foreground="#3DAEFF" FontWeight="Bold"/>
+        <RadioButton GroupName="Export" Content="Виды войск" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,140,0,0" FontSize="20" x:Name="TypeOfTroopsExport" Foreground="#3DAEFF" FontWeight="Bold"/>
+        <RadioButton GroupName="Export" Content="Вооружения" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,170,0,0" FontSize="20" x:Name="WeaponsExport" Foreground="#3DAEFF" FontWeight="Bold"/>
         <Border x:Name="parts_itms" Margin="20,210,20,20" Height="45" CornerRadius="5,5,5,5" Background="AliceBlue" MouseDown="ExportAccept" Padding="7,7,7,7" Cursor="Hand" VerticalAlignment="Top">
             <Grid Height="30">
                 <Image Source="/Images/Export.png" Margin="5,0,0,0" HorizontalAlignment="Left" Width="29" Height="30" VerticalAlignment="Top"/>
-                <Label Content="Экспортировать" Margin="44,0,0,0" Foreground="#FF2C2C2C" FontSize="15" FontFamily="Corbel" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top"/>
+                <Label Content="Экспортировать" Margin="44,0,0,0" Foreground="#3DAEFF" FontSize="15" FontFamily="Corbel" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top"/>
             </Grid>
         </Border>
     </Grid>

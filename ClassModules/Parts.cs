@@ -19,6 +19,3 @@ namespace ClassModules
         public DateTime Date_of_foundation { get; set; }
     }
 }
-
-//ISP_21_2_23
-//3frQxZ83o#
