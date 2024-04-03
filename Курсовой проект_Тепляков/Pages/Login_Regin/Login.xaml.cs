@@ -22,7 +22,6 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
     public partial class Login : Page
     {
         ClassConnection.Connection connection;
-        public static Regin regin;
         public static string[] UserInfo = new string[2];
 
         public Login()
@@ -30,25 +29,6 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
             InitializeComponent();
             connection = new ClassConnection.Connection();
             connection.Connect();
-            regin = new Regin();
-        }
-
-        public void OpenPageRegin()
-        {
-            DoubleAnimation opgridAnimation = new DoubleAnimation();
-            opgridAnimation.From = 1;
-            opgridAnimation.To = 0;
-            opgridAnimation.Duration = TimeSpan.FromSeconds(0.6);
-            opgridAnimation.Completed += delegate
-            {
-                MainWindow.init.frame.Navigate(regin);
-                DoubleAnimation opgrisdAnimation = new DoubleAnimation();
-                opgrisdAnimation.From = 0;
-                opgrisdAnimation.To = 1;
-                opgrisdAnimation.Duration = TimeSpan.FromSeconds(1.2);
-                MainWindow.init.frame.BeginAnimation(Frame.OpacityProperty, opgrisdAnimation);
-            };
-            MainWindow.init.frame.BeginAnimation(Frame.OpacityProperty, opgridAnimation);
         }
 
         private void login_user_TextChanged(object sender, TextChangedEventArgs e)
@@ -124,7 +104,5 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
             if (e.Key == Key.Escape)
                 MainWindow.init.Close();
         }
-
-        private void Regin_Click(object sender, MouseButtonEventArgs e) => OpenPageRegin();
     }
 }
