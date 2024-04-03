@@ -20,8 +20,12 @@
                 <Border MinHeight="600">
                     <Grid>
                         <Label Content="Рота" Margin="39,28,26,0" Foreground="White" FontSize="30" FontFamily="Yu Gothic UI Semibold" HorizontalContentAlignment="Left" Height="52" VerticalAlignment="Top"/>
-                        <Label Content="Главнокомандующий" Margin="39,85,26,0" Foreground="White" FontSize="15" FontFamily="Yu Gothic UI Semilight" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
-                        <TextBox x:Name="Commander" Style="{StaticResource BaseBox}" Height="35" Background="#FFDEDEDE" Margin="40,130,193,0" VerticalAlignment="Top" PreviewTextInput="TextBox_PreviewTextInput" LostFocus="TextBox_LostFocus" GotFocus="TextBox_GotFocus"/>
+                        <Label Content="Название роты" Margin="39,85,26,0" Foreground="White" FontSize="15" FontFamily="Yu Gothic UI Semilight" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
+                        <TextBox x:Name="Name_companies" Style="{StaticResource BaseBox}" Height="35" Background="#FFDEDEDE" Margin="40,130,193,0" VerticalAlignment="Top" PreviewTextInput="TextBox_PreviewTextInput_1" LostFocus="TextBox_LostFocus_1" GotFocus="TextBox_GotFocus_1"/>
+                        <Label Content="Главнокомандующий" Margin="39,175,26,0" Foreground="White" FontSize="15" FontFamily="Yu Gothic UI Semilight" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
+                        <TextBox x:Name="Commander" Style="{StaticResource BaseBox}" Height="35" Background="#FFDEDEDE" Margin="40,220,193,0" VerticalAlignment="Top" PreviewTextInput="TextBox_PreviewTextInput_2" LostFocus="TextBox_LostFocus_2" GotFocus="TextBox_GotFocus_2"/>
+                        <Label Content="Дата создания" Margin="39,265,26,0" Foreground="White" FontSize="15" FontFamily="Yu Gothic UI Semilight" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
+                        <DatePicker x:Name="Date_foundation" Style="{StaticResource styleDatepicker}" Height="35" Background="#FFDEDEDE" Margin="40,310,193,0" VerticalAlignment="Top"/>
                         <Button Style="{StaticResource BtnRedac}" Margin="0,0,136.2,24" VerticalAlignment="Bottom" Height="40" Width="105" Click="Click_Companies_Redact" HorizontalAlignment="Right">
                             <Image Source="/Images/redac.png" Width="20" Height="20"/>
                         </Button>

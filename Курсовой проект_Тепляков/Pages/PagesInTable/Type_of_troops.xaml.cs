@@ -32,6 +32,9 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             if (_type_of_troops.Name_type_of_troops != null) 
             {
                 Name_type_of_troops.Text = _type_of_troops.Name_type_of_troops;
+                Description.Text = _type_of_troops.Description;
+                Count_serviceman.Text = _type_of_troops.Count_serviceman.ToString();
+                Date_foundation.Text = _type_of_troops.Date_foundation.ToString("dd.MM.yyyy");
             }
         }
 
@@ -40,7 +43,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             int id = Main.connect.SetLastId(ClassConnection.Connection.Tables.type_of_troops);
             if (type_of_troops.Name_type_of_troops == null)
             {
-                string query = $"Insert Into type_of_troops ([Id_type_of_troops], [Name_type_of_troops]) Values ({id.ToString()}, '{Name_type_of_troops.Text}')";
+                string query = $"Insert Into type_of_troops ([Id_type_of_troops], [Name_type_of_troops], [Description], [Count_serviceman], [Date_foundation]) Values ({id.ToString()}, '{Name_type_of_troops.Text}', '{Description.Text}', '{Count_serviceman.Text}', '{Date_foundation.Text}')";
                 var query_apply = Main.connect.Query(query);
                 if (query_apply != null)
                 {
@@ -51,7 +54,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             }
             else
             {
-                string query = $"Update type_of_troops Set Name_type_of_troops = '{Name_type_of_troops.Text}' Where Id_type_of_troops = {type_of_troops.Id_type_of_troops}";
+                string query = $"Update type_of_troops Set Name_type_of_troops = '{Name_type_of_troops.Text}', Description = '{Description.Text}', Count_serviceman = '{Count_serviceman.Text}', Date_foundation = '{Date_foundation.Text}' Where Id_type_of_troops = {type_of_troops.Id_type_of_troops}";
                 var query_apply = Main.connect.Query(query);
                 if (query_apply != null)
                 {
@@ -84,7 +87,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             }
         }
 
-        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void TextBox_PreviewTextInput_1(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex(@"^[А-Яа-яA-Za-z\s]*$");
             if (!regex.IsMatch(e.Text))
@@ -93,7 +96,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             }
         }
 
-        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        private void TextBox_LostFocus_1(object sender, RoutedEventArgs e)
         {
             TextBox textBox = (TextBox)sender;
             string[] words = textBox.Text.Split(' ');
@@ -104,7 +107,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             }
         }
 
-        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        private void TextBox_GotFocus_1(object sender, RoutedEventArgs e)
         {
             TextBox textBox = (TextBox)sender;
             if (textBox.Text.StartsWith("Ошибка:"))
@@ -117,6 +120,69 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                 SolidColorBrush brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
                 brush.BeginAnimation(SolidColorBrush.ColorProperty, animation);
                 Name_type_of_troops.BorderBrush = brush;
+            }
+        }
+
+        private void TextBox_LostFocus_2(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            string[] words = textBox.Text.Split(' ');
+            if (words.Any(word => word.Length == 0))
+            {
+                textBox.Text = "Ошибка: введите значение";
+                Description.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+            }
+        }
+
+        private void TextBox_GotFocus_2(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (textBox.Text.StartsWith("Ошибка:"))
+            {
+                textBox.Text = "";
+                ColorAnimation animation = new ColorAnimation();
+                animation.From = (Color)ColorConverter.ConvertFromString("#FB3F51");
+                animation.To = Colors.Transparent;
+                animation.Duration = new Duration(TimeSpan.FromSeconds(2));
+                SolidColorBrush brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                brush.BeginAnimation(SolidColorBrush.ColorProperty, animation);
+                Description.BorderBrush = brush;
+            }
+        }
+
+        private void TextBox_PreviewTextInput_3(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex(@"^[0-9\s]*$");
+            if (!regex.IsMatch(e.Text))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void TextBox_LostFocus_3(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            string[] words = textBox.Text.Split(' ');
+            if (words.Any(word => word.Length == 0))
+            {
+                textBox.Text = "Ошибка: введите значение";
+                Count_serviceman.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+            }
+        }
+
+        private void TextBox_GotFocus_3(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (textBox.Text.StartsWith("Ошибка:"))
+            {
+                textBox.Text = "";
+                ColorAnimation animation = new ColorAnimation();
+                animation.From = (Color)ColorConverter.ConvertFromString("#FB3F51");
+                animation.To = Colors.Transparent;
+                animation.Duration = new Duration(TimeSpan.FromSeconds(2));
+                SolidColorBrush brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                brush.BeginAnimation(SolidColorBrush.ColorProperty, animation);
+                Count_serviceman.BorderBrush = brush;
             }
         }
     }

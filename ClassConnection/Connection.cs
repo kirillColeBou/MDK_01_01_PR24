@@ -32,7 +32,8 @@ namespace ClassConnection
 
         public bool Connect()
         {
-            string Path = $@"Server=student.permaviat.ru;Database=base1_ISP_21_2_23;User Id=ISP_21_2_23;Password=3frQxZ83o#";
+            string Path = $@"Server=USER\SQLEXPRESS;Database=military_district;User Id=sa;Password=Asdfg123";
+            //string Path = $@"Server=student.permaviat.ru;Database=base1_ISP_21_2_23;User Id=ISP_21_2_23;Password=3frQxZ83o#";
             SqlConnection connection = new SqlConnection(Path);
             try
             {
@@ -242,7 +243,7 @@ namespace ClassConnection
                         {
                             Id_weapons = Convert.ToInt32(itemsWeapons.GetValue(0)),
                             Name_weapons = Convert.ToString(itemsWeapons.GetValue(1)),
-                            Desription = Convert.ToString(itemsWeapons.GetValue(2)),
+                            Description = Convert.ToString(itemsWeapons.GetValue(2)),
                             Date_update_information = Convert.ToDateTime(itemsWeapons.GetValue(3))
                         };
                         weapons.Add(newWeapons);
@@ -345,7 +346,7 @@ namespace ClassConnection
                 worksheet.Cells[1, 2].Value = "Название роты";
                 worksheet.Cells[1, 3].Value = "ФИО главнокомандующег";
                 worksheet.Cells[1, 2].Value = "Дата создания";
-                worksheet.Cells[1, 1].Value = "Дата последнего обновления информации";
+                worksheet.Cells[1, 1].Value = "Дата обновления информации";
                 int row = 2;
                 foreach (var record in companies)
                 {
@@ -426,7 +427,7 @@ namespace ClassConnection
                 {
                     worksheet.Cells[row, 1].Value = record.Id_weapons;
                     worksheet.Cells[row, 2].Value = record.Name_weapons;
-                    worksheet.Cells[row, 3].Value = record.Desription;
+                    worksheet.Cells[row, 3].Value = record.Description;
                     worksheet.Cells[row, 4].Value = record.Date_update_information.ToString("dd.MM.yyyy");
                     row++;
                 }

@@ -32,6 +32,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             if (_weapons.Name_weapons != null)
             {
                 Name_weapons.Text = _weapons.Name_weapons;
+                Description.Text = _weapons.Description;
             }
         }
 
@@ -40,7 +41,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             int id = Main.connect.SetLastId(ClassConnection.Connection.Tables.weapons);
             if (weapons.Name_weapons == null)
             {
-                string query = $"Insert Into weapons ([Id_weapons], [Name_weapons]) Values ({id.ToString()}, '{Name_weapons.Text}')";
+                string query = $"Insert Into weapons ([Id_weapons], [Name_weapons], [Description], [Date_update_information]) Values ({id.ToString()}, '{Name_weapons.Text}', '{Description.Text}', '{DateTime.Now.ToString("dd.MM.yyyy")}')";
                 var query_apply = Main.connect.Query(query);
                 if (query_apply != null)
                 {
@@ -51,7 +52,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             }
             else
             {
-                string query = $"Update weapons Set Name_weapons = '{Name_weapons.Text}' Where Id_weapons = {weapons.Id_weapons}";
+                string query = $"Update weapons Set Name_weapons = '{Name_weapons.Text}', Description = '{Description.Text}', Date_update_information = '{DateTime.Now.ToString("dd.MM.yyyy")}' Where Id_weapons = {weapons.Id_weapons}";
                 var query_apply = Main.connect.Query(query);
                 if (query_apply != null)
                 {
@@ -84,7 +85,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             }
         }
 
-        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        private void TextBox_LostFocus_1(object sender, RoutedEventArgs e)
         {
             TextBox textBox = (TextBox)sender;
             string[] words = textBox.Text.Split(' ');
@@ -95,7 +96,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             }
         }
 
-        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        private void TextBox_GotFocus_1(object sender, RoutedEventArgs e)
         {
             TextBox textBox = (TextBox)sender;
             if (textBox.Text.StartsWith("Ошибка:"))
@@ -108,6 +109,33 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                 SolidColorBrush brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
                 brush.BeginAnimation(SolidColorBrush.ColorProperty, animation);
                 Name_weapons.BorderBrush = brush;
+            }
+        }
+
+        private void TextBox_LostFocus_2(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            string[] words = textBox.Text.Split(' ');
+            if (words.Any(word => word.Length == 0))
+            {
+                textBox.Text = "Ошибка: введите значение";
+                Description.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+            }
+        }
+
+        private void TextBox_GotFocus_2(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (textBox.Text.StartsWith("Ошибка:"))
+            {
+                textBox.Text = "";
+                ColorAnimation animation = new ColorAnimation();
+                animation.From = (Color)ColorConverter.ConvertFromString("#FB3F51");
+                animation.To = Colors.Transparent;
+                animation.Duration = new Duration(TimeSpan.FromSeconds(2));
+                SolidColorBrush brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                brush.BeginAnimation(SolidColorBrush.ColorProperty, animation);
+                Description.BorderBrush = brush;
             }
         }
     }

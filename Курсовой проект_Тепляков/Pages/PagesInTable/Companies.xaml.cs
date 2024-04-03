@@ -29,7 +29,11 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             InitializeComponent();
             companies = _companies;
             if (_companies.Commander != null)
+            {
+                Name_companies.Text = _companies.Name_companies;
                 Commander.Text = _companies.Commander;
+                Date_foundation.Text = _companies.Date_foundation.ToString("dd.MM.yyyy");
+            }   
         }
 
         private void Click_Companies_Redact(object sender, RoutedEventArgs e)
@@ -37,29 +41,34 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             string[] FIOCommander = Commander.Text.Split(' ');
             if (FIOCommander.Length <= 3)
             {
-                int id = Main.connect.SetLastId(ClassConnection.Connection.Tables.companies);
-                if (companies.Commander == null)
+                if (Date_foundation.Text != "")
                 {
-                    string query = $"INSERT INTO companies ([Id_companies], [Commander]) VALUES ({id.ToString()}, '{Commander.Text}')";
-                    var query_apply = Main.connect.Query(query);
-                    if (query_apply != null)
+                    int id = Main.connect.SetLastId(ClassConnection.Connection.Tables.companies);
+                    if (companies.Commander == null)
                     {
-                        Main.connect.LoadData(ClassConnection.Connection.Tables.companies);
-                        MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.companies);
+                        string query = $"INSERT INTO companies ([Id_companies], [Name_companies], [Commander], [Date_foundation], [Date_update_information]) VALUES ({id.ToString()}, '{Name_companies.Text}', '{Commander.Text}', '{Date_foundation.Text}', '{DateTime.Now.ToString("dd.MM.yyyy")}')";
+                        var query_apply = Main.connect.Query(query);
+                        if (query_apply != null)
+                        {
+                            Main.connect.LoadData(ClassConnection.Connection.Tables.companies);
+                            MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.companies);
+                        }
+                        else MessageBox.Show("Запрос на добавление роты не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
-                    else MessageBox.Show("Запрос на добавление роты не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    else
+                    {
+                        string query = $"UPDATE companies SET Name_companies = '{Name_companies.Text}', Commander = '{Commander.Text}', Date_foundation = '{Date_foundation.Text}' Date_update_information ='{DateTime.Now.ToString("dd.MM.yyyy")}' WHERE Id_companies = {companies.Id_companies}";
+                        var query_apply = Main.connect.Query(query);
+                        if (query_apply != null)
+                        {
+                            Main.connect.LoadData(ClassConnection.Connection.Tables.companies);
+                            MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.companies);
+                        }
+                        else MessageBox.Show("Запрос на изменение роты не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
                 }
                 else
-                {
-                    string query = $"UPDATE companies SET Commander = '{Commander.Text}' WHERE Id_companies = {companies.Id_companies}";
-                    var query_apply = Main.connect.Query(query);
-                    if (query_apply != null)
-                    {
-                        Main.connect.LoadData(ClassConnection.Connection.Tables.companies);
-                        MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.companies);
-                    }
-                    else MessageBox.Show("Запрос на изменение роты не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
+                    Date_foundation.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
             }
         }
 
@@ -85,7 +94,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             }
         }
 
-        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void TextBox_PreviewTextInput_1(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex(@"^[А-Яа-яA-Za-z\s]*$");
             if (!regex.IsMatch(e.Text))
@@ -94,7 +103,43 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             }
         }
 
-        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        private void TextBox_LostFocus_1(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            string[] words = textBox.Text.Split(' ');
+            if (words.Any(word => word.Length == 0))
+            {
+                textBox.Text = "Ошибка: введите значение";
+                Name_companies.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+            }
+        }
+
+        private void TextBox_GotFocus_1(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (textBox.Text.StartsWith("Ошибка:"))
+            {
+                textBox.Text = "";
+                ColorAnimation animation = new ColorAnimation();
+                animation.From = (Color)ColorConverter.ConvertFromString("#FB3F51");
+                animation.To = Colors.Transparent;
+                animation.Duration = new Duration(TimeSpan.FromSeconds(2));
+                SolidColorBrush brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                brush.BeginAnimation(SolidColorBrush.ColorProperty, animation);
+                Name_companies.BorderBrush = brush;
+            }
+        }
+
+        private void TextBox_PreviewTextInput_2(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex(@"^[А-Яа-яA-Za-z\s]*$");
+            if (!regex.IsMatch(e.Text))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void TextBox_LostFocus_2(object sender, RoutedEventArgs e)
         {
             TextBox textBox = (TextBox)sender;
             string[] words = textBox.Text.Split(' ');
@@ -105,7 +150,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             }
         }
 
-        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        private void TextBox_GotFocus_2(object sender, RoutedEventArgs e)
         {
             TextBox textBox = (TextBox)sender;
             if (textBox.Text.StartsWith("Ошибка:"))
