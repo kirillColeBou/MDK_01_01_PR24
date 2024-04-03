@@ -5,18 +5,21 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Курсовой_проект_Тепляков.Elements"
              mc:Ignorable="d">
-    <Border x:Name="border" Opacity="1" Margin="10,5,10,5" Height="100" CornerRadius="7,7,7,7" Background="#FF2C2C2C">
+    <Border x:Name="border" Opacity="1" Margin="10,5,10,5" Height="140" CornerRadius="7,7,7,7" Background="#FF2C2C2C">
         <Grid>
             <Grid.Resources>
                 <ResourceDictionary Source="/Resource/Dictionary.xaml"/>
             </Grid.Resources>
-            <Label Content="Вид войск" Margin="19,10,101,0" Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" Height="35" VerticalAlignment="Top" FontWeight="Bold" FontSize="18"/>
-            <Label x:Name="Name_type_of_troops" Content="Название вида войск" Margin="19,50,101,0" Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
+            <Label Content="Вид войск" Margin="19,5,101,0" Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" Height="35" VerticalAlignment="Top" FontWeight="Bold" FontSize="18"/>
+            <Label x:Name="Name_type_of_troops" Content="Название вида войск" Margin="19,36,101,0" Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
+            <Label x:Name="Description" Content="Описание" Margin="19,61,101,0" Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
+            <Label x:Name="Count_serviceman" Content="Количество военнослужащих" Margin="19,86,101,0" Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
+            <Label x:Name="Date_foundation" Content="Дата создания" Margin="19,111,101,0" Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
             <Grid x:Name="Buttons">
-                <Button Style="{StaticResource BtnRedac}" Background="#FF2C2C2C" Margin="0,5,9.6,0" VerticalAlignment="Top" Height="40" Width="63" Click="Click_redact" HorizontalAlignment="Right">
+                <Button Style="{StaticResource BtnRedac}" Background="#FF2C2C2C" Margin="0,25,9.6,0" VerticalAlignment="Top" Height="40" Width="63" Click="Click_redact" HorizontalAlignment="Right">
                     <Image Source="/Images/redac.png" Width="20" Height="20"/>
                 </Button>
-                <Button Style="{StaticResource BtnRedac}" Background="#FFE42B2B" Margin="0,0,9.6,10" VerticalAlignment="Bottom" Height="40" Width="63" Click="Click_remove" HorizontalAlignment="Right">
+                <Button Style="{StaticResource BtnRedac}" Background="#FFE42B2B" Margin="0,0,9.6,25" VerticalAlignment="Bottom" Height="40" Width="63" Click="Click_remove" HorizontalAlignment="Right">
                     <Image Source="/Images/del.png" Width="20" Height="20"/>
                 </Button>
             </Grid>

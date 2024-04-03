@@ -36,7 +36,10 @@ namespace Курсовой_проект_Тепляков.Elements
             type_of_troops = _type_of_troops;
             if(_type_of_troops.Name_type_of_troops != null)
             {
-                Name_type_of_troops.Content = _type_of_troops.Name_type_of_troops;
+                Name_type_of_troops.Content = "Название: " + _type_of_troops.Name_type_of_troops;
+                Description.Content = "Описание: " + _type_of_troops.Description;
+                Count_serviceman.Content = "Количество военнослужащих: " + _type_of_troops.Count_serviceman;
+                Date_foundation.Content = "Дата создания: " + _type_of_troops.Date_foundation.ToString("dd.MM.yyyy");
             }
         }
 

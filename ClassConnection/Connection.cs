@@ -344,17 +344,17 @@ namespace ClassConnection
                 ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Записи (роты)");
                 worksheet.Cells[1, 1].Value = "Код роты";
                 worksheet.Cells[1, 2].Value = "Название роты";
-                worksheet.Cells[1, 3].Value = "ФИО главнокомандующег";
-                worksheet.Cells[1, 2].Value = "Дата создания";
-                worksheet.Cells[1, 1].Value = "Дата обновления информации";
+                worksheet.Cells[1, 3].Value = "ФИО главнокомандующего";
+                worksheet.Cells[1, 4].Value = "Дата создания";
+                worksheet.Cells[1, 5].Value = "Дата обновления информации";
                 int row = 2;
                 foreach (var record in companies)
                 {
                     worksheet.Cells[row, 1].Value = record.Id_companies;
                     worksheet.Cells[row, 2].Value = record.Name_companies;
-                    worksheet.Cells[row, 1].Value = record.Commander;
-                    worksheet.Cells[row, 2].Value = record.Date_foundation.ToString("dd.MM.yyyy");
-                    worksheet.Cells[row, 1].Value = record.Date_update_information.ToString("dd.MM.yyyy");
+                    worksheet.Cells[row, 3].Value = record.Commander;
+                    worksheet.Cells[row, 4].Value = record.Date_foundation.ToString("dd.MM.yyyy");
+                    worksheet.Cells[row, 5].Value = record.Date_update_information.ToString("dd.MM.yyyy");
                     row++;
                 }
                 FileInfo fileInfo = new FileInfo(filePath);
@@ -420,7 +420,7 @@ namespace ClassConnection
                 ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Записи (вооружения)");
                 worksheet.Cells[1, 1].Value = "Код вооружения";
                 worksheet.Cells[1, 2].Value = "Название вооружения";
-                worksheet.Cells[1, 2].Value = "Описание";
+                worksheet.Cells[1, 3].Value = "Описание";
                 worksheet.Cells[1, 4].Value = "Дата обновления информации";
                 int row = 2;
                 foreach (var record in weapons)
