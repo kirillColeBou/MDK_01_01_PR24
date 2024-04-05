@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Курсовой_проект_Тепляков.Pages.PagesInTable"
       mc:Ignorable="d" 
-      d:DesignHeight="800" d:DesignWidth="950"
+      d:DesignHeight="720" d:DesignWidth="950"
       Title="Parts">
 
     <Border CornerRadius="10,0,0,10">
@@ -17,7 +17,7 @@
                 <ResourceDictionary Source="/Resource/Dictionary.xaml"/>
             </Grid.Resources>
             <ScrollViewer>
-                <Border MinHeight="800">
+                <Border MinHeight="720">
                     <Grid>
                         <Label Content="Часть" Margin="39,28,26,0" Foreground="White" FontSize="30" FontFamily="Yu Gothic UI Semibold" HorizontalContentAlignment="Left" Height="52" VerticalAlignment="Top"/>
                         <Label Content="Дислокация" Margin="39,85,26,0" Foreground="White" FontSize="15" FontFamily="Yu Gothic UI Semilight" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
@@ -42,10 +42,6 @@
                         <TextBox x:Name="Count_technique" Style="{StaticResource BaseBox}" Height="35" Background="#FFDEDEDE" Margin="42,525,191,0" VerticalAlignment="Top" PreviewTextInput="TextBox_PreviewTextInput_2" LostFocus="TextBox_LostFocus_2" GotFocus="TextBox_GotFocus_2"/>
                         <Label Content="Количество вооружений" Margin="39,565,26,0" Foreground="White" FontSize="15" FontFamily="Yu Gothic UI Semilight" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
                         <TextBox x:Name="Count_weapons" Style="{StaticResource BaseBox}" Height="35" Background="#FFDEDEDE" Margin="42,605,191,0" VerticalAlignment="Top" PreviewTextInput="TextBox_PreviewTextInput_3" LostFocus="TextBox_LostFocus_3" GotFocus="TextBox_GotFocus_3"/>
-                        <Label Content="Дата основания" Margin="39,645,26,0" Foreground="White" FontSize="15" FontFamily="Yu Gothic UI Semilight" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
-                        <Border x:Name="Id_dateOfFoundation_border" Margin="42,685,191,0" Height="42" VerticalAlignment="Top" BorderThickness="1.5" CornerRadius="6,6,6,6">
-                            <DatePicker x:Name="Date_of_foundation" Style="{StaticResource styleDatepicker}" Height="35" Background="#FFDEDEDE" Margin="2,2,2,2" VerticalAlignment="Top" GotFocus="Id_dateOfFoundation_gotFocus"/>
-                        </Border>
                         <Button Style="{StaticResource BtnRedac}" Margin="0,0,136.2,24" VerticalAlignment="Bottom" Height="40" Width="105" Click="Click_Parts_Redact" HorizontalAlignment="Right">
                             <Image Source="/Images/redac.png" Width="20" Height="20"/>
                         </Button>

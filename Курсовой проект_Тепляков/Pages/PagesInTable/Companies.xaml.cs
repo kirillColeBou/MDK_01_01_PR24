@@ -32,7 +32,6 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             {
                 Name_companies.Text = _companies.Name_companies;
                 Commander.Text = _companies.Commander;
-                Date_foundation.Text = _companies.Date_foundation.ToString("dd.MM.yyyy");
             }   
         }
 
@@ -41,34 +40,29 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             string[] FIOCommander = Commander.Text.Split(' ');
             if (FIOCommander.Length <= 3)
             {
-                if (Date_foundation.Text != "")
+                int id = Main.connect.SetLastId(ClassConnection.Connection.Tables.companies);
+                if (companies.Commander == null)
                 {
-                    int id = Main.connect.SetLastId(ClassConnection.Connection.Tables.companies);
-                    if (companies.Commander == null)
+                    string query = $"INSERT INTO companies ([Id_companies], [Name_companies], [Commander], [Date_foundation], [Date_update_information]) VALUES ({id.ToString()}, '{Name_companies.Text}', '{Commander.Text}', '{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}', '{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}')";
+                    var query_apply = Main.connect.Query(query);
+                    if (query_apply != null)
                     {
-                        string query = $"INSERT INTO companies ([Id_companies], [Name_companies], [Commander], [Date_foundation], [Date_update_information]) VALUES ({id.ToString()}, '{Name_companies.Text}', '{Commander.Text}', '{Date_foundation.Text}', '{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}')";
-                        var query_apply = Main.connect.Query(query);
-                        if (query_apply != null)
-                        {
-                            Main.connect.LoadData(ClassConnection.Connection.Tables.companies);
-                            MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.companies);
-                        }
-                        else MessageBox.Show("Запрос на добавление роты не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        Main.connect.LoadData(ClassConnection.Connection.Tables.companies);
+                        MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.companies);
                     }
-                    else
-                    {
-                        string query = $"UPDATE companies SET Name_companies = '{Name_companies.Text}', Commander = '{Commander.Text}', Date_foundation = '{Date_foundation.Text}', Date_update_information ='{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}' WHERE Id_companies = {companies.Id_companies}";
-                        var query_apply = Main.connect.Query(query);
-                        if (query_apply != null)
-                        {
-                            Main.connect.LoadData(ClassConnection.Connection.Tables.companies);
-                            MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.companies);
-                        }
-                        else MessageBox.Show("Запрос на изменение роты не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    }
+                    else MessageBox.Show("Запрос на добавление роты не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 else
-                    Date_foundation.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                {
+                    string query = $"UPDATE companies SET Name_companies = '{Name_companies.Text}', Commander = '{Commander.Text}', Date_update_information ='{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}' WHERE Id_companies = {companies.Id_companies}";
+                    var query_apply = Main.connect.Query(query);
+                    if (query_apply != null)
+                    {
+                        Main.connect.LoadData(ClassConnection.Connection.Tables.companies);
+                        MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.companies);
+                    }
+                    else MessageBox.Show("Запрос на изменение роты не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
             }
         }
 

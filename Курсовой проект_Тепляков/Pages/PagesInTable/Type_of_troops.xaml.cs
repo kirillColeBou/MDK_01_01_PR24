@@ -34,7 +34,6 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                 Name_type_of_troops.Text = _type_of_troops.Name_type_of_troops;
                 Description.Text = _type_of_troops.Description;
                 Count_serviceman.Text = _type_of_troops.Count_serviceman.ToString();
-                Date_foundation.Text = _type_of_troops.Date_foundation.ToString("dd.MM.yyyy");
             }
         }
 
@@ -43,7 +42,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             int id = Main.connect.SetLastId(ClassConnection.Connection.Tables.type_of_troops);
             if (type_of_troops.Name_type_of_troops == null)
             {
-                string query = $"Insert Into type_of_troops ([Id_type_of_troops], [Name_type_of_troops], [Description], [Count_serviceman], [Date_foundation]) Values ({id.ToString()}, '{Name_type_of_troops.Text}', '{Description.Text}', '{Count_serviceman.Text}', '{Date_foundation.Text}')";
+                string query = $"Insert Into type_of_troops ([Id_type_of_troops], [Name_type_of_troops], [Description], [Count_serviceman], [Date_foundation]) Values ({id.ToString()}, '{Name_type_of_troops.Text}', '{Description.Text}', '{Count_serviceman.Text}', '{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}')";
                 var query_apply = Main.connect.Query(query);
                 if (query_apply != null)
                 {
@@ -54,7 +53,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             }
             else
             {
-                string query = $"Update type_of_troops Set Name_type_of_troops = '{Name_type_of_troops.Text}', Description = '{Description.Text}', Count_serviceman = '{Count_serviceman.Text}', Date_foundation = '{Date_foundation.Text}' Where Id_type_of_troops = {type_of_troops.Id_type_of_troops}";
+                string query = $"Update type_of_troops Set Name_type_of_troops = '{Name_type_of_troops.Text}', Description = '{Description.Text}', Count_serviceman = '{Count_serviceman.Text}' Where Id_type_of_troops = {type_of_troops.Id_type_of_troops}";
                 var query_apply = Main.connect.Query(query);
                 if (query_apply != null)
                 {
