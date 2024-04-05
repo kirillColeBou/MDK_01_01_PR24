@@ -38,7 +38,7 @@ namespace Курсовой_проект_Тепляков.Elements
                 Id_weapons.Content = "Вооружение № " + _weapons.Id_weapons;
                 Name_weapons.Content = "Название вооружения: " + _weapons.Name_weapons;
                 Description.Content = "Описание: " + _weapons.Description;
-                Date_update_information.Content = "Дата обновления информации: " + _weapons.Date_update_information.ToString("dd.MM.yyyy");
+                Date_update_information.Content = "Дата обновления информации: " + _weapons.Date_update_information.ToString("dd.MM.yyyy HH:mm:ss");
             }
         }
 

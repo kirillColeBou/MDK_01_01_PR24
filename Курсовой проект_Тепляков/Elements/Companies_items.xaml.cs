@@ -42,7 +42,7 @@ namespace Курсовой_проект_Тепляков.Elements
                 Name_companies.Content = "Название роты: " + _companies.Name_companies;
                 Commander.Content = "Главнокомандующий: " + _companies.Commander;
                 Date_foundation.Content = "Дата создания: " + _companies.Date_foundation.ToString("dd.MM.yyyy");
-                Date_update_information.Content = "Дата обновления информации: " + _companies.Date_update_information.ToString("dd.MM.yyyy");
+                Date_update_information.Content = "Дата обновления информации: " + _companies.Date_update_information.ToString("dd.MM.yyyy HH:mm:ss");
             }
             DoubleAnimation opgridAnimation = new DoubleAnimation();
             opgridAnimation.From = 0;

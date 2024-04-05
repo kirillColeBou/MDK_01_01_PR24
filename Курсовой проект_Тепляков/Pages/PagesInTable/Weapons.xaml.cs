@@ -41,7 +41,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             int id = Main.connect.SetLastId(ClassConnection.Connection.Tables.weapons);
             if (weapons.Name_weapons == null)
             {
-                string query = $"Insert Into weapons ([Id_weapons], [Name_weapons], [Description], [Date_update_information]) Values ({id.ToString()}, '{Name_weapons.Text}', '{Description.Text}', '{DateTime.Now.ToString("dd.MM.yyyy")}')";
+                string query = $"Insert Into weapons ([Id_weapons], [Name_weapons], [Description], [Date_update_information]) Values ({id.ToString()}, '{Name_weapons.Text}', '{Description.Text}', '{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}')";
                 var query_apply = Main.connect.Query(query);
                 if (query_apply != null)
                 {
@@ -52,7 +52,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             }
             else
             {
-                string query = $"Update weapons Set Name_weapons = '{Name_weapons.Text}', Description = '{Description.Text}', Date_update_information = '{DateTime.Now.ToString("dd.MM.yyyy")}' Where Id_weapons = {weapons.Id_weapons}";
+                string query = $"Update weapons Set Name_weapons = '{Name_weapons.Text}', Description = '{Description.Text}', Date_update_information = '{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}' Where Id_weapons = {weapons.Id_weapons}";
                 var query_apply = Main.connect.Query(query);
                 if (query_apply != null)
                 {
