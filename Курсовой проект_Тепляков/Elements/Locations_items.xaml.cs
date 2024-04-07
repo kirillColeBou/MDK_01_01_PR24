@@ -40,10 +40,7 @@ namespace Курсовой_проект_Тепляков.Elements
                 Count_structures.Content = "Количество сооружений: " + _locations.Count_structures;
             }
         }
-        private void Click_redact(object sender, RoutedEventArgs e)
-        {
-            MainWindow.main.Animation_move(MainWindow.main.scroll_main, MainWindow.main.frame_main, MainWindow.main.frame_main, new Pages.PagesInTable.Locations(locations));
-        }
+        private void Click_redact(object sender, RoutedEventArgs e) => MainWindow.main.Animation_move(MainWindow.main.scroll_main, MainWindow.main.frame_main, MainWindow.main.frame_main, new Pages.PagesInTable.Locations(locations));
 
         private void Click_remove(object sender, RoutedEventArgs e)
         {

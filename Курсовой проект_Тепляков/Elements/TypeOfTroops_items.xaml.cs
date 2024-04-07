@@ -23,30 +23,22 @@ namespace Курсовой_проект_Тепляков.Elements
     /// </summary>
     public partial class TypeOfTroops_items : UserControl
     {
-        ClassConnection.Connection connection;
         ClassModules.Type_of_troops type_of_troops;
         public TypeOfTroops_items(ClassModules.Type_of_troops _type_of_troops)
         {
             InitializeComponent();
-            connection = new ClassConnection.Connection();
-            if (Pages.Login_Regin.Login.UserInfo[1] != "admin")
-            {
-                Buttons.Visibility = Visibility.Hidden;
-            }
+            if (Pages.Login_Regin.Login.UserInfo[1] != "admin") Buttons.Visibility = Visibility.Hidden;
             type_of_troops = _type_of_troops;
             if(_type_of_troops.Name_type_of_troops != null)
             {
-                Name_type_of_troops.Content = "Название: " + _type_of_troops.Name_type_of_troops;
+                Name_type_of_troops.Content = "Название вида войск: " + _type_of_troops.Name_type_of_troops;
                 Description.Content = "Описание: " + _type_of_troops.Description;
                 Count_serviceman.Content = "Количество военнослужащих: " + _type_of_troops.Count_serviceman;
                 Date_foundation.Content = "Дата создания: " + _type_of_troops.Date_foundation.ToString("dd.MM.yyyy");
             }
         }
 
-        private void Click_redact(object sender, RoutedEventArgs e)
-        {
-            MainWindow.main.Animation_move(MainWindow.main.scroll_main, MainWindow.main.frame_main, MainWindow.main.frame_main, new Pages.PagesInTable.Type_of_troops(type_of_troops));
-        }
+        private void Click_redact(object sender, RoutedEventArgs e) => MainWindow.main.Animation_move(MainWindow.main.scroll_main, MainWindow.main.frame_main, MainWindow.main.frame_main, new Pages.PagesInTable.Type_of_troops(type_of_troops));
 
         private void Click_remove(object sender, RoutedEventArgs e)
         {

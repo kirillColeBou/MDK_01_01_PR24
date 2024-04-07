@@ -56,6 +56,7 @@ namespace Курсовой_проект_Тепляков.Pages
                 connect.LoadData(Connection.Tables.technique);
                 connect.LoadData(Connection.Tables.type_of_troops);
                 connect.LoadData(Connection.Tables.weapons);
+                connect.LoadData(Connection.Tables.country);
             } 
         }
 

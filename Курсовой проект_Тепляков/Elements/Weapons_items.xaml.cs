@@ -22,16 +22,11 @@ namespace Курсовой_проект_Тепляков.Elements
     /// </summary>
     public partial class Weapons_items : UserControl
     {
-        ClassConnection.Connection connection;
         Weapons weapons;
         public Weapons_items(Weapons _weapons)
         {
             InitializeComponent();
-            connection = new ClassConnection.Connection();
-            if (Pages.Login_Regin.Login.UserInfo[1] != "admin")
-            {
-                Buttons.Visibility = Visibility.Hidden;
-            }
+            if (Pages.Login_Regin.Login.UserInfo[1] != "admin") Buttons.Visibility = Visibility.Hidden;
             weapons = _weapons;
             if(_weapons.Name_weapons != null)
             {

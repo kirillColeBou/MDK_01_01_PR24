@@ -1,4 +1,5 @@
-﻿using ClassModules;
+﻿using ClassConnection;
+using ClassModules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,26 +24,19 @@ namespace Курсовой_проект_Тепляков.Elements
     /// </summary>
     public partial class Parts_items : UserControl
     {
-        ClassConnection.Connection connection;
         ClassModules.Parts parts;
         public Parts_items(ClassModules.Parts _parts)
         {
             InitializeComponent();
-            connection = new ClassConnection.Connection();
-            if (Pages.Login_Regin.Login.UserInfo[1] != "admin")
-            {
-                Buttons.Visibility = Visibility.Hidden;
-            }
+            if (Pages.Login_Regin.Login.UserInfo[1] != "admin") Buttons.Visibility = Visibility.Hidden;
             parts = _parts;
             if(_parts.Date_of_foundation != null)
             {
                 Id_part.Content = "Часть № " + _parts.Id_part;
-                ClassModules.Locations item_location = ClassConnection.Connection.locations.Find(x => x.Id_locations == _parts.Locations);
-                Locations.Content = "Место дислокации: " + item_location.Country;
-                ClassModules.Type_of_troops item_typeOfTroops = ClassConnection.Connection.type_of_troops.Find(x => x.Id_type_of_troops == _parts.Type_of_troops);
-                Type_of_troops.Content = "Вид войск: " + item_typeOfTroops.Name_type_of_troops;
-                ClassModules.Weapons item_weapons = ClassConnection.Connection.weapons.Find(x => x.Id_weapons == _parts.Weapons);
-                Weapons.Content = "Вид вооружения: " + item_weapons.Name_weapons;
+                ClassModules.Locations item_location = Connection.locations.Find(x => x.Id_locations == _parts.Locations);
+                Locations.Content = "Место дислокации: " + Connection.country.Find(x => x.Id == item_location.Country).Name;
+                Type_of_troops.Content = "Вид войск: " + Connection.type_of_troops.Find(x => x.Id_type_of_troops == _parts.Type_of_troops).Name_type_of_troops;
+                Weapons.Content = "Вид вооружения: " + Connection.weapons.Find(x => x.Id_weapons == _parts.Weapons).Name_weapons;
                 Companies.Content = "Рота №" + _parts.Companies;
                 Count_companies.Content = "Количество рот: " + _parts.Count_companies;
                 Count_technique.Content = "Количество техники: " + _parts.Count_technique;
@@ -51,10 +45,7 @@ namespace Курсовой_проект_Тепляков.Elements
             }
         }
 
-        private void Click_redact(object sender, RoutedEventArgs e)
-        {
-            MainWindow.main.Animation_move(MainWindow.main.scroll_main, MainWindow.main.frame_main, MainWindow.main.frame_main, new Pages.PagesInTable.Parts(parts));
-        }
+        private void Click_redact(object sender, RoutedEventArgs e) => MainWindow.main.Animation_move(MainWindow.main.scroll_main, MainWindow.main.frame_main, MainWindow.main.frame_main, new Pages.PagesInTable.Parts(parts));
 
         private void Click_remove(object sender, RoutedEventArgs e)
         {

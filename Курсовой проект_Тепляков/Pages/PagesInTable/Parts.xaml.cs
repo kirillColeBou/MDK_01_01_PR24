@@ -100,8 +100,8 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                             if (parts.Count_weapons == null)
                             {
                                 string query = $"Insert Into parts ([Id_part], [Locations], [Type_of_troops], [Weapons], [Companies], [Count_companies], [Count_technique], [Count_weapons], [Date_of_foundation])" +
-                                    $"Values ({id.ToString()}, '{id_locations_temp.Id_locations.ToString()}', '{id_typeOfTroops_temp.Id_type_of_troops.ToString()}', '{id_weapons_temp.Id_weapons.ToString()}'," +
-                                    $" '{id_companies_temp.Id_companies.ToString()}', '{Count_companies.Text}', '{Count_technique.Text}', '{Count_weapons.Text}', '{DateTime.Now.ToString("dd.MM.yyyy")}')";
+                                    $"Values ({id.ToString()}, {id_locations_temp.Id_locations.ToString()}, {id_typeOfTroops_temp.Id_type_of_troops.ToString()}, {id_weapons_temp.Id_weapons.ToString()}," +
+                                    $" {id_companies_temp.Id_companies.ToString()}, N'{Count_companies.Text}', N'{Count_technique.Text}', N'{Count_weapons.Text}', N'{DateTime.Now.ToString("dd.MM.yyyy")}')";
                                 var query_apply = Main.connect.Query(query);
                                 if (query_apply != null)
                                 {
@@ -113,8 +113,8 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                             else
                             {
                                 string query = $"Update parts Set Locations = '{id_locations_temp.Id_locations.ToString()}', Type_of_troops = '{id_typeOfTroops_temp.Id_type_of_troops.ToString()}'," +
-                                    $" Weapons = '{id_weapons_temp.Id_weapons.ToString()}', Companies = '{id_companies_temp.Id_companies.ToString()}', Count_companies = '{Count_companies.Text}'," + "" +
-                                    $" Count_technique = '{Count_technique.Text}', Count_weapons = '{Count_weapons.Text}' Where Id_part = {parts.Id_part}";
+                                    $" Weapons = '{id_weapons_temp.Id_weapons.ToString()}', Companies = '{id_companies_temp.Id_companies.ToString()}', Count_companies = N'{Count_companies.Text}'," + "" +
+                                    $" Count_technique = N'{Count_technique.Text}', Count_weapons = N'{Count_weapons.Text}' Where Id_part = {parts.Id_part}";
                                 var query_apply = Main.connect.Query(query);
                                 if (query_apply != null)
                                 {

@@ -21,29 +21,21 @@ namespace Курсовой_проект_Тепляков.Elements
     /// </summary>
     public partial class Technique_items : UserControl
     {
-        ClassConnection.Connection connection;
         ClassModules.Technique technique;
         public Technique_items(ClassModules.Technique _technique)
         {
             InitializeComponent();
-            connection = new ClassConnection.Connection();
-            if (Pages.Login_Regin.Login.UserInfo[1] != "admin")
-            {
-                Buttons.Visibility = Visibility.Hidden;
-            }
+            if (Pages.Login_Regin.Login.UserInfo[1] != "admin") Buttons.Visibility = Visibility.Hidden;
             technique = _technique;
             if(_technique.Characteristics != null)
             {
-                Name_technique.Content = technique.Name_technique;
+                Name_technique.Content = "Название техники" + technique.Name_technique;
                 Parts.Content = "Номер части: " + technique.Parts;
                 Characteristics.Content = "Характеристики: " + technique.Characteristics;
             }
         }
 
-        private void Click_redact(object sender, RoutedEventArgs e)
-        {
-            MainWindow.main.Animation_move(MainWindow.main.scroll_main, MainWindow.main.frame_main, MainWindow.main.frame_main, new Pages.PagesInTable.Technique(technique));
-        }
+        private void Click_redact(object sender, RoutedEventArgs e) => MainWindow.main.Animation_move(MainWindow.main.scroll_main, MainWindow.main.frame_main, MainWindow.main.frame_main, new Pages.PagesInTable.Technique(technique));
 
         private void Click_remove(object sender, RoutedEventArgs e)
         {

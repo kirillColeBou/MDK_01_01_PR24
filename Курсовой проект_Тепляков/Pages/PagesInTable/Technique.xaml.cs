@@ -54,7 +54,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                 int id = Main.connect.SetLastId(ClassConnection.Connection.Tables.technique);
                 if (technique.Characteristics == null)
                 {
-                    string query = $"Insert Into technique ([Id_technique], [Name_technique], [Parts], [Characteristics]) Values ({id.ToString()}, '{Name_technique.Text}', '{id_part_temp.Id_part.ToString()}', '{Characteristics.Text}')";
+                    string query = $"Insert Into technique ([Id_technique], [Name_technique], [Parts], [Characteristics]) Values ({id.ToString()}, N'{Name_technique.Text}', '{id_part_temp.Id_part.ToString()}', N'{Characteristics.Text}')";
                     var query_apply = Main.connect.Query(query);
                     if (query_apply != null)
                     {
@@ -65,7 +65,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                 }
                 else
                 {
-                    string query = $"Update technique Set Name_technique = '{Name_technique.Text}', Parts = '{id_part_temp.Id_part.ToString()}', Characteristics = '{Characteristics.Text}' Where Id_technique = {technique.Id_technique}";
+                    string query = $"Update technique Set Name_technique = N'{Name_technique.Text}', Parts = '{id_part_temp.Id_part.ToString()}', Characteristics = N'{Characteristics.Text}' Where Id_technique = {technique.Id_technique}";
                     var query_apply = Main.connect.Query(query);
                     if (query_apply != null)
                     {
