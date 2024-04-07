@@ -404,6 +404,8 @@ namespace Курсовой_проект_Тепляков.Pages
             technique_itms.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF2C2C2C"));
             typeOfTroops_itms.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF2C2C2C"));
             weapons_itms.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF2C2C2C"));
+            parrent.Children.Clear();
+            page_select = page_main.none;
             var export = new ExportWindow();
             export.ShowDialog();
         }

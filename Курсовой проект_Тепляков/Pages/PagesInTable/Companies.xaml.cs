@@ -102,7 +102,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
 
         private void TextBox_PreviewTextInput_1(object sender, TextCompositionEventArgs e)
         {
-            Regex regex = new Regex(@"^[А-Яа-яA-Za-z\s]*$");
+            Regex regex = new Regex(@"^[А-Яа-яA-Za-z0-9\s]*$");
             if (!regex.IsMatch(e.Text))
             {
                 e.Handled = true;

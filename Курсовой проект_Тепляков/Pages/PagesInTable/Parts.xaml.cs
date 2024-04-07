@@ -1,4 +1,5 @@
-﻿using ClassModules;
+﻿using ClassConnection;
+using ClassModules;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
@@ -35,7 +36,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             {
                 ComboBoxItem cb_locations = new ComboBoxItem();
                 cb_locations.Tag = item.Id_locations;
-                cb_locations.Content = item.Country;
+                cb_locations.Content = "Страна: " + Connection.country.Find(x => x.Id == item.Id_locations).Name;
                 if (_parts.Locations == item.Id_locations) cb_locations.IsSelected = true;
                 Locations.Items.Add(cb_locations);
             }
