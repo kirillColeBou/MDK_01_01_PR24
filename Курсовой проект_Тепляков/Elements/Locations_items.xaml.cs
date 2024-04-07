@@ -24,21 +24,16 @@ namespace Курсовой_проект_Тепляков.Elements
     /// </summary>
     public partial class Locations_items : UserControl
     {
-        ClassConnection.Connection connection;
         ClassModules.Locations locations;
         public Locations_items(ClassModules.Locations _locations)
         {
             InitializeComponent();
-            connection = new ClassConnection.Connection();
-            if (Pages.Login_Regin.Login.UserInfo[1] != "admin")
-            {
-                Buttons.Visibility = Visibility.Hidden;
-            }
+            if (Pages.Login_Regin.Login.UserInfo[1] != "admin") Buttons.Visibility = Visibility.Hidden;
             locations = _locations;
 #pragma warning disable
             if(_locations.Count_structures != null)
             {
-                Country.Content = _locations.Country;
+                Country.Content = "Место дислокации: " + ClassConnection.Connection.country.Find(x => x.Id == _locations.Country).Name;
                 City.Content = "Город: " + _locations.City;
                 Address.Content = "Адрес: " + _locations.Address;
                 Square.Content = "Занимаемая площадь в м^2: " + _locations.Square;

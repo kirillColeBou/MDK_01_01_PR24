@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Companies.cs" />
+    <Compile Include="Country.cs" />
     <Compile Include="Locations.cs" />
     <Compile Include="Parts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

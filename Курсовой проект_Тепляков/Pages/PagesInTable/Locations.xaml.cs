@@ -31,20 +31,30 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             locations = _locations;
             if (_locations.Address != null)
             {
-                Country.Text = _locations.Country;
                 City.Text = _locations.City;
                 Address.Text = _locations.Address;
                 Square.Text = _locations.Square.ToString();
                 Count_structures.Text = _locations.Count_structures.ToString();
             }
+            Main.connect.LoadData(ClassConnection.Connection.Tables.country);
+            foreach (var item in ClassConnection.Connection.country)
+            {
+                ComboBoxItem cb_country = new ComboBoxItem();
+                cb_country.Tag = item.Id;
+                cb_country.Content = item.Name;
+                if (_locations.Country == item.Id) cb_country.IsSelected = true;
+                Country.Items.Add(cb_country);
+            }
         }
 
         private void Click_Locations_Redact(object sender, RoutedEventArgs e)
         {
+            ClassModules.Country id_country_temp;
+            id_country_temp = ClassConnection.Connection.country.Find(x => x.Id == Convert.ToInt32(((ComboBoxItem)Country.SelectedItem).Tag));
             int id = Main.connect.SetLastId(ClassConnection.Connection.Tables.locations);
-            if (locations.Country == null)
+            if (locations.City == null)
             {
-                string query = $"Insert Into locations ([Id_locations], [Country], [City], [Address], [Square], [Count_structures]) Values ({id.ToString()}, '{Country.Text}', '{City.Text}', '{Address.Text}', '{Square.Text}', '{Count_structures.Text}')";
+                string query = $"Insert Into locations ([Id_locations], [Country], [City], [Address], [Square], [Count_structures]) Values ({id.ToString()}, '{id_country_temp.Id.ToString()}', '{City.Text}', '{Address.Text}', '{Square.Text}', '{Count_structures.Text}')";
                 var query_apply = Main.connect.Query(query);
                 if (query_apply != null)
                 {
@@ -55,7 +65,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             }
             else
             {
-                string query = $"Update locations Set [Country] = '{Country.Text}', [City] = '{City.Text}', [Address] = '{Address.Text}', [Square] = '{Square.Text}', [Count_structures] = '{Count_structures.Text}' Where [Id_locations] = {locations.Id_locations}";
+                string query = $"Update locations Set [Country] = '{id_country_temp.Id.ToString()}', [City] = '{City.Text}', [Address] = '{Address.Text}', [Square] = '{Square.Text}', [Count_structures] = '{Count_structures.Text}' Where [Id_locations] = {locations.Id_locations}";
                 var query_apply = Main.connect.Query(query);
                 if (query_apply != null)
                 {
@@ -88,42 +98,6 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void TextBox_PreviewTextInput_1(object sender, TextCompositionEventArgs e)
-        {
-            Regex regex = new Regex(@"^[А-Яа-яA-Za-z\s]*$");
-            if (!regex.IsMatch(e.Text))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void TextBox_LostFocus_1(object sender, RoutedEventArgs e)
-        {
-            TextBox textBox = (TextBox)sender;
-            string[] words = textBox.Text.Split(' ');
-            if (words.Any(word => word.Length == 0))
-            {
-                textBox.Text = "Ошибка: введите значение";
-                Country.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
-            }
-        }
-
-        private void TextBox_GotFocus_1(object sender, RoutedEventArgs e)
-        {
-            TextBox textBox = (TextBox)sender;
-            if (textBox.Text.StartsWith("Ошибка:"))
-            {
-                textBox.Text = "";
-                ColorAnimation animation = new ColorAnimation();
-                animation.From = (Color)ColorConverter.ConvertFromString("#FB3F51");
-                animation.To = Colors.Transparent;
-                animation.Duration = new Duration(TimeSpan.FromSeconds(2));
-                SolidColorBrush brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
-                brush.BeginAnimation(SolidColorBrush.ColorProperty, animation);
-                Country.BorderBrush = brush;
             }
         }
 

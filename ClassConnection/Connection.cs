@@ -23,12 +23,13 @@ namespace ClassConnection
         public static List<Technique> technique = new List<Technique>();
         public static List<Type_of_troops> type_of_troops = new List<Type_of_troops>();
         public static List<Weapons> weapons = new List<Weapons>();
-        public List<Users> users = new List<Users>();
+        public static List<Users> users = new List<Users>();
+        public static List<Country> country = new List<Country>();
         #endregion
 
         public enum Tables
         {
-            companies, locations, parts, technique, type_of_troops, weapons, users
+            companies, locations, parts, technique, type_of_troops, weapons, users, country
         }
 
         public bool Connect()
@@ -119,14 +120,6 @@ namespace ClassConnection
                             return max_status + 1;
                         }
                         else return 1;
-                    case "users":
-                        if (users.Count >= 1)
-                        {
-                            int max_status = users[0].Id;
-                            max_status = users.Max(x => x.Id);
-                            return max_status + 1;
-                        }
-                        else return 1;
                 }
                 return -1;
             }
@@ -167,7 +160,7 @@ namespace ClassConnection
                         Locations newLocations = new Locations
                         {
                             Id_locations = Convert.ToInt32(itemsLocations.GetValue(0)),
-                            Country = Convert.ToString(itemsLocations.GetValue(1)),
+                            Country = Convert.ToInt32(itemsLocations.GetValue(1)),
                             City = Convert.ToString(itemsLocations.GetValue(2)),
                             Address = Convert.ToString(itemsLocations.GetValue(3)),
                             Square = Convert.ToInt32(itemsLocations.GetValue(4)),
@@ -267,6 +260,21 @@ namespace ClassConnection
                         users.Add(newUsers);
                     }
                     itemsUsers.Close();
+                }
+                if (tables.ToString() == "country")
+                {
+                    SqlDataReader itemsCountry = Query("Select * From " + tables.ToString() + " Order By [Id]");
+                    users.Clear();
+                    while (itemsCountry.Read())
+                    {
+                        Country newCountry = new Country
+                        {
+                            Id = Convert.ToInt32(itemsCountry.GetValue(0)),
+                            Name = Convert.ToString(itemsCountry.GetValue(1))
+                        };
+                        country.Add(newCountry);
+                    }
+                    itemsCountry.Close();
                 }
             }
             catch

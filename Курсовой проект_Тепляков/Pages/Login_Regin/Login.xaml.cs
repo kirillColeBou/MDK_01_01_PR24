@@ -74,7 +74,7 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
             else if (login_user.Text != "" && password_user.Password != "")
             {
                 connection.LoadData(ClassConnection.Connection.Tables.users);
-                var info = connection.users.Find(x => x.Login == login_user.Text && x.Password == password_user.Password);
+                var info = ClassConnection.Connection.users.Find(x => x.Login == login_user.Text && x.Password == password_user.Password);
                 if (info != null)
                 {
                     UserInfo[0] = login_user.Text;
