@@ -5,25 +5,20 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Курсовой_проект_Тепляков.Elements"
              mc:Ignorable="d">
-    <Border x:Name="border" Opacity="1" Margin="10,5,10,5" Height="140" CornerRadius="7,7,7,7" Background="#FF2C2C2C">
+    <Border x:Name="border" Opacity="1" Margin="10,5,10,5" Height="115" CornerRadius="7,7,7,7" Background="#FF2C2C2C">
         <Grid>
             <Grid.Resources>
                 <ResourceDictionary Source="/Resource/Dictionary.xaml"/>
             </Grid.Resources>
             <Label x:Name="Id_part" Content="Часть (номер)" Margin="19,5,101,0" Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" Height="35" VerticalAlignment="Top" FontWeight="Bold" FontSize="18" HorizontalAlignment="Left"/>
             <Label x:Name="Locations" Content="Дислокация" Margin="19,36,101,0" Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-            <Label x:Name="Type_of_troops" Content="Вид войск" Margin="19,61,101,0" Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-            <Label x:Name="Weapons" Content="Вид вооружения" Margin="19,86,101,0" Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-            <Label x:Name="Companies" Content="Рота" Margin="19,111,101,0" Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-            <Label x:Name="Count_companies" Content="Количество рот" Margin="450,11,101,0" Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-            <Label x:Name="Count_technique" Content="Количество техники" Margin="450,36,101,0" Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-            <Label x:Name="Count_weapons"  Content="Количество вооружений" Margin="450,61,101,0" Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-            <Label x:Name="Date_of_foundation" Content="Дата основания" Margin="450,86,101,0" Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+            <Label x:Name="Companies" Content="Название роты" Margin="19,61,101,0" Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+            <Label x:Name="Date_of_foundation" Content="Дата основания" Margin="19,86,101,0" Foreground="White" FontFamily="Corbel" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left"/>
             <Grid x:Name="Buttons">
-                <Button Style="{StaticResource BtnRedac}" Background="#FF2C2C2C" Margin="0,23.5,9.6,0" VerticalAlignment="Top" Height="40" Width="63" Click="Click_redact" HorizontalAlignment="Right">
+                <Button Style="{StaticResource BtnRedac}" Background="#FF2C2C2C" Margin="0,15,9.6,0" VerticalAlignment="Top" Height="40" Width="63" Click="Click_redact" HorizontalAlignment="Right">
                     <Image Source="/Images/redac.png" Width="20" Height="20"/>
                 </Button>
-                <Button Style="{StaticResource BtnRedac}" Background="#FFE42B2B" Margin="0,0,9.6,23.5" VerticalAlignment="Bottom" Height="40" Width="63" Click="Click_remove" HorizontalAlignment="Right">
+                <Button Style="{StaticResource BtnRedac}" Background="#FFE42B2B" Margin="0,0,9.6,15" VerticalAlignment="Bottom" Height="40" Width="63" Click="Click_remove" HorizontalAlignment="Right">
                     <Image Source="/Images/del.png" Width="20" Height="20"/>
                 </Button>
             </Grid>

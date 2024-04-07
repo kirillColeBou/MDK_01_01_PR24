@@ -1,4 +1,5 @@
-﻿using ClassModules;
+﻿using ClassConnection;
+using ClassModules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +42,7 @@ namespace Курсовой_проект_Тепляков.Elements
                 Id_parts.Content = "Рота №" + _companies.Id_companies.ToString();
                 Name_companies.Content = "Название роты: " + _companies.Name_companies;
                 Commander.Content = "Главнокомандующий: " + _companies.Commander;
+                Type_of_troops.Content = "Вид войск: " + Connection.type_of_troops.Find(x => x.Id_type_of_troops == _companies.Type_of_troops).Name_type_of_troops;
                 Date_foundation.Content = "Дата создания: " + _companies.Date_foundation.ToString("dd.MM.yyyy");
                 Date_update_information.Content = "Дата обновления информации: " + _companies.Date_update_information.ToString("dd.MM.yyyy HH:mm:ss");
             }

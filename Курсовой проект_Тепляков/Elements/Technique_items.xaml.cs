@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClassConnection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,7 +31,7 @@ namespace Курсовой_проект_Тепляков.Elements
             if(_technique.Characteristics != null)
             {
                 Name_technique.Content = "Название техники: " + technique.Name_technique;
-                Parts.Content = "Номер части: " + technique.Parts;
+                Companies.Content = "Название роты: " + Connection.companies.Find(x => x.Id_companies == _technique.Companies).Name_companies;
                 Characteristics.Content = "Характеристики: " + technique.Characteristics;
             }
         }

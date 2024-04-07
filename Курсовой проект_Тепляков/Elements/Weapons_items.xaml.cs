@@ -1,4 +1,5 @@
-﻿using ClassModules;
+﻿using ClassConnection;
+using ClassModules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,7 @@ namespace Курсовой_проект_Тепляков.Elements
             {
                 Id_weapons.Content = "Вооружение № " + _weapons.Id_weapons;
                 Name_weapons.Content = "Название вооружения: " + _weapons.Name_weapons;
+                Companies.Content = "Название роты: " + Connection.companies.Find(x => x.Id_companies == _weapons.Companies).Name_companies;
                 Description.Content = "Описание: " + _weapons.Description;
                 Date_update_information.Content = "Дата обновления информации: " + _weapons.Date_update_information.ToString("dd.MM.yyyy HH:mm:ss");
             }
