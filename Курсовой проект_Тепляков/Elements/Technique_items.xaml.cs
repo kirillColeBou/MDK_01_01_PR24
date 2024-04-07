@@ -29,7 +29,7 @@ namespace Курсовой_проект_Тепляков.Elements
             technique = _technique;
             if(_technique.Characteristics != null)
             {
-                Name_technique.Content = "Название техники" + technique.Name_technique;
+                Name_technique.Content = "Название техники: " + technique.Name_technique;
                 Parts.Content = "Номер части: " + technique.Parts;
                 Characteristics.Content = "Характеристики: " + technique.Characteristics;
             }

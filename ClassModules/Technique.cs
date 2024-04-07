@@ -10,7 +10,7 @@ namespace ClassModules
     {
         public int Id_technique { get; set; }
         public string Name_technique { get; set; }
-        public int Parts { get; set; }
+        public int Companies { get; set; }
         public string Characteristics { get; set; }
     }
 }

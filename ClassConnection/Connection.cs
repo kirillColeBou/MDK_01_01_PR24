@@ -144,8 +144,9 @@ namespace ClassConnection
                             Id_companies = Convert.ToInt32(itemsCompanies.GetValue(0)),
                             Name_companies = Convert.ToString(itemsCompanies.GetValue(1)),
                             Commander = Convert.ToString(itemsCompanies.GetValue(2)),
-                            Date_foundation = Convert.ToDateTime(itemsCompanies.GetValue(3)),
-                            Date_update_information = Convert.ToDateTime(itemsCompanies.GetValue(4))
+                            Type_of_troops = Convert.ToInt32(itemsCompanies.GetValue(3)),
+                            Date_foundation = Convert.ToDateTime(itemsCompanies.GetValue(4)),
+                            Date_update_information = Convert.ToDateTime(itemsCompanies.GetValue(5))
                         };
                         companies.Add(newCompanies);
                     }
@@ -180,13 +181,8 @@ namespace ClassConnection
                         {
                             Id_part = Convert.ToInt32(itemsParts.GetValue(0)),
                             Locations = Convert.ToInt32(itemsParts.GetValue(1)),
-                            Type_of_troops = Convert.ToInt32(itemsParts.GetValue(2)),
-                            Weapons = Convert.ToInt32(itemsParts.GetValue(3)),
-                            Companies = Convert.ToInt32(itemsParts.GetValue(4)),
-                            Count_companies = Convert.ToString(itemsParts.GetValue(5)),
-                            Count_technique = Convert.ToString(itemsParts.GetValue(6)),
-                            Count_weapons = Convert.ToString(itemsParts.GetValue(7)),
-                            Date_of_foundation = Convert.ToDateTime(itemsParts.GetValue(8))
+                            Companies = Convert.ToInt32(itemsParts.GetValue(2)),
+                            Date_of_foundation = Convert.ToDateTime(itemsParts.GetValue(3))
                         };
                         parts.Add(newParts);
                     }
@@ -202,7 +198,7 @@ namespace ClassConnection
                         {
                             Id_technique = Convert.ToInt32(itemsTechnique.GetValue(0)),
                             Name_technique = Convert.ToString(itemsTechnique.GetValue(1)),
-                            Parts = Convert.ToInt32(itemsTechnique.GetValue(2)),
+                            Companies = Convert.ToInt32(itemsTechnique.GetValue(2)),
                             Characteristics = Convert.ToString(itemsTechnique.GetValue(3))
                         };
                         technique.Add(newTechnique);
@@ -237,8 +233,9 @@ namespace ClassConnection
                         {
                             Id_weapons = Convert.ToInt32(itemsWeapons.GetValue(0)),
                             Name_weapons = Convert.ToString(itemsWeapons.GetValue(1)),
-                            Description = Convert.ToString(itemsWeapons.GetValue(2)),
-                            Date_update_information = Convert.ToDateTime(itemsWeapons.GetValue(3))
+                            Companies = Convert.ToInt32(itemsWeapons.GetValue(2)),
+                            Description = Convert.ToString(itemsWeapons.GetValue(3)),
+                            Date_update_information = Convert.ToDateTime(itemsWeapons.GetValue(4))
                         };
                         weapons.Add(newWeapons);
                     }
@@ -293,25 +290,15 @@ namespace ClassConnection
                     ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Записи (части)");
                     worksheet.Cells[1, 1].Value = "Код части";
                     worksheet.Cells[1, 2].Value = "Место дислокации";
-                    worksheet.Cells[1, 3].Value = "Вид войск";
-                    worksheet.Cells[1, 4].Value = "Вооружение";
-                    worksheet.Cells[1, 5].Value = "Рота";
-                    worksheet.Cells[1, 6].Value = "Количество рот";
-                    worksheet.Cells[1, 7].Value = "Количество техники";
-                    worksheet.Cells[1, 8].Value = "Количество вооружений";
-                    worksheet.Cells[1, 9].Value = "Дата основания";
+                    worksheet.Cells[1, 3].Value = "Название роты";
+                    worksheet.Cells[1, 4].Value = "Дата основания";
                     int row = 2;
                     foreach (var record in parts)
                     {
                         worksheet.Cells[row, 1].Value = record.Id_part;
                         worksheet.Cells[row, 2].Value = locations.First(x => x.Id_locations == record.Locations).Country;
-                        worksheet.Cells[row, 3].Value = type_of_troops.First(x => x.Id_type_of_troops == record.Type_of_troops).Name_type_of_troops;
-                        worksheet.Cells[row, 4].Value = weapons.First(x => x.Id_weapons == record.Weapons).Name_weapons;
-                        worksheet.Cells[row, 5].Value = companies.First(x => x.Id_companies == record.Companies).Name_companies;
-                        worksheet.Cells[row, 6].Value = record.Count_companies;
-                        worksheet.Cells[row, 7].Value = record.Count_technique;
-                        worksheet.Cells[row, 8].Value = record.Count_weapons;
-                        worksheet.Cells[row, 9].Value = record.Date_of_foundation.ToString("dd.MM.yyyy");
+                        worksheet.Cells[row, 3].Value = companies.First(x => x.Id_companies == record.Companies).Name_companies;
+                        worksheet.Cells[row, 4].Value = record.Date_of_foundation.ToString("dd.MM.yyyy");
                         row++;
                     }
                 }
@@ -328,7 +315,7 @@ namespace ClassConnection
                     foreach (var record in locations)
                     {
                         worksheet.Cells[row, 1].Value = record.Id_locations;
-                        worksheet.Cells[row, 2].Value = record.Country;
+                        worksheet.Cells[row, 2].Value = country.First(x => x.Id == record.Country).Name;
                         worksheet.Cells[row, 3].Value = record.City;
                         worksheet.Cells[row, 4].Value = record.Address;
                         worksheet.Cells[row, 5].Value = record.Square;
@@ -342,16 +329,18 @@ namespace ClassConnection
                     worksheet.Cells[1, 1].Value = "Код роты";
                     worksheet.Cells[1, 2].Value = "Название роты";
                     worksheet.Cells[1, 3].Value = "ФИО главнокомандующего";
-                    worksheet.Cells[1, 4].Value = "Дата создания";
-                    worksheet.Cells[1, 5].Value = "Дата обновления информации";
+                    worksheet.Cells[1, 4].Value = "Вид войск";
+                    worksheet.Cells[1, 5].Value = "Дата создания";
+                    worksheet.Cells[1, 6].Value = "Дата обновления информации";
                     int row = 2;
                     foreach (var record in companies)
                     {
                         worksheet.Cells[row, 1].Value = record.Id_companies;
                         worksheet.Cells[row, 2].Value = record.Name_companies;
                         worksheet.Cells[row, 3].Value = record.Commander;
-                        worksheet.Cells[row, 4].Value = record.Date_foundation.ToString("dd.MM.yyyy");
-                        worksheet.Cells[row, 5].Value = record.Date_update_information.ToString("dd.MM.yyyy");
+                        worksheet.Cells[row, 4].Value = type_of_troops.First(x => x.Id_type_of_troops == record.Type_of_troops).Name_type_of_troops;
+                        worksheet.Cells[row, 5].Value = record.Date_foundation.ToString("dd.MM.yyyy");
+                        worksheet.Cells[row, 6].Value = record.Date_update_information.ToString("dd.MM.yyyy");
                         row++;
                     }
                 }
@@ -360,14 +349,14 @@ namespace ClassConnection
                     ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Записи (техника)");
                     worksheet.Cells[1, 1].Value = "Код техники";
                     worksheet.Cells[1, 2].Value = "Название техники";
-                    worksheet.Cells[1, 3].Value = "Номер части";
+                    worksheet.Cells[1, 3].Value = "Название роты";
                     worksheet.Cells[1, 4].Value = "Характеристики";
                     int row = 2;
                     foreach (var record in technique)
                     {
                         worksheet.Cells[row, 1].Value = record.Id_technique;
                         worksheet.Cells[row, 2].Value = record.Name_technique;
-                        worksheet.Cells[row, 3].Value = parts.First(x => x.Id_part == record.Parts).Id_part;
+                        worksheet.Cells[row, 3].Value = companies.First(x => x.Id_companies == record.Companies).Name_companies;
                         worksheet.Cells[row, 4].Value = record.Characteristics;
                         row++;
                     }
@@ -396,15 +385,17 @@ namespace ClassConnection
                     ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Записи (вооружения)");
                     worksheet.Cells[1, 1].Value = "Код вооружения";
                     worksheet.Cells[1, 2].Value = "Название вооружения";
-                    worksheet.Cells[1, 3].Value = "Описание";
-                    worksheet.Cells[1, 4].Value = "Дата обновления информации";
+                    worksheet.Cells[1, 3].Value = "Название роты";
+                    worksheet.Cells[1, 4].Value = "Описание";
+                    worksheet.Cells[1, 5].Value = "Дата обновления информации";
                     int row = 2;
                     foreach (var record in weapons)
                     {
                         worksheet.Cells[row, 1].Value = record.Id_weapons;
                         worksheet.Cells[row, 2].Value = record.Name_weapons;
-                        worksheet.Cells[row, 3].Value = record.Description;
-                        worksheet.Cells[row, 4].Value = record.Date_update_information.ToString("dd.MM.yyyy");
+                        worksheet.Cells[row, 3].Value = companies.First(x => x.Id_companies == record.Companies).Name_companies;
+                        worksheet.Cells[row, 4].Value = record.Description;
+                        worksheet.Cells[row, 5].Value = record.Date_update_information.ToString("dd.MM.yyyy");
                         row++;
                     }
                 }

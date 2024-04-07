@@ -10,6 +10,7 @@ namespace ClassModules
     {
         public int Id_weapons { get; set; }
         public string Name_weapons { get; set; }
+        public int Companies { get; set; }
         public string Description { get; set; }
         public DateTime Date_update_information { get; set; }
     }
