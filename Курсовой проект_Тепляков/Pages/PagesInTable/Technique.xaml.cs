@@ -32,60 +32,47 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                 Name_technique.Text = _technique.Name_technique;
                 Characteristics.Text = _technique.Characteristics;
             }
-            Main.connect.LoadData(ClassConnection.Connection.Tables.parts);
-            foreach (ClassModules.Parts item in ClassConnection.Connection.parts)
+            Main.connect.LoadData(ClassConnection.Connection.Tables.companies);
+            foreach (var item in ClassConnection.Connection.companies)
             {
-                ComboBoxItem cb_parts = new ComboBoxItem();
-                cb_parts.Tag = item.Id_part;
-                cb_parts.Content = "Часть №" + item.Id_part;
-                if (_technique.Parts == item.Id_part) cb_parts.IsSelected = true;
-                Id_part.Items.Add(cb_parts);
+                ComboBoxItem cb_companies = new ComboBoxItem();
+                cb_companies.Tag = item.Id_companies;
+                cb_companies.Content = item.Name_companies;
+                if (_technique.Companies == item.Id_companies) cb_companies.IsSelected = true;
+                Companies.Items.Add(cb_companies);
             }
         }
 
         private void Click_Technique_Redact(object sender, RoutedEventArgs e)
         {
-            Id_part_border.GotFocus += Id_part_gotFocus;
-            if (Id_part.SelectedItem != null)
+            ClassModules.Companies id_companies_temp;
+            id_companies_temp = ClassConnection.Connection.companies.Find(x => x.Id_companies == Convert.ToInt32(((ComboBoxItem)Companies.SelectedItem).Tag));
+            int id = Main.connect.SetLastId(ClassConnection.Connection.Tables.technique);
+            if (technique.Characteristics == null)
             {
-
-                ClassModules.Parts id_part_temp;
-                id_part_temp = ClassConnection.Connection.parts.Find(x => x.Id_part == Convert.ToInt32(((ComboBoxItem)Id_part.SelectedItem).Tag));
-                int id = Main.connect.SetLastId(ClassConnection.Connection.Tables.technique);
-                if (technique.Characteristics == null)
+                string query = $"Insert Into technique ([Id_technique], [Name_technique], [Companies], [Characteristics]) Values ({id.ToString()}, N'{Name_technique.Text}', '{id_companies_temp.Id_companies.ToString()}', N'{Characteristics.Text}')";
+                var query_apply = Main.connect.Query(query);
+                if (query_apply != null)
                 {
-                    string query = $"Insert Into technique ([Id_technique], [Name_technique], [Parts], [Characteristics]) Values ({id.ToString()}, N'{Name_technique.Text}', '{id_part_temp.Id_part.ToString()}', N'{Characteristics.Text}')";
-                    var query_apply = Main.connect.Query(query);
-                    if (query_apply != null)
-                    {
-                        Main.connect.LoadData(ClassConnection.Connection.Tables.technique);
-                        MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.technique);
-                    }
-                    else MessageBox.Show("Запрос на добавление техники не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    Main.connect.LoadData(ClassConnection.Connection.Tables.technique);
+                    MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.technique);
                 }
-                else
-                {
-                    string query = $"Update technique Set Name_technique = N'{Name_technique.Text}', Parts = '{id_part_temp.Id_part.ToString()}', Characteristics = N'{Characteristics.Text}' Where Id_technique = {technique.Id_technique}";
-                    var query_apply = Main.connect.Query(query);
-                    if (query_apply != null)
-                    {
-                        Main.connect.LoadData(ClassConnection.Connection.Tables.technique);
-                        MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.technique);
-                    }
-                    else MessageBox.Show("Запрос на изменение техники не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-
+                else MessageBox.Show("Запрос на добавление техники не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
-                Id_part_border.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                string query = $"Update technique Set Name_technique = N'{Name_technique.Text}', Companies = '{id_companies_temp.Id_companies.ToString()}', Characteristics = N'{Characteristics.Text}' Where Id_technique = {technique.Id_technique}";
+                var query_apply = Main.connect.Query(query);
+                if (query_apply != null)
+                {
+                    Main.connect.LoadData(ClassConnection.Connection.Tables.technique);
+                    MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.technique);
+                }
+                else MessageBox.Show("Запрос на изменение техники не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
-        private void Click_Cancel_Technique_Redact(object sender, RoutedEventArgs e)
-        {
-            MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main);
-        }
+        private void Click_Cancel_Technique_Redact(object sender, RoutedEventArgs e) => MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main);
 
         private void Click_Remove_Technique_Redact(object sender, RoutedEventArgs e)
         {
@@ -106,8 +93,6 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                 MessageBox.Show(ex.Message);
             }
         }
-
-        private void Id_part_gotFocus(object sender, RoutedEventArgs e) => Id_part_border.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#545454"));
 
         private void TextBox_LostFocus_1(object sender, RoutedEventArgs e)
         {

@@ -22,10 +22,8 @@
                         <Label Content="Техника" Margin="39,28,26,0" Foreground="White" FontSize="30" FontFamily="Yu Gothic UI Semibold" HorizontalContentAlignment="Left" Height="52" VerticalAlignment="Top"/>
                         <Label Content="Название техники" Margin="39,85,26,0" Foreground="White" FontSize="15" FontFamily="Yu Gothic UI Semilight" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
                         <TextBox x:Name="Name_technique" Style="{StaticResource BaseBox}" Height="35" Background="#FFDEDEDE" Margin="40,130,193,0" VerticalAlignment="Top" LostFocus="TextBox_LostFocus_1" GotFocus="TextBox_GotFocus_1"/>
-                        <Label Content="Номер части" Margin="39,175,26,0" Foreground="White" FontSize="15" FontFamily="Yu Gothic UI Semilight" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
-                        <Border x:Name="Id_part_border" Margin="42,220,195,0" Height="34" VerticalAlignment="Top" BorderThickness="1.5">
-                            <ComboBox x:Name="Id_part" FontFamily="Yu Gothic UI Semilight" Margin="2,2,2,2" Height="30" FontSize="14" GotFocus="Id_part_gotFocus"/>
-                        </Border>
+                        <Label Content="Рота" Margin="39,175,26,0" Foreground="White" FontSize="15" FontFamily="Yu Gothic UI Semilight" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
+                        <ComboBox x:Name="Companies" FontFamily="Yu Gothic UI Semilight" Margin="39,220,189,0" HorizontalContentAlignment="Left" VerticalAlignment="Top" Height="30" FontSize="14"/>
                         <Label Content="Характеристики" Margin="39,265,26,0" Foreground="White" FontSize="15" FontFamily="Yu Gothic UI Semilight" HorizontalContentAlignment="Left" Height="29" VerticalAlignment="Top"/>
                         <TextBox x:Name="Characteristics" Style="{StaticResource BaseBox}" Height="35" Background="#FFDEDEDE" Margin="40,310,193,0" VerticalAlignment="Top" LostFocus="TextBox_LostFocus_2" GotFocus="TextBox_GotFocus_2"/>
                         <Button Style="{StaticResource BtnRedac}" Margin="0,0,136.2,24" VerticalAlignment="Bottom" Height="40" Width="105" Click="Click_Technique_Redact" HorizontalAlignment="Right">

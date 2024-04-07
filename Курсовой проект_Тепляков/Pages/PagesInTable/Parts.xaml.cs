@@ -30,14 +30,8 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
         {
             InitializeComponent();
             parts = _parts;
-            if (Count_companies.Text != null)
-            {
-                Count_companies.Text = _parts.Count_companies;
-                Count_technique.Text = _parts.Count_technique;
-                Count_weapons.Text = _parts.Count_weapons;
-            }
             Main.connect.LoadData(ClassConnection.Connection.Tables.locations);
-            foreach (ClassModules.Locations item in ClassConnection.Connection.locations)
+            foreach (var item in ClassConnection.Connection.locations)
             {
                 ComboBoxItem cb_locations = new ComboBoxItem();
                 cb_locations.Tag = item.Id_locations;
@@ -45,30 +39,12 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                 if (_parts.Locations == item.Id_locations) cb_locations.IsSelected = true;
                 Locations.Items.Add(cb_locations);
             }
-            Main.connect.LoadData(ClassConnection.Connection.Tables.type_of_troops);
-            foreach (ClassModules.Type_of_troops item in ClassConnection.Connection.type_of_troops)
-            {
-                ComboBoxItem cb_typeOfTroops = new ComboBoxItem();
-                cb_typeOfTroops.Tag = item.Id_type_of_troops;
-                cb_typeOfTroops.Content = item.Name_type_of_troops;
-                if (_parts.Type_of_troops == item.Id_type_of_troops) cb_typeOfTroops.IsSelected = true;
-                Type_of_troops.Items.Add(cb_typeOfTroops);
-            }
-            Main.connect.LoadData(ClassConnection.Connection.Tables.weapons);
-            foreach (ClassModules.Weapons item in ClassConnection.Connection.weapons)
-            {
-                ComboBoxItem cb_weapons = new ComboBoxItem();
-                cb_weapons.Tag = item.Id_weapons;
-                cb_weapons.Content = item.Name_weapons;
-                if (_parts.Weapons == item.Id_weapons) cb_weapons.IsSelected = true;
-                Weapons.Items.Add(cb_weapons);
-            }
             Main.connect.LoadData(ClassConnection.Connection.Tables.companies);
-            foreach (ClassModules.Companies item in ClassConnection.Connection.companies)
+            foreach (var item in ClassConnection.Connection.companies)
             {
                 ComboBoxItem cb_companies = new ComboBoxItem();
                 cb_companies.Tag = item.Id_companies;
-                cb_companies.Content = "Рота №" + item.Id_companies + "; " + "Главнокомандующий: " + item.Commander;
+                cb_companies.Content = item.Name_companies;
                 if (_parts.Companies == item.Id_companies) cb_companies.IsSelected = true;
                 Companies.Items.Add(cb_companies);
             }
@@ -76,61 +52,40 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
 
         private void Click_Parts_Redact(object sender, RoutedEventArgs e)
         {
-            Id_locations_border.GotFocus += Id_locations_gotFocus;
-            Id_typeOfTroops_border.GotFocus += Id_typeOfTroops_gotFocus;
-            Id_weapons_border.GotFocus += Id_companies_gotFocus;
-            Id_companies_border.GotFocus += Id_companies_gotFocus;
             if (Locations.SelectedItem != null)
             {
-                if (Type_of_troops.SelectedItem != null)
+                if (Companies.SelectedItem != null)
                 {
-                    if (Weapons.SelectedItem != null)
+                    ClassModules.Locations id_locations_temp;
+                    ClassModules.Companies id_companies_temp;
+                    id_locations_temp = ClassConnection.Connection.locations.Find(x => x.Id_locations == Convert.ToInt32(((ComboBoxItem)Locations.SelectedItem).Tag));
+                    id_companies_temp = ClassConnection.Connection.companies.Find(x => x.Id_companies == Convert.ToInt32(((ComboBoxItem)Companies.SelectedItem).Tag));
+                    int id = Main.connect.SetLastId(ClassConnection.Connection.Tables.parts);
+                    if (parts.Companies == 0)
                     {
-                        if (Companies.SelectedItem != null)
+                        string query = $"Insert Into parts ([Id_part], [Locations], [Companies], [Date_of_foundation])" +
+                            $"Values ({id.ToString()}, {id_locations_temp.Id_locations.ToString()}, {id_companies_temp.Id_companies.ToString()}, N'{DateTime.Now.ToString("dd.MM.yyyy")}')";
+                        var query_apply = Main.connect.Query(query);
+                        if (query_apply != null)
                         {
-                            ClassModules.Locations id_locations_temp;
-                            ClassModules.Type_of_troops id_typeOfTroops_temp;
-                            ClassModules.Weapons id_weapons_temp;
-                            ClassModules.Companies id_companies_temp;
-                            id_locations_temp = ClassConnection.Connection.locations.Find(x => x.Id_locations == Convert.ToInt32(((ComboBoxItem)Locations.SelectedItem).Tag));
-                            id_typeOfTroops_temp = ClassConnection.Connection.type_of_troops.Find(x => x.Id_type_of_troops == Convert.ToInt32(((ComboBoxItem)Type_of_troops.SelectedItem).Tag));
-                            id_weapons_temp = ClassConnection.Connection.weapons.Find(x => x.Id_weapons == Convert.ToInt32(((ComboBoxItem)Weapons.SelectedItem).Tag));
-                            id_companies_temp = ClassConnection.Connection.companies.Find(x => x.Id_companies == Convert.ToInt32(((ComboBoxItem)Companies.SelectedItem).Tag));
-                            int id = Main.connect.SetLastId(ClassConnection.Connection.Tables.parts);
-                            if (parts.Count_weapons == null)
-                            {
-                                string query = $"Insert Into parts ([Id_part], [Locations], [Type_of_troops], [Weapons], [Companies], [Count_companies], [Count_technique], [Count_weapons], [Date_of_foundation])" +
-                                    $"Values ({id.ToString()}, {id_locations_temp.Id_locations.ToString()}, {id_typeOfTroops_temp.Id_type_of_troops.ToString()}, {id_weapons_temp.Id_weapons.ToString()}," +
-                                    $" {id_companies_temp.Id_companies.ToString()}, N'{Count_companies.Text}', N'{Count_technique.Text}', N'{Count_weapons.Text}', N'{DateTime.Now.ToString("dd.MM.yyyy")}')";
-                                var query_apply = Main.connect.Query(query);
-                                if (query_apply != null)
-                                {
-                                    Main.connect.LoadData(ClassConnection.Connection.Tables.parts);
-                                    MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.parts);
-                                }
-                                else MessageBox.Show("Запрос на добавление части не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                            }
-                            else
-                            {
-                                string query = $"Update parts Set Locations = '{id_locations_temp.Id_locations.ToString()}', Type_of_troops = '{id_typeOfTroops_temp.Id_type_of_troops.ToString()}'," +
-                                    $" Weapons = '{id_weapons_temp.Id_weapons.ToString()}', Companies = '{id_companies_temp.Id_companies.ToString()}', Count_companies = N'{Count_companies.Text}'," + "" +
-                                    $" Count_technique = N'{Count_technique.Text}', Count_weapons = N'{Count_weapons.Text}' Where Id_part = {parts.Id_part}";
-                                var query_apply = Main.connect.Query(query);
-                                if (query_apply != null)
-                                {
-                                    Main.connect.LoadData(ClassConnection.Connection.Tables.parts);
-                                    MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.parts);
-                                }
-                                else MessageBox.Show("Запрос на изменение части не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                            }
+                            Main.connect.LoadData(ClassConnection.Connection.Tables.parts);
+                            MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.parts);
                         }
-                        else Id_companies_border.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                        else MessageBox.Show("Запрос на добавление части не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
-                    else Id_weapons_border.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
+                    else
+                    {
+                        string query = $"Update parts Set Locations = '{id_locations_temp.Id_locations.ToString()}', Companies = '{id_companies_temp.Id_companies.ToString()}' Where Id_part = {parts.Id_part}";
+                        var query_apply = Main.connect.Query(query);
+                        if (query_apply != null)
+                        {
+                            Main.connect.LoadData(ClassConnection.Connection.Tables.parts);
+                            MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.parts);
+                        }
+                        else MessageBox.Show("Запрос на изменение части не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
                 }
-                else Id_typeOfTroops_border.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
             }
-            else Id_locations_border.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
         }
 
         private void Click_Cancel_Parts_Redact(object sender, RoutedEventArgs e) => MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main);
@@ -152,122 +107,6 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void Id_locations_gotFocus(object sender, RoutedEventArgs e) => Id_locations_border.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#545454"));
-
-        private void Id_typeOfTroops_gotFocus(object sender, RoutedEventArgs e) => Id_typeOfTroops_border.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#545454"));
-
-        private void Id_weapons_gotFocus(object sender, RoutedEventArgs e) => Id_weapons_border.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#545454"));
-
-        private void Id_companies_gotFocus(object sender, RoutedEventArgs e) => Id_companies_border.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#545454"));
-
-        private void TextBox_PreviewTextInput_1(object sender, TextCompositionEventArgs e)
-        {
-            Regex regex = new Regex(@"^[0-9\s]*$");
-            if (!regex.IsMatch(e.Text))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void TextBox_LostFocus_1(object sender, RoutedEventArgs e)
-        {
-            TextBox textBox = (TextBox)sender;
-            string[] words = textBox.Text.Split(' ');
-            if (words.Any(word => word.Length == 0))
-            {
-                textBox.Text = "Ошибка: введите значение";
-                Count_companies.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
-            }
-        }
-
-        private void TextBox_GotFocus_1(object sender, RoutedEventArgs e)
-        {
-            TextBox textBox = (TextBox)sender;
-            if (textBox.Text.StartsWith("Ошибка:"))
-            {
-                textBox.Text = "";
-                ColorAnimation animation = new ColorAnimation();
-                animation.From = (Color)ColorConverter.ConvertFromString("#FB3F51");
-                animation.To = Colors.Transparent;
-                animation.Duration = new Duration(TimeSpan.FromSeconds(2));
-                SolidColorBrush brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
-                brush.BeginAnimation(SolidColorBrush.ColorProperty, animation);
-                Count_companies.BorderBrush = brush;
-            }
-        }
-
-        private void TextBox_PreviewTextInput_2(object sender, TextCompositionEventArgs e)
-        {
-            Regex regex = new Regex(@"^[0-9\s]*$");
-            if (!regex.IsMatch(e.Text))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void TextBox_LostFocus_2(object sender, RoutedEventArgs e)
-        {
-            TextBox textBox = (TextBox)sender;
-            string[] words = textBox.Text.Split(' ');
-            if (words.Any(word => word.Length == 0))
-            {
-                textBox.Text = "Ошибка: введите значение";
-                Count_technique.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
-            }
-        }
-
-        private void TextBox_GotFocus_2(object sender, RoutedEventArgs e)
-        {
-            TextBox textBox = (TextBox)sender;
-            if (textBox.Text.StartsWith("Ошибка:"))
-            {
-                textBox.Text = "";
-                ColorAnimation animation = new ColorAnimation();
-                animation.From = (Color)ColorConverter.ConvertFromString("#FB3F51");
-                animation.To = Colors.Transparent;
-                animation.Duration = new Duration(TimeSpan.FromSeconds(2));
-                SolidColorBrush brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
-                brush.BeginAnimation(SolidColorBrush.ColorProperty, animation);
-                Count_technique.BorderBrush = brush;
-            }
-        }
-
-        private void TextBox_PreviewTextInput_3(object sender, TextCompositionEventArgs e)
-        {
-            Regex regex = new Regex(@"^[0-9\s]*$");
-            if (!regex.IsMatch(e.Text))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void TextBox_LostFocus_3(object sender, RoutedEventArgs e)
-        {
-            TextBox textBox = (TextBox)sender;
-            string[] words = textBox.Text.Split(' ');
-            if (words.Any(word => word.Length == 0))
-            {
-                textBox.Text = "Ошибка: введите значение";
-                Count_weapons.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
-            }
-        }
-
-        private void TextBox_GotFocus_3(object sender, RoutedEventArgs e)
-        {
-            TextBox textBox = (TextBox)sender;
-            if (textBox.Text.StartsWith("Ошибка:"))
-            {
-                textBox.Text = "";
-                ColorAnimation animation = new ColorAnimation();
-                animation.From = (Color)ColorConverter.ConvertFromString("#FB3F51");
-                animation.To = Colors.Transparent;
-                animation.Duration = new Duration(TimeSpan.FromSeconds(2));
-                SolidColorBrush brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3F51"));
-                brush.BeginAnimation(SolidColorBrush.ColorProperty, animation);
-                Count_weapons.BorderBrush = brush;
             }
         }
     }

@@ -34,14 +34,25 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                 Name_weapons.Text = _weapons.Name_weapons;
                 Description.Text = _weapons.Description;
             }
+            Main.connect.LoadData(ClassConnection.Connection.Tables.companies);
+            foreach (var item in ClassConnection.Connection.companies)
+            {
+                ComboBoxItem cb_companies = new ComboBoxItem();
+                cb_companies.Tag = item.Id_companies;
+                cb_companies.Content = item.Name_companies;
+                if (_weapons.Companies == item.Id_companies) cb_companies.IsSelected = true;
+                Companies.Items.Add(cb_companies);
+            }
         }
 
         private void Click_Weapons_Redact(object sender, RoutedEventArgs e)
         {
+            ClassModules.Companies id_companies_temp;
+            id_companies_temp = ClassConnection.Connection.companies.Find(x => x.Id_companies == Convert.ToInt32(((ComboBoxItem)Companies.SelectedItem).Tag));
             int id = Main.connect.SetLastId(ClassConnection.Connection.Tables.weapons);
             if (weapons.Name_weapons == null)
             {
-                string query = $"Insert Into weapons ([Id_weapons], [Name_weapons], [Description], [Date_update_information]) Values ({id.ToString()}, N'{Name_weapons.Text}', N'{Description.Text}', N'{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}')";
+                string query = $"Insert Into weapons ([Id_weapons], [Name_weapons], [Companies], [Description], [Date_update_information]) Values ({id.ToString()}, N'{Name_weapons.Text}', N'{id_companies_temp.Id_companies.ToString()}', N'{Description.Text}', N'{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}')";
                 var query_apply = Main.connect.Query(query);
                 if (query_apply != null)
                 {
@@ -52,7 +63,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             }
             else
             {
-                string query = $"Update weapons Set Name_weapons = N'{Name_weapons.Text}', Description = N'{Description.Text}', Date_update_information = N'{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}' Where Id_weapons = {weapons.Id_weapons}";
+                string query = $"Update weapons Set Name_weapons = N'{Name_weapons.Text}', Companies = N'{id_companies_temp.Id_companies.ToString()}', Description = N'{Description.Text}', Date_update_information = N'{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}' Where Id_weapons = {weapons.Id_weapons}";
                 var query_apply = Main.connect.Query(query);
                 if (query_apply != null)
                 {
