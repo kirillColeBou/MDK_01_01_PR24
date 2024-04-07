@@ -46,6 +46,7 @@ namespace Курсовой_проект_Тепляков.Pages
                 if (WeaponsExport.IsChecked == true) table[5] = "weapons";
             }
             ClassConnection.Connection.Export(table, saveFileDialog.FileName);
+            System.Windows.MessageBox.Show($"Экспорт выполнен.\nФайл находиться по пути: {saveFileDialog.FileName}.", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();
         }
     }
