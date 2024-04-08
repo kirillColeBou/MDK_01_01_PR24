@@ -455,58 +455,78 @@ namespace Курсовой_проект_Тепляков.Pages
                 {
                     parrent.Children.Clear();
                     var parts = Connection.parts.FindAll(x => x.Id_part.ToString() == Search.Text);
-                    var country = Connection.country.FindAll(x => x.Name.StartsWith(Search.Text.ToLower().ToUpper()));
-                    var companies = Connection.companies.FindAll(x => x.Name_companies.StartsWith(Search.Text));
                     foreach (var itemSearch in parts)
                     {
                         parrent.Children.Add(new Elements.Parts_items(itemSearch));
                     }
-                    foreach (var itemCountry in country)
+                    var country = Connection.country.FindAll(x => x.Name.StartsWith(Search.Text));
+                    var countryIds = country.Select(c => c.Id).ToList();
+                    var locations = Connection.locations.Where(l => countryIds.Contains(l.Country)).ToList();
+                    var locationIds = locations.Select(l => l.Id_locations).ToList();
+                    var searchPartsByCountry = Connection.parts.Where(p => locationIds.Contains(p.Locations)).ToList();
+                    foreach (var itemSearch in searchPartsByCountry)
                     {
-                        var location = Connection.locations.FindAll(x => x.Country == itemCountry.Id);
-                        foreach (var itemLocation in location)
-                        {
-                            var searchParts = Connection.parts.FindAll(x => x.Locations == itemLocation.Id_locations);
-                            foreach (var itemSearch in searchParts)
-                            {
-                                parrent.Children.Add(new Elements.Parts_items(itemSearch));
-                            }
-                        }
+                        parrent.Children.Add(new Elements.Parts_items(itemSearch));
                     }
-                    foreach (var itemCompanies in companies)
+                    var companies = Connection.companies.FindAll(x => x.Name_companies.StartsWith(Search.Text));
+                    var companyIds = companies.Select(c => c.Id_companies).ToList();
+                    var searchPartsByCompany = Connection.parts.Where(p => companyIds.Contains(p.Companies)).ToList();
+                    foreach (var itemSearch in searchPartsByCompany)
                     {
-                        var searchParts = Connection.parts.FindAll(x => x.Companies == itemCompanies.Id_companies);
-                        foreach (var itemSearch in searchParts)
-                        {
-                            parrent.Children.Add(new Elements.Parts_items(itemSearch));
-                        }
+                        parrent.Children.Add(new Elements.Parts_items(itemSearch));
                     }
                 }
                 else if (page_select == page_main.locations)
                 {
                     parrent.Children.Clear();
-
+                    var country = Connection.country.FindAll(x => x.Name.StartsWith(Search.Text));
+                    var countryIds = country.Select(c => c.Id).ToList();
+                    var locationsByCountry = Connection.locations.Where(l => countryIds.Contains(l.Country)).ToList();
+                    foreach (var itemSearch in locationsByCountry)
+                    {
+                        parrent.Children.Add(new Elements.Locations_items(itemSearch));
+                    }
+                    var locationsByCity = Connection.locations.FindAll(x => x.City.StartsWith(Search.Text));
+                    foreach (var itemSearch in locationsByCity)
+                    {
+                        parrent.Children.Add(new Elements.Locations_items(itemSearch));
+                    }
+                    var locationsByAddress = Connection.locations.FindAll(x => x.Address.StartsWith(Search.Text));
+                    foreach (var itemSearch in locationsByAddress)
+                    {
+                        parrent.Children.Add(new Elements.Locations_items(itemSearch));
+                    }
+                    var locationsBySquare = Connection.locations.FindAll(x => x.Square.ToString().StartsWith(Search.Text));
+                    foreach (var itemSearch in locationsBySquare)
+                    {
+                        parrent.Children.Add(new Elements.Locations_items(itemSearch));
+                    }
+                    var locationsByCountStructures = Connection.locations.FindAll(x => x.Count_structures.ToString().StartsWith(Search.Text));
+                    foreach (var itemSearch in locationsByCountStructures)
+                    {
+                        parrent.Children.Add(new Elements.Locations_items(itemSearch));
+                    }
                 }
-                else if (page_select == page_main.companies)
-                {
-                    parrent.Children.Clear();
+                //else if (page_select == page_main.companies)
+                //{
+                //    parrent.Children.Clear();
 
-                }
-                else if (page_select == page_main.technique)
-                {
-                    parrent.Children.Clear();
+                //}
+                //else if (page_select == page_main.technique)
+                //{
+                //    parrent.Children.Clear();
 
-                }
-                else if (page_select == page_main.type_of_troops)
-                {
-                    parrent.Children.Clear();
+                //}
+                //else if (page_select == page_main.type_of_troops)
+                //{
+                //    parrent.Children.Clear();
 
-                }
-                else if (page_select == page_main.weapons)
-                {
-                    parrent.Children.Clear();
+                //}
+                //else if (page_select == page_main.weapons)
+                //{
+                //    parrent.Children.Clear();
 
-                }
+                //}
             }
             else
             {
@@ -520,26 +540,26 @@ namespace Курсовой_проект_Тепляков.Pages
                     parrent.Children.Clear();
                     LoadLocations();
                 }
-                else if (page_select == page_main.companies)
-                {
-                    parrent.Children.Clear();
-                    LoadCompanies();
-                }
-                else if (page_select == page_main.technique)
-                {
-                    parrent.Children.Clear();
-                    LoadTechnique();
-                }
-                else if (page_select == page_main.type_of_troops) 
-                {
-                    parrent.Children.Clear();
-                    LoadTypeOfTroops(); 
-                }
-                else if (page_select == page_main.weapons) 
-                {
-                    parrent.Children.Clear();
-                    LoadWeapons();
-                } 
+                //else if (page_select == page_main.companies)
+                //{
+                //    parrent.Children.Clear();
+                //    LoadCompanies();
+                //}
+                //else if (page_select == page_main.technique)
+                //{
+                //    parrent.Children.Clear();
+                //    LoadTechnique();
+                //}
+                //else if (page_select == page_main.type_of_troops) 
+                //{
+                //    parrent.Children.Clear();
+                //    LoadTypeOfTroops(); 
+                //}
+                //else if (page_select == page_main.weapons) 
+                //{
+                //    parrent.Children.Clear();
+                //    LoadWeapons();
+                //} 
             }
         }
 
