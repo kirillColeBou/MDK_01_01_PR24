@@ -550,7 +550,21 @@ namespace Курсовой_проект_Тепляков.Pages
                 else if (page_select == page_main.type_of_troops)
                 {
                     parrent.Children.Clear();
-
+                    var typeOfTroopByName = Connection.type_of_troops.FindAll(x => x.Name_type_of_troops.StartsWith(Search.Text));
+                    foreach (var itemSearch in typeOfTroopByName)
+                    {
+                        parrent.Children.Add(new Elements.TypeOfTroops_items(itemSearch));
+                    }
+                    var typeOfTroopByDescription = Connection.type_of_troops.FindAll(x => x.Description.StartsWith(Search.Text));
+                    foreach (var itemSearch in typeOfTroopByDescription)
+                    {
+                        parrent.Children.Add(new Elements.TypeOfTroops_items(itemSearch));
+                    }
+                    var techniqueByCountServiceman = Connection.type_of_troops.FindAll(x => x.Count_serviceman.ToString().StartsWith(Search.Text));
+                    foreach (var itemSearch in techniqueByCountServiceman)
+                    {
+                        parrent.Children.Add(new Elements.TypeOfTroops_items(itemSearch));
+                    }
                 }
                 else if (page_select == page_main.weapons)
                 {
