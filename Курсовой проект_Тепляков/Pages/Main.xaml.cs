@@ -529,7 +529,23 @@ namespace Курсовой_проект_Тепляков.Pages
                 else if (page_select == page_main.technique)
                 {
                     parrent.Children.Clear();
-
+                    var techniqueByName = Connection.technique.FindAll(x => x.Name_technique.StartsWith(Search.Text));
+                    foreach (var itemSearch in techniqueByName)
+                    {
+                        parrent.Children.Add(new Elements.Technique_items(itemSearch));
+                    }
+                    var companies = Connection.companies.FindAll(x => x.Name_companies.StartsWith(Search.Text));
+                    var companiesIds = companies.Select(t => t.Id_companies).ToList();
+                    var tehcniqueByCompanies = Connection.technique.Where(c => companiesIds.Contains(c.Companies)).ToList();
+                    foreach (var itemSearch in tehcniqueByCompanies)
+                    {
+                        parrent.Children.Add(new Elements.Technique_items(itemSearch));
+                    }
+                    var techniqueByCharacteristics = Connection.technique.FindAll(x => x.Characteristics.StartsWith(Search.Text));
+                    foreach (var itemSearch in techniqueByCharacteristics)
+                    {
+                        parrent.Children.Add(new Elements.Technique_items(itemSearch));
+                    }
                 }
                 else if (page_select == page_main.type_of_troops)
                 {
