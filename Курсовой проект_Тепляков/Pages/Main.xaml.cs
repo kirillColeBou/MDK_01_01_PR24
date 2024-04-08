@@ -49,14 +49,13 @@ namespace Курсовой_проект_Тепляков.Pages
         {
             if (connectApply == true)
             {
-                connect = new Connection();
-                connect.LoadData(Connection.Tables.companies);
-                connect.LoadData(Connection.Tables.locations);
-                connect.LoadData(Connection.Tables.parts);
-                connect.LoadData(Connection.Tables.technique);
-                connect.LoadData(Connection.Tables.type_of_troops);
-                connect.LoadData(Connection.Tables.weapons);
-                connect.LoadData(Connection.Tables.country);
+                Login.connection.LoadData(Connection.Tables.companies);
+                Login.connection.LoadData(Connection.Tables.locations);
+                Login.connection.LoadData(Connection.Tables.parts);
+                Login.connection.LoadData(Connection.Tables.technique);
+                Login.connection.LoadData(Connection.Tables.type_of_troops);
+                Login.connection.LoadData(Connection.Tables.weapons);
+                Login.connection.LoadData(Connection.Tables.country);
             } 
         }
 
@@ -88,7 +87,6 @@ namespace Курсовой_проект_Тепляков.Pages
         {
             Dispatcher.InvokeAsync(async () =>
             {
-                connect.LoadData(ClassConnection.Connection.Tables.parts);
                 foreach (ClassModules.Parts parts_items in ClassConnection.Connection.parts)
                 {
                     if (page_select == page_main.parts)
@@ -146,7 +144,6 @@ namespace Курсовой_проект_Тепляков.Pages
         {
             Dispatcher.InvokeAsync(async () =>
             {
-                connect.LoadData(ClassConnection.Connection.Tables.locations);
                 foreach (ClassModules.Locations locations_items in ClassConnection.Connection.locations)
                 {
                     if (page_select == page_main.locations)
@@ -204,7 +201,6 @@ namespace Курсовой_проект_Тепляков.Pages
         {
             Dispatcher.InvokeAsync(async () =>
             {
-                connect.LoadData(ClassConnection.Connection.Tables.companies);
                 foreach (ClassModules.Companies companies_items in ClassConnection.Connection.companies)
                 {
                     if (page_select == page_main.companies)
@@ -262,7 +258,6 @@ namespace Курсовой_проект_Тепляков.Pages
         {
             Dispatcher.InvokeAsync(async () =>
             {
-                connect.LoadData(ClassConnection.Connection.Tables.technique);
                 foreach (ClassModules.Technique technique_items in ClassConnection.Connection.technique)
                 {
                     if (page_select == page_main.technique)
@@ -320,7 +315,6 @@ namespace Курсовой_проект_Тепляков.Pages
         {
             Dispatcher.InvokeAsync(async () =>
             {
-                connect.LoadData(ClassConnection.Connection.Tables.type_of_troops);
                 foreach (ClassModules.Type_of_troops type_of_troops_items in ClassConnection.Connection.type_of_troops)
                 {
                     if (page_select == page_main.type_of_troops)
@@ -378,7 +372,6 @@ namespace Курсовой_проект_Тепляков.Pages
         {
             Dispatcher.InvokeAsync(async () =>
             {
-                connect.LoadData(ClassConnection.Connection.Tables.weapons);
                 foreach (ClassModules.Weapons weapons_items in ClassConnection.Connection.weapons)
                 {
                     if (page_select == page_main.weapons)
@@ -507,59 +500,80 @@ namespace Курсовой_проект_Тепляков.Pages
                         parrent.Children.Add(new Elements.Locations_items(itemSearch));
                     }
                 }
-                //else if (page_select == page_main.companies)
-                //{
-                //    parrent.Children.Clear();
+                else if (page_select == page_main.companies)
+                {
+                    parrent.Children.Clear();
+                    var companiesByIds = Connection.companies.FindAll(x => x.Id_companies.ToString().StartsWith(Search.Text));
+                    foreach (var itemSearch in companiesByIds)
+                    {
+                        parrent.Children.Add(new Elements.Companies_items(itemSearch));
+                    }
+                    var companiesByName = Connection.companies.FindAll(x => x.Name_companies.StartsWith(Search.Text));
+                    foreach (var itemSearch in companiesByName)
+                    {
+                        parrent.Children.Add(new Elements.Companies_items(itemSearch));
+                    }
+                    var companiesByCommander = Connection.companies.FindAll(x => x.Commander.StartsWith(Search.Text));
+                    foreach (var itemSearch in companiesByCommander)
+                    {
+                        parrent.Children.Add(new Elements.Companies_items(itemSearch));
+                    }
+                    var typeOfTroops = Connection.type_of_troops.FindAll(x => x.Name_type_of_troops.StartsWith(Search.Text));
+                    var typeOfTroopsIds = typeOfTroops.Select(t => t.Id_type_of_troops).ToList();
+                    var companiesByTypeOfTroops = Connection.companies.Where(c => typeOfTroopsIds.Contains(c.Type_of_troops)).ToList();
+                    foreach (var itemSearch in companiesByTypeOfTroops)
+                    {
+                        parrent.Children.Add(new Elements.Companies_items(itemSearch));
+                    }
+                }
+                else if (page_select == page_main.technique)
+                {
+                    parrent.Children.Clear();
 
-                //}
-                //else if (page_select == page_main.technique)
-                //{
-                //    parrent.Children.Clear();
+                }
+                else if (page_select == page_main.type_of_troops)
+                {
+                    parrent.Children.Clear();
 
-                //}
-                //else if (page_select == page_main.type_of_troops)
-                //{
-                //    parrent.Children.Clear();
+                }
+                else if (page_select == page_main.weapons)
+                {
+                    parrent.Children.Clear();
 
-                //}
-                //else if (page_select == page_main.weapons)
-                //{
-                //    parrent.Children.Clear();
-
-                //}
+                }
             }
             else
             {
                 if (page_select == page_main.parts)
                 {
-                    parrent.Children.Clear();
+                    if(parrent != null) parrent.Children.Clear();
                     LoadParts();
                 }
                 else if (page_select == page_main.locations)
                 {
-                    parrent.Children.Clear();
+                    if (parrent != null) parrent.Children.Clear();
                     LoadLocations();
                 }
-                //else if (page_select == page_main.companies)
-                //{
-                //    parrent.Children.Clear();
-                //    LoadCompanies();
-                //}
-                //else if (page_select == page_main.technique)
-                //{
-                //    parrent.Children.Clear();
-                //    LoadTechnique();
-                //}
-                //else if (page_select == page_main.type_of_troops) 
-                //{
-                //    parrent.Children.Clear();
-                //    LoadTypeOfTroops(); 
-                //}
-                //else if (page_select == page_main.weapons) 
-                //{
-                //    parrent.Children.Clear();
-                //    LoadWeapons();
-                //} 
+                else if (page_select == page_main.companies)
+                {
+                    if (parrent != null) parrent.Children.Clear();
+                    LoadCompanies();
+                }
+                else if (page_select == page_main.technique)
+                {
+                    if (parrent != null) parrent.Children.Clear();
+                    LoadTechnique();
+                }
+                else if (page_select == page_main.type_of_troops)
+                {
+                    if (parrent != null) parrent.Children.Clear();
+                    LoadTypeOfTroops();
+                }
+                else if (page_select == page_main.weapons)
+                {
+                    if (parrent != null) parrent.Children.Clear();
+                    LoadWeapons();
+                }
             }
         }
 

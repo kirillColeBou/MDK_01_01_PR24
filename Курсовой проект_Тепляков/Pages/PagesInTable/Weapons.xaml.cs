@@ -34,7 +34,6 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                 Name_weapons.Text = _weapons.Name_weapons;
                 Description.Text = _weapons.Description;
             }
-            Main.connect.LoadData(ClassConnection.Connection.Tables.companies);
             foreach (var item in ClassConnection.Connection.companies)
             {
                 ComboBoxItem cb_companies = new ComboBoxItem();

@@ -36,7 +36,6 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                 Square.Text = _locations.Square.ToString();
                 Count_structures.Text = _locations.Count_structures.ToString();
             }
-            Main.connect.LoadData(ClassConnection.Connection.Tables.country);
             foreach (var item in ClassConnection.Connection.country)
             {
                 ComboBoxItem cb_country = new ComboBoxItem();

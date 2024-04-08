@@ -34,7 +34,6 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                 Name_companies.Text = _companies.Name_companies;
                 Commander.Text = _companies.Commander;
             }
-            Main.connect.LoadData(ClassConnection.Connection.Tables.type_of_troops);
             foreach (var item in ClassConnection.Connection.type_of_troops)
             {
                 ComboBoxItem cb_typeOfTroops = new ComboBoxItem();

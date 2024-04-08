@@ -21,7 +21,7 @@ namespace Курсовой_проект_Тепляков.Pages.Login_Regin
     /// </summary>
     public partial class Login : Page
     {
-        ClassConnection.Connection connection;
+        public static ClassConnection.Connection connection;
         public static string[] UserInfo = new string[2];
 
         public Login()
