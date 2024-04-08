@@ -31,17 +31,15 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
         {
             InitializeComponent();
             parts = _parts;
-            Main.connect.LoadData(ClassConnection.Connection.Tables.locations);
-            foreach (var item in ClassConnection.Connection.locations)
+            foreach (var item in Connection.locations)
             {
                 ComboBoxItem cb_locations = new ComboBoxItem();
                 cb_locations.Tag = item.Id_locations;
-                cb_locations.Content = "Страна: " + Connection.country.Find(x => x.Id == item.Id_locations).Name;
+                cb_locations.Content = "Город: " + item.City;
                 if (_parts.Locations == item.Id_locations) cb_locations.IsSelected = true;
                 Locations.Items.Add(cb_locations);
             }
-            Main.connect.LoadData(ClassConnection.Connection.Tables.companies);
-            foreach (var item in ClassConnection.Connection.companies)
+            foreach (var item in Connection.companies)
             {
                 ComboBoxItem cb_companies = new ComboBoxItem();
                 cb_companies.Tag = item.Id_companies;

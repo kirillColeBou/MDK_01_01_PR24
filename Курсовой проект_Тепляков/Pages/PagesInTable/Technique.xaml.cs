@@ -32,7 +32,6 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                 Name_technique.Text = _technique.Name_technique;
                 Characteristics.Text = _technique.Characteristics;
             }
-            Main.connect.LoadData(ClassConnection.Connection.Tables.companies);
             foreach (var item in ClassConnection.Connection.companies)
             {
                 ComboBoxItem cb_companies = new ComboBoxItem();

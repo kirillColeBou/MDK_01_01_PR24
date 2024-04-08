@@ -84,8 +84,33 @@ namespace Курсовой_проект_Тепляков.Pages
             MainWindow.init.frame.BeginAnimation(Frame.OpacityProperty, opgridAnimation);
         }
 
+        private void LoadParts()
+        {
+            Dispatcher.InvokeAsync(async () =>
+            {
+                connect.LoadData(ClassConnection.Connection.Tables.parts);
+                foreach (ClassModules.Parts parts_items in ClassConnection.Connection.parts)
+                {
+                    if (page_select == page_main.parts)
+                    {
+                        parrent.Children.Add(new Elements.Parts_items(parts_items));
+                        await Task.Delay(90);
+                    }
+                }
+                if (page_select == page_main.parts)
+                {
+                    if (Login.UserInfo[1] == "admin")
+                    {
+                        var add = new Pages.PagesInTable.Parts(new ClassModules.Parts());
+                        parrent.Children.Add(new Elements.Add(add));
+                    }
+                }
+            });
+        }
+
         private void Click_Parts(object sender, RoutedEventArgs e)
         {
+            Search.IsEnabled = true;
             parts_itms.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF"));
             locations_itms.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF2C2C2C"));
             companies_itms.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF2C2C2C"));
@@ -109,26 +134,7 @@ namespace Курсовой_проект_Тепляков.Pages
                     opgriAnimation.Duration = TimeSpan.FromSeconds(0.2);
                     opgriAnimation.Completed += delegate
                     {
-                        Dispatcher.InvokeAsync(async () =>
-                        {
-                            connect.LoadData(ClassConnection.Connection.Tables.parts);
-                            foreach (ClassModules.Parts parts_items in ClassConnection.Connection.parts)
-                            {
-                                if (page_select == page_main.parts)
-                                {
-                                    parrent.Children.Add(new Elements.Parts_items(parts_items));
-                                    await Task.Delay(90);
-                                }
-                            }
-                            if (page_select == page_main.parts)
-                            {
-                                if (Login.UserInfo[1] == "admin")
-                                {
-                                    var add = new Pages.PagesInTable.Parts(new ClassModules.Parts());
-                                    parrent.Children.Add(new Elements.Add(add));
-                                }
-                            }
-                        });
+                        LoadParts();
                     };
                     parrent.BeginAnimation(StackPanel.OpacityProperty, opgriAnimation);
                 };
@@ -136,8 +142,33 @@ namespace Курсовой_проект_Тепляков.Pages
             }
         }
 
+        private void LoadLocations()
+        {
+            Dispatcher.InvokeAsync(async () =>
+            {
+                connect.LoadData(ClassConnection.Connection.Tables.locations);
+                foreach (ClassModules.Locations locations_items in ClassConnection.Connection.locations)
+                {
+                    if (page_select == page_main.locations)
+                    {
+                        parrent.Children.Add(new Elements.Locations_items(locations_items));
+                        await Task.Delay(90);
+                    }
+                }
+                if (page_select == page_main.locations)
+                {
+                    if (Login.UserInfo[1] == "admin")
+                    {
+                        var add = new Pages.PagesInTable.Locations(new ClassModules.Locations());
+                        parrent.Children.Add(new Elements.Add(add));
+                    }
+                }
+            });
+        }
+
         private void Click_Locations(object sender, RoutedEventArgs e)
         {
+            Search.IsEnabled = true;
             parts_itms.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF2C2C2C"));
             locations_itms.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF"));
             companies_itms.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF2C2C2C"));
@@ -161,26 +192,7 @@ namespace Курсовой_проект_Тепляков.Pages
                     opgriAnimation.Duration = TimeSpan.FromSeconds(0.2);
                     opgriAnimation.Completed += delegate
                     {
-                        Dispatcher.InvokeAsync(async () =>
-                        {
-                            connect.LoadData(ClassConnection.Connection.Tables.locations);
-                            foreach (ClassModules.Locations locations_items in ClassConnection.Connection.locations)
-                            {
-                                if (page_select == page_main.locations)
-                                {
-                                    parrent.Children.Add(new Elements.Locations_items(locations_items));
-                                    await Task.Delay(90);
-                                }
-                            }
-                            if (page_select == page_main.locations)
-                            {
-                                if (Login.UserInfo[1] == "admin")
-                                {
-                                    var add = new Pages.PagesInTable.Locations(new ClassModules.Locations());
-                                    parrent.Children.Add(new Elements.Add(add));
-                                }
-                            }
-                        });
+                        LoadLocations();
                     };
                     parrent.BeginAnimation(StackPanel.OpacityProperty, opgriAnimation);
                 };
@@ -188,8 +200,33 @@ namespace Курсовой_проект_Тепляков.Pages
             }
         }
 
+        private void LoadCompanies()
+        {
+            Dispatcher.InvokeAsync(async () =>
+            {
+                connect.LoadData(ClassConnection.Connection.Tables.companies);
+                foreach (ClassModules.Companies companies_items in ClassConnection.Connection.companies)
+                {
+                    if (page_select == page_main.companies)
+                    {
+                        parrent.Children.Add(new Elements.Companies_items(companies_items));
+                        await Task.Delay(90);
+                    }
+                }
+                if (page_select == page_main.companies)
+                {
+                    if (Login.UserInfo[1] == "admin")
+                    {
+                        var add = new Pages.PagesInTable.Companies(new ClassModules.Companies());
+                        parrent.Children.Add(new Elements.Add(add));
+                    }
+                }
+            });
+        }
+        
         private void Click_Companies(object sender, RoutedEventArgs e)
         {
+            Search.IsEnabled = true;
             parts_itms.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF2C2C2C"));
             locations_itms.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF2C2C2C"));
             companies_itms.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF"));
@@ -213,26 +250,7 @@ namespace Курсовой_проект_Тепляков.Pages
                     opgriAnimation.Duration = TimeSpan.FromSeconds(0.2);
                     opgriAnimation.Completed += delegate
                     {
-                        Dispatcher.InvokeAsync(async () =>
-                        {
-                            connect.LoadData(ClassConnection.Connection.Tables.companies);
-                            foreach(ClassModules.Companies companies_items in ClassConnection.Connection.companies)
-                            {
-                                if(page_select == page_main.companies)
-                                {
-                                    parrent.Children.Add(new Elements.Companies_items(companies_items));
-                                    await Task.Delay(90);
-                                }
-                            }
-                            if(page_select == page_main.companies)
-                            {
-                                if (Login.UserInfo[1] == "admin")
-                                {
-                                    var add = new Pages.PagesInTable.Companies(new ClassModules.Companies());
-                                    parrent.Children.Add(new Elements.Add(add));
-                                }
-                            }
-                        });
+                        LoadCompanies();
                     };
                     parrent.BeginAnimation(StackPanel.OpacityProperty, opgriAnimation);
                 };
@@ -240,8 +258,33 @@ namespace Курсовой_проект_Тепляков.Pages
             }
         }
 
+        private void LoadTechnique()
+        {
+            Dispatcher.InvokeAsync(async () =>
+            {
+                connect.LoadData(ClassConnection.Connection.Tables.technique);
+                foreach (ClassModules.Technique technique_items in ClassConnection.Connection.technique)
+                {
+                    if (page_select == page_main.technique)
+                    {
+                        parrent.Children.Add(new Elements.Technique_items(technique_items));
+                        await Task.Delay(90);
+                    }
+                }
+                if (page_select == page_main.technique)
+                {
+                    if (Login.UserInfo[1] == "admin")
+                    {
+                        var add = new Pages.PagesInTable.Technique(new ClassModules.Technique());
+                        parrent.Children.Add(new Elements.Add(add));
+                    }
+                }
+            });
+        }
+        
         private void Click_Technique(object sender, RoutedEventArgs e)
         {
+            Search.IsEnabled = true;
             parts_itms.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF2C2C2C"));
             locations_itms.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF2C2C2C"));
             companies_itms.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF2C2C2C"));
@@ -265,26 +308,7 @@ namespace Курсовой_проект_Тепляков.Pages
                     opgriAnimation.Duration = TimeSpan.FromSeconds(0.2);
                     opgriAnimation.Completed += delegate
                     {
-                        Dispatcher.InvokeAsync(async () =>
-                        {
-                            connect.LoadData(ClassConnection.Connection.Tables.technique);
-                            foreach (ClassModules.Technique technique_items in ClassConnection.Connection.technique)
-                            {
-                                if (page_select == page_main.technique)
-                                {
-                                    parrent.Children.Add(new Elements.Technique_items(technique_items));
-                                    await Task.Delay(90);
-                                }
-                            }
-                            if (page_select == page_main.technique)
-                            {
-                                if (Login.UserInfo[1] == "admin")
-                                {
-                                    var add = new Pages.PagesInTable.Technique(new ClassModules.Technique());
-                                    parrent.Children.Add(new Elements.Add(add));
-                                }
-                            }
-                        });
+                        LoadTechnique();
                     };
                     parrent.BeginAnimation(StackPanel.OpacityProperty, opgriAnimation);
                 };
@@ -292,8 +316,33 @@ namespace Курсовой_проект_Тепляков.Pages
             }
         }
 
+        private void LoadTypeOfTroops()
+        {
+            Dispatcher.InvokeAsync(async () =>
+            {
+                connect.LoadData(ClassConnection.Connection.Tables.type_of_troops);
+                foreach (ClassModules.Type_of_troops type_of_troops_items in ClassConnection.Connection.type_of_troops)
+                {
+                    if (page_select == page_main.type_of_troops)
+                    {
+                        parrent.Children.Add(new Elements.TypeOfTroops_items(type_of_troops_items));
+                        await Task.Delay(90);
+                    }
+                }
+                if (page_select == page_main.type_of_troops)
+                {
+                    if (Login.UserInfo[1] == "admin")
+                    {
+                        var add = new Pages.PagesInTable.Type_of_troops(new ClassModules.Type_of_troops());
+                        parrent.Children.Add(new Elements.Add(add));
+                    }
+                }
+            });
+        }
+        
         private void Click_Type_of_troops(object sender, RoutedEventArgs e)
         {
+            Search.IsEnabled = true;
             parts_itms.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF2C2C2C"));
             locations_itms.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF2C2C2C"));
             companies_itms.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF2C2C2C"));
@@ -317,26 +366,7 @@ namespace Курсовой_проект_Тепляков.Pages
                     opgriAnimation.Duration = TimeSpan.FromSeconds(0.2);
                     opgriAnimation.Completed += delegate
                     {
-                        Dispatcher.InvokeAsync(async () =>
-                        {
-                            connect.LoadData(ClassConnection.Connection.Tables.type_of_troops);
-                            foreach (ClassModules.Type_of_troops type_of_troops_items in ClassConnection.Connection.type_of_troops)
-                            {
-                                if (page_select == page_main.type_of_troops)
-                                {
-                                    parrent.Children.Add(new Elements.TypeOfTroops_items(type_of_troops_items));
-                                    await Task.Delay(90);
-                                }
-                            }
-                            if (page_select == page_main.type_of_troops)
-                            {
-                                if (Login.UserInfo[1] == "admin")
-                                {
-                                    var add = new Pages.PagesInTable.Type_of_troops(new ClassModules.Type_of_troops());
-                                    parrent.Children.Add(new Elements.Add(add));
-                                }
-                            }
-                        });
+                        LoadTypeOfTroops();
                     };
                     parrent.BeginAnimation(StackPanel.OpacityProperty, opgriAnimation);
                 };
@@ -344,8 +374,33 @@ namespace Курсовой_проект_Тепляков.Pages
             }
         }
 
+        private void LoadWeapons()
+        {
+            Dispatcher.InvokeAsync(async () =>
+            {
+                connect.LoadData(ClassConnection.Connection.Tables.weapons);
+                foreach (ClassModules.Weapons weapons_items in ClassConnection.Connection.weapons)
+                {
+                    if (page_select == page_main.weapons)
+                    {
+                        parrent.Children.Add(new Elements.Weapons_items(weapons_items));
+                        await Task.Delay(90);
+                    }
+                }
+                if (page_select == page_main.weapons)
+                {
+                    if (Login.UserInfo[1] == "admin")
+                    {
+                        var add = new Pages.PagesInTable.Weapons(new ClassModules.Weapons());
+                        parrent.Children.Add(new Elements.Add(add));
+                    }
+                }
+            });
+        }
+        
         private void Click_Weapons(object sender, RoutedEventArgs e)
         {
+            Search.IsEnabled = true;
             parts_itms.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF2C2C2C"));
             locations_itms.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF2C2C2C"));
             companies_itms.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF2C2C2C"));
@@ -369,26 +424,7 @@ namespace Курсовой_проект_Тепляков.Pages
                     opgriAnimation.Duration = TimeSpan.FromSeconds(0.2);
                     opgriAnimation.Completed += delegate
                     {
-                        Dispatcher.InvokeAsync(async () =>
-                        {
-                            connect.LoadData(ClassConnection.Connection.Tables.weapons);
-                            foreach (ClassModules.Weapons weapons_items in ClassConnection.Connection.weapons)
-                            {
-                                if (page_select == page_main.weapons)
-                                {
-                                    parrent.Children.Add(new Elements.Weapons_items(weapons_items));
-                                    await Task.Delay(90);
-                                }
-                            }
-                            if (page_select == page_main.weapons)
-                            {
-                                if (Login.UserInfo[1] == "admin")
-                                {
-                                    var add = new Pages.PagesInTable.Weapons(new ClassModules.Weapons());
-                                    parrent.Children.Add(new Elements.Add(add));
-                                }
-                            }
-                        });
+                        LoadWeapons();
                     };
                     parrent.BeginAnimation(StackPanel.OpacityProperty, opgriAnimation);
                 };
@@ -398,6 +434,7 @@ namespace Курсовой_проект_Тепляков.Pages
 
         private void Click_Export(object sender, MouseButtonEventArgs e)
         {
+            Search.IsEnabled = false;
             parts_itms.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF2C2C2C"));
             locations_itms.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF2C2C2C"));
             companies_itms.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF2C2C2C"));
@@ -410,8 +447,115 @@ namespace Курсовой_проект_Тепляков.Pages
             export.ShowDialog();
         }
 
+        private void SearchTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(Search.Text) && Search.Text != "Поиск")
+            {
+                if (page_select == page_main.parts)
+                {
+                    parrent.Children.Clear();
+                    var parts = Connection.parts.FindAll(x => x.Id_part.ToString() == Search.Text);
+                    var country = Connection.country.FindAll(x => x.Name.StartsWith(Search.Text.ToLower().ToUpper()));
+                    var companies = Connection.companies.FindAll(x => x.Name_companies.StartsWith(Search.Text));
+                    foreach (var itemSearch in parts)
+                    {
+                        parrent.Children.Add(new Elements.Parts_items(itemSearch));
+                    }
+                    foreach (var itemCountry in country)
+                    {
+                        var location = Connection.locations.FindAll(x => x.Country == itemCountry.Id);
+                        foreach (var itemLocation in location)
+                        {
+                            var searchParts = Connection.parts.FindAll(x => x.Locations == itemLocation.Id_locations);
+                            foreach (var itemSearch in searchParts)
+                            {
+                                parrent.Children.Add(new Elements.Parts_items(itemSearch));
+                            }
+                        }
+                    }
+                    foreach (var itemCompanies in companies)
+                    {
+                        var searchParts = Connection.parts.FindAll(x => x.Companies == itemCompanies.Id_companies);
+                        foreach (var itemSearch in searchParts)
+                        {
+                            parrent.Children.Add(new Elements.Parts_items(itemSearch));
+                        }
+                    }
+                }
+                else if (page_select == page_main.locations)
+                {
+                    parrent.Children.Clear();
+
+                }
+                else if (page_select == page_main.companies)
+                {
+                    parrent.Children.Clear();
+
+                }
+                else if (page_select == page_main.technique)
+                {
+                    parrent.Children.Clear();
+
+                }
+                else if (page_select == page_main.type_of_troops)
+                {
+                    parrent.Children.Clear();
+
+                }
+                else if (page_select == page_main.weapons)
+                {
+                    parrent.Children.Clear();
+
+                }
+            }
+            else
+            {
+                if (page_select == page_main.parts)
+                {
+                    parrent.Children.Clear();
+                    LoadParts();
+                }
+                else if (page_select == page_main.locations)
+                {
+                    parrent.Children.Clear();
+                    LoadLocations();
+                }
+                else if (page_select == page_main.companies)
+                {
+                    parrent.Children.Clear();
+                    LoadCompanies();
+                }
+                else if (page_select == page_main.technique)
+                {
+                    parrent.Children.Clear();
+                    LoadTechnique();
+                }
+                else if (page_select == page_main.type_of_troops) 
+                {
+                    parrent.Children.Clear();
+                    LoadTypeOfTroops(); 
+                }
+                else if (page_select == page_main.weapons) 
+                {
+                    parrent.Children.Clear();
+                    LoadWeapons();
+                } 
+            }
+        }
+
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            Search.Text = "Поиск";
+        }
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            Search.Text = "";
+        }
+
         private void Click_Back(object sender, RoutedEventArgs e)
         {
+            Search.IsEnabled = false;
             parts_itms.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF2C2C2C"));
             locations_itms.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF2C2C2C"));
             companies_itms.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF2C2C2C"));

@@ -22,7 +22,8 @@
                 </Border.Background>
             </Border>
             <Image Source="/Images/logo.png" Margin="19,8,0,0" HorizontalAlignment="Left" Width="41" Height="42" VerticalAlignment="Top"/>
-            <Label x:Name="WhoAmI" Content="" Margin="0,10,10,0" HorizontalAlignment="Right" Height="38" VerticalAlignment="Top" Foreground="DarkGray" FontSize="20" FontFamily="Yu Gothic UI Semibold" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="Search" Style="{StaticResource BaseBox}" Height="35" Background="#FFDEDEDE" Margin="180,12.5,500,0" VerticalAlignment="Top" Text="Поиск" TextChanged="SearchTextChanged" LostFocus="TextBox_LostFocus" GotFocus="TextBox_GotFocus" IsEnabled="False"/>
+            <Label x:Name="WhoAmI" Content="" Margin="0,10,10,0" HorizontalAlignment="Right" Height="38" VerticalAlignment="Top" Foreground="#3DAEFF" FontSize="20" FontFamily="Yu Gothic UI Semibold" VerticalContentAlignment="Center"/>
         </Grid>
         <Grid Margin="10,71,10,0" Height="51" VerticalAlignment="Top">
             <StackPanel x:Name="list_move" Orientation="Horizontal">

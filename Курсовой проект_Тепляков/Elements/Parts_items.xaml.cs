@@ -34,7 +34,7 @@ namespace Курсовой_проект_Тепляков.Elements
             {
                 Id_part.Content = "Часть № " + _parts.Id_part;
                 ClassModules.Locations item_location = Connection.locations.Find(x => x.Id_locations == _parts.Locations);
-                Locations.Content = "Место дислокации: " + Connection.country.Find(x => x.Id == item_location.Country).Name;
+                Locations.Content = "Место дислокации: " + Connection.country.Find(x => x.Id == item_location.Country).Name + " г." + item_location.City;
                 Companies.Content = "Название роты: " + Connection.companies.Find(x => x.Id_companies == _parts.Companies).Name_companies;
                 Date_of_foundation.Content = "Дата основания: " + _parts.Date_of_foundation.ToString("dd.MM.yyyy");
             }
