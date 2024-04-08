@@ -61,8 +61,8 @@ namespace Курсовой_проект_Тепляков.Pages
 
         public void RoleUser()
         {
-            if (Login.UserInfo[1] == "admin") WhoAmI.Content = $"Здравствуйте, {Login.UserInfo[0]}! {Login.UserInfo[1]}";
-            else WhoAmI.Content = $"Здравствуйте, {Login.UserInfo[0]}! {Login.UserInfo[1]}";
+            if (Login.UserInfo[1] == "admin") WhoAmI.Content = $"Здравствуйте, {Login.UserInfo[0]}! Роль - {Login.UserInfo[1]}";
+            else WhoAmI.Content = $"Здравствуйте, {Login.UserInfo[0]}! Роль - {Login.UserInfo[1]}";
         }
 
         public void OpenPageLogin()
@@ -503,8 +503,8 @@ namespace Курсовой_проект_Тепляков.Pages
                 else if (page_select == page_main.companies)
                 {
                     parrent.Children.Clear();
-                    var companiesByIds = Connection.companies.FindAll(x => x.Id_companies.ToString().StartsWith(Search.Text));
-                    foreach (var itemSearch in companiesByIds)
+                    var companiesById = Connection.companies.FindAll(x => x.Id_companies.ToString().StartsWith(Search.Text));
+                    foreach (var itemSearch in companiesById)
                     {
                         parrent.Children.Add(new Elements.Companies_items(itemSearch));
                     }
@@ -569,7 +569,28 @@ namespace Курсовой_проект_Тепляков.Pages
                 else if (page_select == page_main.weapons)
                 {
                     parrent.Children.Clear();
-
+                    var weaponById = Connection.weapons.FindAll(x => x.Id_weapons.ToString().StartsWith(Search.Text));
+                    foreach (var itemSearch in weaponById)
+                    {
+                        parrent.Children.Add(new Elements.Weapons_items(itemSearch));
+                    }
+                    var weaponByName = Connection.weapons.FindAll(x => x.Name_weapons.StartsWith(Search.Text));
+                    foreach (var itemSearch in weaponByName)
+                    {
+                        parrent.Children.Add(new Elements.Weapons_items(itemSearch));
+                    }
+                    var companies = Connection.companies.FindAll(x => x.Name_companies.StartsWith(Search.Text));
+                    var companiesIds = companies.Select(t => t.Id_companies).ToList();
+                    var weaponByCompanies = Connection.weapons.Where(c => companiesIds.Contains(c.Companies)).ToList();
+                    foreach (var itemSearch in weaponByCompanies)
+                    {
+                        parrent.Children.Add(new Elements.Weapons_items(itemSearch));
+                    }
+                    var weaponByDescription = Connection.weapons.FindAll(x => x.Description.StartsWith(Search.Text));
+                    foreach (var itemSearch in weaponByDescription)
+                    {
+                        parrent.Children.Add(new Elements.Weapons_items(itemSearch));
+                    }
                 }
             }
             else
