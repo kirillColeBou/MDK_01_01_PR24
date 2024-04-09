@@ -34,7 +34,6 @@ namespace Курсовой_проект_Тепляков.Pages
             companies, locations, parts, technique, type_of_troops, weapons, none
         }
 
-        public static Connection connect;
         public static page_main page_select;
         public static Main main;
 
@@ -628,15 +627,9 @@ namespace Курсовой_проект_Тепляков.Pages
             }
         }
 
-        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            Search.Text = "Поиск";
-        }
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e) => Search.Text = "Поиск";
 
-        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            Search.Text = "";
-        }
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e) => Search.Text = "";
 
         private void Click_Back(object sender, RoutedEventArgs e)
         {

@@ -48,14 +48,14 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
         {
             ClassModules.Companies id_companies_temp;
             id_companies_temp = ClassConnection.Connection.companies.Find(x => x.Id_companies == Convert.ToInt32(((ComboBoxItem)Companies.SelectedItem).Tag));
-            int id = Main.connect.SetLastId(ClassConnection.Connection.Tables.weapons);
+            int id = Pages.Login_Regin.Login.connection.SetLastId(ClassConnection.Connection.Tables.weapons);
             if (weapons.Name_weapons == null)
             {
                 string query = $"Insert Into weapons ([Id_weapons], [Name_weapons], [Companies], [Description], [Date_update_information]) Values ({id.ToString()}, N'{Name_weapons.Text}', N'{id_companies_temp.Id_companies.ToString()}', N'{Description.Text}', N'{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}')";
-                var query_apply = Main.connect.Query(query);
+                var query_apply = Pages.Login_Regin.Login.connection.Query(query);
                 if (query_apply != null)
                 {
-                    Main.connect.LoadData(ClassConnection.Connection.Tables.weapons);
+                    Pages.Login_Regin.Login.connection.LoadData(ClassConnection.Connection.Tables.weapons);
                     MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.weapons);
                 }
                 else MessageBox.Show("Запрос на добавление вооружения не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -63,10 +63,10 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             else
             {
                 string query = $"Update weapons Set Name_weapons = N'{Name_weapons.Text}', Companies = N'{id_companies_temp.Id_companies.ToString()}', Description = N'{Description.Text}', Date_update_information = N'{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}' Where Id_weapons = {weapons.Id_weapons}";
-                var query_apply = Main.connect.Query(query);
+                var query_apply = Pages.Login_Regin.Login.connection.Query(query);
                 if (query_apply != null)
                 {
-                    Main.connect.LoadData(ClassConnection.Connection.Tables.weapons);
+                    Pages.Login_Regin.Login.connection.LoadData(ClassConnection.Connection.Tables.weapons);
                     MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.weapons);
                 }
                 else MessageBox.Show("Запрос на изменение вооружения не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -79,12 +79,12 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
         {
             try
             {
-                Main.connect.LoadData(ClassConnection.Connection.Tables.weapons);
+                Pages.Login_Regin.Login.connection.LoadData(ClassConnection.Connection.Tables.weapons);
                 string query = "Delete From weapons Where [Id_weapons] = " + weapons.Id_weapons.ToString() + "";
-                var query_apply = Main.connect.Query(query);
+                var query_apply = Pages.Login_Regin.Login.connection.Query(query);
                 if (query_apply != null)
                 {
-                    Main.connect.LoadData(ClassConnection.Connection.Tables.weapons);
+                    Pages.Login_Regin.Login.connection.LoadData(ClassConnection.Connection.Tables.weapons);
                     MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.weapons);
                 }
                 else MessageBox.Show("Запрос на удаление вооружения не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);

@@ -42,12 +42,12 @@ namespace Курсовой_проект_Тепляков.Elements
         {
             try
             {
-                Main.connect.LoadData(ClassConnection.Connection.Tables.technique);
+                Pages.Login_Regin.Login.connection.LoadData(ClassConnection.Connection.Tables.technique);
                 string query = $"Delete From Technique Where Id_technique = " + technique.Id_technique.ToString() + "";
-                var query_apply = Main.connect.Query(query);
+                var query_apply = Pages.Login_Regin.Login.connection.Query(query);
                 if (query_apply != null)
                 {
-                    Main.connect.LoadData(ClassConnection.Connection.Tables.technique);
+                    Pages.Login_Regin.Login.connection.LoadData(ClassConnection.Connection.Tables.technique);
                     MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Pages.Main.page_main.technique);
                 }
                 else MessageBox.Show("Запрос на удаление техники не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);

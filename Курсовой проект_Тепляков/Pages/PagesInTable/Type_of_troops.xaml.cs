@@ -39,14 +39,14 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
 
         private void Click_TypeOfTroops_Redact(object sender, RoutedEventArgs e)
         {
-            int id = Main.connect.SetLastId(ClassConnection.Connection.Tables.type_of_troops);
+            int id = Pages.Login_Regin.Login.connection.SetLastId(ClassConnection.Connection.Tables.type_of_troops);
             if (type_of_troops.Name_type_of_troops == null)
             {
                 string query = $"Insert Into type_of_troops ([Id_type_of_troops], [Name_type_of_troops], [Description], [Count_serviceman], [Date_foundation]) Values ({id.ToString()}, N'{Name_type_of_troops.Text}', N'{Description.Text}', N'{Count_serviceman.Text}', N'{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}')";
-                var query_apply = Main.connect.Query(query);
+                var query_apply = Pages.Login_Regin.Login.connection.Query(query);
                 if (query_apply != null)
                 {
-                    Main.connect.LoadData(ClassConnection.Connection.Tables.type_of_troops);
+                    Pages.Login_Regin.Login.connection.LoadData(ClassConnection.Connection.Tables.type_of_troops);
                     MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.type_of_troops);
                 }
                 else MessageBox.Show("Запрос на добавление вида войск не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -54,10 +54,10 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             else
             {
                 string query = $"Update type_of_troops Set Name_type_of_troops = N'{Name_type_of_troops.Text}', Description = N'{Description.Text}', Count_serviceman = N'{Count_serviceman.Text}' Where Id_type_of_troops = {type_of_troops.Id_type_of_troops}";
-                var query_apply = Main.connect.Query(query);
+                var query_apply = Pages.Login_Regin.Login.connection.Query(query);
                 if (query_apply != null)
                 {
-                    Main.connect.LoadData(ClassConnection.Connection.Tables.type_of_troops);
+                    Pages.Login_Regin.Login.connection.LoadData(ClassConnection.Connection.Tables.type_of_troops);
                     MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.type_of_troops);
                 }
                 else MessageBox.Show("Запрос на изменение вида войск не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -70,12 +70,12 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
         {
             try
             {
-                Main.connect.LoadData(ClassConnection.Connection.Tables.type_of_troops);
+                Pages.Login_Regin.Login.connection.LoadData(ClassConnection.Connection.Tables.type_of_troops);
                 string query = "Delete From type_of_troops Where [Id_type_of_troops] = " + type_of_troops.Id_type_of_troops.ToString() + "";
-                var query_apply = Main.connect.Query(query);
+                var query_apply = Pages.Login_Regin.Login.connection.Query(query);
                 if (query_apply != null)
                 {
-                    Main.connect.LoadData(ClassConnection.Connection.Tables.type_of_troops);
+                    Pages.Login_Regin.Login.connection.LoadData(ClassConnection.Connection.Tables.type_of_troops);
                     MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.type_of_troops);
                 }
                 else MessageBox.Show("Запрос на удаление вида войск не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);

@@ -51,14 +51,14 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             {
                 ClassModules.Type_of_troops id_typeOfTroops_temp;
                 id_typeOfTroops_temp = ClassConnection.Connection.type_of_troops.Find(x => x.Id_type_of_troops == Convert.ToInt32(((ComboBoxItem)Type_of_troops.SelectedItem).Tag));
-                int id = Main.connect.SetLastId(ClassConnection.Connection.Tables.companies);
+                int id = Login_Regin.Login.connection.SetLastId(ClassConnection.Connection.Tables.companies);
                 if (companies.Commander == null)
                 {
                     string query = $"INSERT INTO companies ([Id_companies], [Name_companies], [Commander], [Type_of_troops], [Date_foundation], [Date_update_information]) VALUES ({id.ToString()}, N'{Name_companies.Text}', N'{Commander.Text}', N'{id_typeOfTroops_temp.Id_type_of_troops.ToString()}', N'{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}', N'{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}')";
-                    var query_apply = Main.connect.Query(query);
+                    var query_apply = Login_Regin.Login.connection.Query(query);
                     if (query_apply != null)
                     {
-                        Main.connect.LoadData(ClassConnection.Connection.Tables.companies);
+                        Login_Regin.Login.connection.LoadData(ClassConnection.Connection.Tables.companies);
                         MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.companies);
                     }
                     else MessageBox.Show("Запрос на добавление роты не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -66,10 +66,10 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                 else
                 {
                     string query = $"UPDATE companies SET Name_companies = N'{Name_companies.Text}', Commander = N'{Commander.Text}', Type_of_troops = N'{id_typeOfTroops_temp.Id_type_of_troops.ToString()}', Date_update_information = N'{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}' WHERE Id_companies = {companies.Id_companies}";
-                    var query_apply = Main.connect.Query(query);
+                    var query_apply = Login_Regin.Login.connection.Query(query);
                     if (query_apply != null)
                     {
-                        Main.connect.LoadData(ClassConnection.Connection.Tables.companies);
+                        Login_Regin.Login.connection.LoadData(ClassConnection.Connection.Tables.companies);
                         MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.companies);
                     }
                     else MessageBox.Show("Запрос на изменение роты не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -83,12 +83,12 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
         {
             try
             {
-                Main.connect.LoadData(ClassConnection.Connection.Tables.companies);
+                Login_Regin.Login.connection.LoadData(ClassConnection.Connection.Tables.companies);
                 string query = "Delete From companies Where [Id_companies] = " + companies.Id_companies.ToString() + "";
-                var query_apply = Main.connect.Query(query);
+                var query_apply = Login_Regin.Login.connection.Query(query);
                 if(query_apply != null)
                 {
-                    Main.connect.LoadData(ClassConnection.Connection.Tables.companies);
+                    Login_Regin.Login.connection.LoadData(ClassConnection.Connection.Tables.companies);
                     MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.companies);
                 }
                 else MessageBox.Show("Запрос на удаление роты не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);

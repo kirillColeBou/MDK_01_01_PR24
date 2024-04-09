@@ -59,15 +59,15 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                     ClassModules.Companies id_companies_temp;
                     id_locations_temp = ClassConnection.Connection.locations.Find(x => x.Id_locations == Convert.ToInt32(((ComboBoxItem)Locations.SelectedItem).Tag));
                     id_companies_temp = ClassConnection.Connection.companies.Find(x => x.Id_companies == Convert.ToInt32(((ComboBoxItem)Companies.SelectedItem).Tag));
-                    int id = Main.connect.SetLastId(ClassConnection.Connection.Tables.parts);
+                    int id = Login_Regin.Login.connection.SetLastId(ClassConnection.Connection.Tables.parts);
                     if (parts.Companies == 0)
                     {
                         string query = $"Insert Into parts ([Id_part], [Locations], [Companies], [Date_of_foundation])" +
                             $"Values ({id.ToString()}, {id_locations_temp.Id_locations.ToString()}, {id_companies_temp.Id_companies.ToString()}, N'{DateTime.Now.ToString("dd.MM.yyyy")}')";
-                        var query_apply = Main.connect.Query(query);
+                        var query_apply = Login_Regin.Login.connection.Query(query);
                         if (query_apply != null)
                         {
-                            Main.connect.LoadData(ClassConnection.Connection.Tables.parts);
+                            Login_Regin.Login.connection.LoadData(ClassConnection.Connection.Tables.parts);
                             MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.parts);
                         }
                         else MessageBox.Show("Запрос на добавление части не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -75,10 +75,10 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                     else
                     {
                         string query = $"Update parts Set Locations = '{id_locations_temp.Id_locations.ToString()}', Companies = '{id_companies_temp.Id_companies.ToString()}' Where Id_part = {parts.Id_part}";
-                        var query_apply = Main.connect.Query(query);
+                        var query_apply = Login_Regin.Login.connection.Query(query);
                         if (query_apply != null)
                         {
-                            Main.connect.LoadData(ClassConnection.Connection.Tables.parts);
+                            Login_Regin.Login.connection.LoadData(ClassConnection.Connection.Tables.parts);
                             MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.parts);
                         }
                         else MessageBox.Show("Запрос на изменение части не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -93,12 +93,12 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
         {
             try
             {
-                Main.connect.LoadData(ClassConnection.Connection.Tables.parts);
+                Login_Regin.Login.connection.LoadData(ClassConnection.Connection.Tables.parts);
                 string query = "Delete parts Where [Id_part] = " + parts.Id_part.ToString() + "";
-                var query_apply = Main.connect.Query(query);
+                var query_apply = Login_Regin.Login.connection.Query(query);
                 if (query_apply != null)
                 {
-                    Main.connect.LoadData(ClassConnection.Connection.Tables.parts);
+                    Login_Regin.Login.connection.LoadData(ClassConnection.Connection.Tables.parts);
                     Main.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Main.page_main.parts);
                 }
                 else MessageBox.Show("Запрос на удаление части не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);

@@ -44,12 +44,12 @@ namespace Курсовой_проект_Тепляков.Elements
         {
             try
             {
-                Main.connect.LoadData(ClassConnection.Connection.Tables.type_of_troops);
+                Pages.Login_Regin.Login.connection.LoadData(ClassConnection.Connection.Tables.type_of_troops);
                 string query = $"Delete From Type_of_troops Where Id_type_of_troops = " + type_of_troops.Id_type_of_troops.ToString() + "";
-                var query_apply = Main.connect.Query(query);
+                var query_apply = Pages.Login_Regin.Login.connection.Query(query);
                 if (query_apply != null)
                 {
-                    Main.connect.LoadData(ClassConnection.Connection.Tables.type_of_troops);
+                    Pages.Login_Regin.Login.connection.LoadData(ClassConnection.Connection.Tables.type_of_troops);
                     MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Pages.Main.page_main.type_of_troops);
                 }
                 else MessageBox.Show("Запрос на удаление вида войск не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
