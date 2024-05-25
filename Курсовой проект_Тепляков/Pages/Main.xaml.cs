@@ -439,190 +439,93 @@ namespace Курсовой_проект_Тепляков.Pages
             export.ShowDialog();
         }
 
-        private void SearchTextChanged(object sender, TextChangedEventArgs e)
+        private bool isDataLoaded = false;
+
+        private async void SearchTextChanged(object sender, TextChangedEventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(Search.Text) && Search.Text != "Поиск")
             {
+                await Task.Delay(100);
                 if (page_select == page_main.parts)
                 {
                     parrent.Children.Clear();
                     var parts = Connection.parts.FindAll(x => x.Id_part.ToString() == Search.Text);
-                    foreach (var itemSearch in parts)
-                    {
-                        parrent.Children.Add(new Elements.Parts_items(itemSearch));
-                    }
-                    var country = Connection.country.FindAll(x => x.Name.StartsWith(Search.Text));
-                    var countryIds = country.Select(c => c.Id).ToList();
-                    var locations = Connection.locations.Where(l => countryIds.Contains(l.Country)).ToList();
-                    var locationIds = locations.Select(l => l.Id_locations).ToList();
-                    var searchPartsByCountry = Connection.parts.Where(p => locationIds.Contains(p.Locations)).ToList();
-                    foreach (var itemSearch in searchPartsByCountry)
-                    {
-                        parrent.Children.Add(new Elements.Parts_items(itemSearch));
-                    }
-                    var companies = Connection.companies.FindAll(x => x.Name_companies.StartsWith(Search.Text));
-                    var companyIds = companies.Select(c => c.Id_companies).ToList();
-                    var searchPartsByCompany = Connection.parts.Where(p => companyIds.Contains(p.Companies)).ToList();
-                    foreach (var itemSearch in searchPartsByCompany)
-                    {
-                        parrent.Children.Add(new Elements.Parts_items(itemSearch));
-                    }
+                    foreach (var itemSearch in parts) parrent.Children.Add(new Elements.Parts_items(itemSearch));
                 }
                 else if (page_select == page_main.locations)
                 {
                     parrent.Children.Clear();
-                    var country = Connection.country.FindAll(x => x.Name.StartsWith(Search.Text));
+                    var country = Connection.country.FindAll(x => x.Name.Contains(Search.Text));
                     var countryIds = country.Select(c => c.Id).ToList();
                     var locationsByCountry = Connection.locations.Where(l => countryIds.Contains(l.Country)).ToList();
-                    foreach (var itemSearch in locationsByCountry)
-                    {
-                        parrent.Children.Add(new Elements.Locations_items(itemSearch));
-                    }
-                    var locationsByCity = Connection.locations.FindAll(x => x.City.StartsWith(Search.Text));
-                    foreach (var itemSearch in locationsByCity)
-                    {
-                        parrent.Children.Add(new Elements.Locations_items(itemSearch));
-                    }
-                    var locationsByAddress = Connection.locations.FindAll(x => x.Address.StartsWith(Search.Text));
-                    foreach (var itemSearch in locationsByAddress)
-                    {
-                        parrent.Children.Add(new Elements.Locations_items(itemSearch));
-                    }
-                    var locationsBySquare = Connection.locations.FindAll(x => x.Square.ToString().StartsWith(Search.Text));
-                    foreach (var itemSearch in locationsBySquare)
-                    {
-                        parrent.Children.Add(new Elements.Locations_items(itemSearch));
-                    }
-                    var locationsByCountStructures = Connection.locations.FindAll(x => x.Count_structures.ToString().StartsWith(Search.Text));
-                    foreach (var itemSearch in locationsByCountStructures)
-                    {
-                        parrent.Children.Add(new Elements.Locations_items(itemSearch));
-                    }
+                    foreach (var itemSearch in locationsByCountry) parrent.Children.Add(new Elements.Locations_items(itemSearch));
                 }
                 else if (page_select == page_main.companies)
                 {
                     parrent.Children.Clear();
-                    var companiesById = Connection.companies.FindAll(x => x.Id_companies.ToString().StartsWith(Search.Text));
-                    foreach (var itemSearch in companiesById)
-                    {
-                        parrent.Children.Add(new Elements.Companies_items(itemSearch));
-                    }
-                    var companiesByName = Connection.companies.FindAll(x => x.Name_companies.StartsWith(Search.Text));
-                    foreach (var itemSearch in companiesByName)
-                    {
-                        parrent.Children.Add(new Elements.Companies_items(itemSearch));
-                    }
-                    var companiesByCommander = Connection.companies.FindAll(x => x.Commander.StartsWith(Search.Text));
-                    foreach (var itemSearch in companiesByCommander)
-                    {
-                        parrent.Children.Add(new Elements.Companies_items(itemSearch));
-                    }
-                    var typeOfTroops = Connection.type_of_troops.FindAll(x => x.Name_type_of_troops.StartsWith(Search.Text));
-                    var typeOfTroopsIds = typeOfTroops.Select(t => t.Id_type_of_troops).ToList();
-                    var companiesByTypeOfTroops = Connection.companies.Where(c => typeOfTroopsIds.Contains(c.Type_of_troops)).ToList();
-                    foreach (var itemSearch in companiesByTypeOfTroops)
-                    {
-                        parrent.Children.Add(new Elements.Companies_items(itemSearch));
-                    }
+                    var companiesById = Connection.companies.FindAll(x => x.Id_companies.ToString().Contains(Search.Text));
+                    foreach (var itemSearch in companiesById) parrent.Children.Add(new Elements.Companies_items(itemSearch));
                 }
                 else if (page_select == page_main.technique)
                 {
                     parrent.Children.Clear();
-                    var techniqueByName = Connection.technique.FindAll(x => x.Name_technique.StartsWith(Search.Text));
-                    foreach (var itemSearch in techniqueByName)
-                    {
-                        parrent.Children.Add(new Elements.Technique_items(itemSearch));
-                    }
-                    var companies = Connection.companies.FindAll(x => x.Name_companies.StartsWith(Search.Text));
-                    var companiesIds = companies.Select(t => t.Id_companies).ToList();
-                    var tehcniqueByCompanies = Connection.technique.Where(c => companiesIds.Contains(c.Companies)).ToList();
-                    foreach (var itemSearch in tehcniqueByCompanies)
-                    {
-                        parrent.Children.Add(new Elements.Technique_items(itemSearch));
-                    }
-                    var techniqueByCharacteristics = Connection.technique.FindAll(x => x.Characteristics.StartsWith(Search.Text));
-                    foreach (var itemSearch in techniqueByCharacteristics)
-                    {
-                        parrent.Children.Add(new Elements.Technique_items(itemSearch));
-                    }
+                    var techniqueByName = Connection.technique.FindAll(x => x.Name_technique.Contains(Search.Text));
+                    foreach (var itemSearch in techniqueByName) parrent.Children.Add(new Elements.Technique_items(itemSearch));
                 }
                 else if (page_select == page_main.type_of_troops)
                 {
                     parrent.Children.Clear();
-                    var typeOfTroopByName = Connection.type_of_troops.FindAll(x => x.Name_type_of_troops.StartsWith(Search.Text));
-                    foreach (var itemSearch in typeOfTroopByName)
-                    {
-                        parrent.Children.Add(new Elements.TypeOfTroops_items(itemSearch));
-                    }
-                    var typeOfTroopByDescription = Connection.type_of_troops.FindAll(x => x.Description.StartsWith(Search.Text));
-                    foreach (var itemSearch in typeOfTroopByDescription)
-                    {
-                        parrent.Children.Add(new Elements.TypeOfTroops_items(itemSearch));
-                    }
-                    var techniqueByCountServiceman = Connection.type_of_troops.FindAll(x => x.Count_serviceman.ToString().StartsWith(Search.Text));
-                    foreach (var itemSearch in techniqueByCountServiceman)
-                    {
-                        parrent.Children.Add(new Elements.TypeOfTroops_items(itemSearch));
-                    }
+                    var typeOfTroopByName = Connection.type_of_troops.FindAll(x => x.Name_type_of_troops.Contains(Search.Text));
+                    foreach (var itemSearch in typeOfTroopByName) parrent.Children.Add(new Elements.TypeOfTroops_items(itemSearch));
                 }
                 else if (page_select == page_main.weapons)
                 {
                     parrent.Children.Clear();
-                    var weaponById = Connection.weapons.FindAll(x => x.Id_weapons.ToString().StartsWith(Search.Text));
-                    foreach (var itemSearch in weaponById)
-                    {
-                        parrent.Children.Add(new Elements.Weapons_items(itemSearch));
-                    }
-                    var weaponByName = Connection.weapons.FindAll(x => x.Name_weapons.StartsWith(Search.Text));
-                    foreach (var itemSearch in weaponByName)
-                    {
-                        parrent.Children.Add(new Elements.Weapons_items(itemSearch));
-                    }
-                    var companies = Connection.companies.FindAll(x => x.Name_companies.StartsWith(Search.Text));
-                    var companiesIds = companies.Select(t => t.Id_companies).ToList();
-                    var weaponByCompanies = Connection.weapons.Where(c => companiesIds.Contains(c.Companies)).ToList();
-                    foreach (var itemSearch in weaponByCompanies)
-                    {
-                        parrent.Children.Add(new Elements.Weapons_items(itemSearch));
-                    }
-                    var weaponByDescription = Connection.weapons.FindAll(x => x.Description.StartsWith(Search.Text));
-                    foreach (var itemSearch in weaponByDescription)
-                    {
-                        parrent.Children.Add(new Elements.Weapons_items(itemSearch));
-                    }
+                    var weaponById = Connection.weapons.FindAll(x => x.Id_weapons.ToString().Contains(Search.Text));
+                    foreach (var itemSearch in weaponById) parrent.Children.Add(new Elements.Weapons_items(itemSearch));
                 }
             }
             else
             {
-                if (page_select == page_main.parts)
+                await Task.Delay(100);
+                if (string.IsNullOrWhiteSpace(Search.Text))
                 {
-                    if(parrent != null) parrent.Children.Clear();
-                    LoadParts();
+                    parrent.Children.Clear(); 
+                    return;
                 }
-                else if (page_select == page_main.locations)
+                if (!isDataLoaded || Search.Text == "Поиск")
                 {
-                    if (parrent != null) parrent.Children.Clear();
-                    LoadLocations();
-                }
-                else if (page_select == page_main.companies)
-                {
-                    if (parrent != null) parrent.Children.Clear();
-                    LoadCompanies();
-                }
-                else if (page_select == page_main.technique)
-                {
-                    if (parrent != null) parrent.Children.Clear();
-                    LoadTechnique();
-                }
-                else if (page_select == page_main.type_of_troops)
-                {
-                    if (parrent != null) parrent.Children.Clear();
-                    LoadTypeOfTroops();
-                }
-                else if (page_select == page_main.weapons)
-                {
-                    if (parrent != null) parrent.Children.Clear();
-                    LoadWeapons();
+                    if (page_select == page_main.parts)
+                    {
+                        if (parrent != null) parrent.Children.Clear();
+                        LoadParts();
+                    }
+                    else if (page_select == page_main.locations)
+                    {
+                        if (parrent != null) parrent.Children.Clear();
+                        LoadLocations();
+                    }
+                    else if (page_select == page_main.companies)
+                    {
+                        if (parrent != null) parrent.Children.Clear();
+                        LoadCompanies();
+                    }
+                    else if (page_select == page_main.technique)
+                    {
+                        if (parrent != null) parrent.Children.Clear();
+                        LoadTechnique();
+                    }
+                    else if (page_select == page_main.type_of_troops)
+                    {
+                        if (parrent != null) parrent.Children.Clear();
+                        LoadTypeOfTroops();
+                    }
+                    else if (page_select == page_main.weapons)
+                    {
+                        if (parrent != null) parrent.Children.Clear();
+                        LoadWeapons();
+                    }
+                    isDataLoaded = true;
                 }
             }
         }
