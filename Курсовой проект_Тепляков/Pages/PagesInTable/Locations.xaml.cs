@@ -53,7 +53,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             int id = Pages.Login_Regin.Login.connection.SetLastId(ClassConnection.Connection.Tables.locations);
             if (locations.City == null)
             {
-                string query = $"Insert Into locations ([Id_locations], [Country], [City], [Address], [Square], [Count_structures]) Values ({id.ToString()}, {id_country_temp.Id.ToString()}, N'{City.Text}', N'{Address.Text}', N'{Square.Text}', N'{Count_structures.Text}')";
+                string query = $"Insert Into locations ([Id_locations], [Country], [City], [Address], [Square], [Count_structures]) Values ({id.ToString()}, N{id_country_temp.Id.ToString()}, N'{City.Text}', N'{Address.Text}', N'{Square.Text}', N'{Count_structures.Text}')";
                 var query_apply = Pages.Login_Regin.Login.connection.Query(query);
                 if (query_apply != null)
                 {
@@ -64,7 +64,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             }
             else
             {
-                string query = $"Update locations Set [Country] = '{id_country_temp.Id.ToString()}', [City] = N'{City.Text}', [Address] = N'{Address.Text}', [Square] = N'{Square.Text}', [Count_structures] = N'{Count_structures.Text}' Where [Id_locations] = {locations.Id_locations}";
+                string query = $"Update locations Set [Country] = N'{id_country_temp.Id.ToString()}', [City] = N'{City.Text}', [Address] = N'{Address.Text}', [Square] = N'{Square.Text}', [Count_structures] = N'{Count_structures.Text}' Where [Id_locations] = {locations.Id_locations}";
                 var query_apply = Pages.Login_Regin.Login.connection.Query(query);
                 if (query_apply != null)
                 {

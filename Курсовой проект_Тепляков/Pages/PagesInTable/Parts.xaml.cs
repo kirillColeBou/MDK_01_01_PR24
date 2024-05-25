@@ -63,7 +63,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                     if (parts.Companies == 0)
                     {
                         string query = $"Insert Into parts ([Id_part], [Locations], [Companies], [Date_of_foundation])" +
-                            $"Values ({id.ToString()}, {id_locations_temp.Id_locations.ToString()}, {id_companies_temp.Id_companies.ToString()}, N'{DateTime.Now.ToString("dd.MM.yyyy")}')";
+                            $"Values ({id.ToString()}, N{id_locations_temp.Id_locations.ToString()}, N{id_companies_temp.Id_companies.ToString()}, N'{DateTime.Now.ToString("dd.MM.yyyy")}')";
                         var query_apply = Login_Regin.Login.connection.Query(query);
                         if (query_apply != null)
                         {
@@ -74,7 +74,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                     }
                     else
                     {
-                        string query = $"Update parts Set Locations = '{id_locations_temp.Id_locations.ToString()}', Companies = '{id_companies_temp.Id_companies.ToString()}' Where Id_part = {parts.Id_part}";
+                        string query = $"Update parts Set Locations = N'{id_locations_temp.Id_locations.ToString()}', Companies = N'{id_companies_temp.Id_companies.ToString()}' Where Id_part = {parts.Id_part}";
                         var query_apply = Login_Regin.Login.connection.Query(query);
                         if (query_apply != null)
                         {
