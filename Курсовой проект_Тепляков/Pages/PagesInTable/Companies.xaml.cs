@@ -34,14 +34,6 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                 Name_companies.Text = _companies.Name_companies;
                 Commander.Text = _companies.Commander;
             }
-            foreach (var item in ClassConnection.Connection.type_of_troops)
-            {
-                ComboBoxItem cb_typeOfTroops = new ComboBoxItem();
-                cb_typeOfTroops.Tag = item.Id_type_of_troops;
-                cb_typeOfTroops.Content = item.Name_type_of_troops;
-                if (_companies.Type_of_troops == item.Id_type_of_troops) cb_typeOfTroops.IsSelected = true;
-                Type_of_troops.Items.Add(cb_typeOfTroops);
-            }
         }
 
         private void Click_Companies_Redact(object sender, RoutedEventArgs e)
@@ -49,12 +41,10 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             string[] FIOCommander = Commander.Text.Split(' ');
             if (FIOCommander.Length <= 3)
             {
-                ClassModules.Type_of_troops id_typeOfTroops_temp;
-                id_typeOfTroops_temp = ClassConnection.Connection.type_of_troops.Find(x => x.Id_type_of_troops == Convert.ToInt32(((ComboBoxItem)Type_of_troops.SelectedItem).Tag));
                 int id = Login_Regin.Login.connection.SetLastId(ClassConnection.Connection.Tables.companies);
                 if (companies.Commander == null)
                 {
-                    string query = $"INSERT INTO companies ([Id_companies], [Name_companies], [Commander], [Type_of_troops], [Date_foundation], [Date_update_information]) VALUES ({id.ToString()}, N'{Name_companies.Text}', N'{Commander.Text}', N'{id_typeOfTroops_temp.Id_type_of_troops.ToString()}', N'{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}', N'{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}')";
+                    string query = $"INSERT INTO companies ([Id_companies], [Name_companies], [Commander], [Date_foundation], [Date_update_information]) VALUES ({id.ToString()}, N'{Name_companies.Text}', N'{Commander.Text}', N'{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}', N'{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}')";
                     var query_apply = Login_Regin.Login.connection.Query(query);
                     if (query_apply != null)
                     {
@@ -65,7 +55,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                 }
                 else
                 {
-                    string query = $"UPDATE companies SET Name_companies = N'{Name_companies.Text}', Commander = N'{Commander.Text}', Type_of_troops = N'{id_typeOfTroops_temp.Id_type_of_troops.ToString()}', Date_update_information = N'{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}' WHERE Id_companies = {companies.Id_companies}";
+                    string query = $"UPDATE companies SET Name_companies = N'{Name_companies.Text}', Commander = N'{Commander.Text}', Date_update_information = N'{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}' WHERE Id_companies = {companies.Id_companies}";
                     var query_apply = Login_Regin.Login.connection.Query(query);
                     if (query_apply != null)
                     {

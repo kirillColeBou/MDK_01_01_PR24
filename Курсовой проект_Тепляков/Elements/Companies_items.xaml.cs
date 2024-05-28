@@ -26,23 +26,19 @@ namespace Курсовой_проект_Тепляков.Elements
     /// </summary>
     public partial class Companies_items : UserControl
     {
-        ClassConnection.Connection connection;
+        Connection connection;
         ClassModules.Companies companies;
         public Companies_items(ClassModules.Companies _companies)
         {
             InitializeComponent();
             connection = new ClassConnection.Connection();
-            if (Pages.Login_Regin.Login.UserInfo[1] != "admin")
-            {
-                Buttons.Visibility = Visibility.Hidden;
-            }
+            if (Pages.Login_Regin.Login.UserInfo[1] != "admin") Buttons.Visibility = Visibility.Hidden;
             companies = _companies;
             if(_companies.Commander != null)
             {
                 Id_parts.Content = "Рота №" + _companies.Id_companies.ToString();
                 Name_companies.Content = "Название роты: " + _companies.Name_companies;
                 Commander.Content = "Главнокомандующий: " + _companies.Commander;
-                Type_of_troops.Content = "Вид войск: " + Connection.type_of_troops.Find(x => x.Id_type_of_troops == _companies.Type_of_troops).Name_type_of_troops;
                 Date_foundation.Content = "Дата создания: " + _companies.Date_foundation.ToString("dd.MM.yyyy");
                 Date_update_information.Content = "Дата обновления информации: " + _companies.Date_update_information.ToString("dd.MM.yyyy HH:mm:ss");
             }
@@ -53,10 +49,7 @@ namespace Курсовой_проект_Тепляков.Elements
             border.BeginAnimation(StackPanel.OpacityProperty, opgridAnimation);
         }
 
-        private void Click_redact(object sender, RoutedEventArgs e)
-        {
-            MainWindow.main.Animation_move(MainWindow.main.scroll_main, MainWindow.main.frame_main, MainWindow.main.frame_main, new Pages.PagesInTable.Companies(companies));
-        }
+        private void Click_redact(object sender, RoutedEventArgs e) => MainWindow.main.Animation_move(MainWindow.main.scroll_main, MainWindow.main.frame_main, MainWindow.main.frame_main, new Pages.PagesInTable.Companies(companies));
 
         private void Click_remove(object sender, RoutedEventArgs e)
         {

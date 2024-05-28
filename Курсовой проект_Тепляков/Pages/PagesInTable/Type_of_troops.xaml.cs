@@ -35,14 +35,24 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                 Description.Text = _type_of_troops.Description;
                 Count_serviceman.Text = _type_of_troops.Count_serviceman.ToString();
             }
+            foreach (var item in ClassConnection.Connection.companies)
+            {
+                ComboBoxItem cb_companies = new ComboBoxItem();
+                cb_companies.Tag = item.Id_companies;
+                cb_companies.Content = item.Name_companies;
+                if (_type_of_troops.Companies == item.Id_companies) cb_companies.IsSelected = true;
+                Companies.Items.Add(cb_companies);
+            }
         }
 
         private void Click_TypeOfTroops_Redact(object sender, RoutedEventArgs e)
         {
+            ClassModules.Companies id_companies_temp;
+            id_companies_temp = ClassConnection.Connection.companies.Find(x => x.Id_companies == Convert.ToInt32(((ComboBoxItem)Companies.SelectedItem).Tag));
             int id = Pages.Login_Regin.Login.connection.SetLastId(ClassConnection.Connection.Tables.type_of_troops);
             if (type_of_troops.Name_type_of_troops == null)
             {
-                string query = $"Insert Into type_of_troops ([Id_type_of_troops], [Name_type_of_troops], [Description], [Count_serviceman], [Date_foundation]) Values ({id.ToString()}, N'{Name_type_of_troops.Text}', N'{Description.Text}', N'{Count_serviceman.Text}', N'{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}')";
+                string query = $"Insert Into type_of_troops ([Id_type_of_troops], [Name_type_of_troops], [Description], [Companies], [Count_serviceman], [Date_foundation]) Values ({id.ToString()}, N'{Name_type_of_troops.Text}', N'{Description.Text}', N'{id_companies_temp.Id_companies.ToString()}', N'{Count_serviceman.Text}', N'{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}')";
                 var query_apply = Pages.Login_Regin.Login.connection.Query(query);
                 if (query_apply != null)
                 {
@@ -53,7 +63,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             }
             else
             {
-                string query = $"Update type_of_troops Set Name_type_of_troops = N'{Name_type_of_troops.Text}', Description = N'{Description.Text}', Count_serviceman = N'{Count_serviceman.Text}' Where Id_type_of_troops = {type_of_troops.Id_type_of_troops}";
+                string query = $"Update type_of_troops Set Name_type_of_troops = N'{Name_type_of_troops.Text}', Description = N'{Description.Text}', Companies = N'{id_companies_temp.Id_companies.ToString()}', Count_serviceman = N'{Count_serviceman.Text}' Where Id_type_of_troops = {type_of_troops.Id_type_of_troops}";
                 var query_apply = Pages.Login_Regin.Login.connection.Query(query);
                 if (query_apply != null)
                 {
