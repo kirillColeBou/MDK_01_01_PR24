@@ -34,8 +34,8 @@ namespace ClassConnection
 
         public bool Connect()
         {
-            string Path = $@"Server=DESKTOP-UIE24UG\SQLEXPRESS;Database=military_district;User Id=sa;Password=Asdfg123";
-            //string Path = $@"Server=student.permaviat.ru;Database=base1_ISP_21_2_23;User Id=ISP_21_2_23;Password=3frQxZ83o#";
+            //string Path = $@"Server=DESKTOP-UIE24UG\SQLEXPRESS;Database=military_district;User Id=sa;Password=Asdfg123";
+            string Path = $@"Server=student.permaviat.ru;Database=base1_ISP_21_2_23;User Id=ISP_21_2_23;Password=3frQxZ83o#";
             SqlConnection connection = new SqlConnection(Path);
             try
             {

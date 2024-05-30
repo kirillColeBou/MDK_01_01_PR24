@@ -52,7 +52,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             int id = Pages.Login_Regin.Login.connection.SetLastId(ClassConnection.Connection.Tables.type_of_troops);
             if (type_of_troops.Name_type_of_troops == null)
             {
-                string query = $"Insert Into type_of_troops ([Id_type_of_troops], [Name_type_of_troops], [Description], [Companies], [Count_serviceman], [Date_foundation]) Values ({id.ToString()}, N'{Name_type_of_troops.Text}', N'{Description.Text}', N'{id_companies_temp.Id_companies.ToString()}', N'{Count_serviceman.Text}', N'{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}')";
+                string query = $"Insert Into type_of_troops ([Id_type_of_troops], [Name_type_of_troops], [Description], [Companies], [Count_serviceman], [Date_foundation]) Values ({id.ToString()}, N'{Name_type_of_troops.Text}', N'{Description.Text}', '{id_companies_temp.Id_companies.ToString()}', N'{Count_serviceman.Text}', '{DateTime.Now.ToString("yyyy-MM-dd")}')";
                 var query_apply = Pages.Login_Regin.Login.connection.Query(query);
                 if (query_apply != null)
                 {
@@ -63,7 +63,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             }
             else
             {
-                string query = $"Update type_of_troops Set Name_type_of_troops = N'{Name_type_of_troops.Text}', Description = N'{Description.Text}', Companies = N'{id_companies_temp.Id_companies.ToString()}', Count_serviceman = N'{Count_serviceman.Text}' Where Id_type_of_troops = {type_of_troops.Id_type_of_troops}";
+                string query = $"Update type_of_troops Set Name_type_of_troops = N'{Name_type_of_troops.Text}', Description = N'{Description.Text}', Companies = '{id_companies_temp.Id_companies.ToString()}', Count_serviceman = N'{Count_serviceman.Text}' Where Id_type_of_troops = {type_of_troops.Id_type_of_troops}";
                 var query_apply = Pages.Login_Regin.Login.connection.Query(query);
                 if (query_apply != null)
                 {

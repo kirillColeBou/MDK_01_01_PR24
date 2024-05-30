@@ -44,7 +44,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                 int id = Login_Regin.Login.connection.SetLastId(ClassConnection.Connection.Tables.companies);
                 if (companies.Commander == null)
                 {
-                    string query = $"INSERT INTO companies ([Id_companies], [Name_companies], [Commander], [Date_foundation], [Date_update_information]) VALUES ({id.ToString()}, N'{Name_companies.Text}', N'{Commander.Text}', N'{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}', N'{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}')";
+                    string query = $"INSERT INTO companies ([Id_companies], [Name_companies], [Commander], [Date_foundation], [Date_update_information]) VALUES ({id.ToString()}, N'{Name_companies.Text}', N'{Commander.Text}', '{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}', '{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}')";
                     var query_apply = Login_Regin.Login.connection.Query(query);
                     if (query_apply != null)
                     {
@@ -55,7 +55,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
                 }
                 else
                 {
-                    string query = $"UPDATE companies SET Name_companies = N'{Name_companies.Text}', Commander = N'{Commander.Text}', Date_update_information = N'{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}' WHERE Id_companies = {companies.Id_companies}";
+                    string query = $"UPDATE companies SET Name_companies = N'{Name_companies.Text}', Commander = N'{Commander.Text}', Date_update_information = '{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}' WHERE Id_companies = {companies.Id_companies}";
                     var query_apply = Login_Regin.Login.connection.Query(query);
                     if (query_apply != null)
                     {

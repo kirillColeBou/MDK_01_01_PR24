@@ -49,7 +49,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             int id = Pages.Login_Regin.Login.connection.SetLastId(ClassConnection.Connection.Tables.technique);
             if (technique.Characteristics == null)
             {
-                string query = $"Insert Into technique ([Id_technique], [Name_technique], [Companies], [Characteristics]) Values ({id.ToString()}, N'{Name_technique.Text}', N'{id_companies_temp.Id_companies.ToString()}', N'{Characteristics.Text}')";
+                string query = $"Insert Into technique ([Id_technique], [Name_technique], [Companies], [Characteristics]) Values ({id.ToString()}, N'{Name_technique.Text}', '{id_companies_temp.Id_companies.ToString()}', N'{Characteristics.Text}')";
                 var query_apply = Pages.Login_Regin.Login.connection.Query(query);
                 if (query_apply != null)
                 {
@@ -60,7 +60,7 @@ namespace Курсовой_проект_Тепляков.Pages.PagesInTable
             }
             else
             {
-                string query = $"Update technique Set Name_technique = N'{Name_technique.Text}', Companies = N'{id_companies_temp.Id_companies.ToString()}', Characteristics = N'{Characteristics.Text}' Where Id_technique = {technique.Id_technique}";
+                string query = $"Update technique Set Name_technique = N'{Name_technique.Text}', Companies = '{id_companies_temp.Id_companies.ToString()}', Characteristics = N'{Characteristics.Text}' Where Id_technique = {technique.Id_technique}";
                 var query_apply = Pages.Login_Regin.Login.connection.Query(query);
                 if (query_apply != null)
                 {
