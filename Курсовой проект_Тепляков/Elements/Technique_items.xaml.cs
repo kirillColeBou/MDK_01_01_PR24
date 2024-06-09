@@ -31,7 +31,7 @@ namespace Курсовой_проект_Тепляков.Elements
             if(_technique.Characteristics != null)
             {
                 Name_technique.Content = "Название техники: " + technique.Name_technique;
-                Companies.Content = "Название роты: " + Connection.companies.Find(x => x.Id_companies == _technique.Companies).Name_companies;
+                Companies.Content = "Название роты: " + Connection.companies.FirstOrDefault(x => x.Id_companies == _technique.Companies).Name_companies;
                 Characteristics.Content = "Характеристики: " + technique.Characteristics;
             }
         }
@@ -42,15 +42,18 @@ namespace Курсовой_проект_Тепляков.Elements
         {
             try
             {
-                Pages.Login_Regin.Login.connection.LoadData(ClassConnection.Connection.Tables.technique);
-                string query = $"Delete From Technique Where Id_technique = " + technique.Id_technique.ToString() + "";
-                var query_apply = Pages.Login_Regin.Login.connection.Query(query);
-                if (query_apply != null)
+                if (MessageBox.Show("Вы уверены, что хотите удалить информацию о технике?", "Удаление информации", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
                     Pages.Login_Regin.Login.connection.LoadData(ClassConnection.Connection.Tables.technique);
-                    MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Pages.Main.page_main.technique);
+                    string query = $"Delete From Technique Where Id_technique = " + technique.Id_technique.ToString() + "";
+                    var query_apply = Pages.Login_Regin.Login.connection.Query(query);
+                    if (query_apply != null)
+                    {
+                        Pages.Login_Regin.Login.connection.LoadData(ClassConnection.Connection.Tables.technique);
+                        MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Pages.Main.page_main.technique);
+                    }
+                    else MessageBox.Show("Запрос на удаление техники не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-                else MessageBox.Show("Запрос на удаление техники не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             catch (Exception ex)
             {

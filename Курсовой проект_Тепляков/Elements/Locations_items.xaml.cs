@@ -46,15 +46,18 @@ namespace Курсовой_проект_Тепляков.Elements
         {
             try
             {
-                Pages.Login_Regin.Login.connection.LoadData(ClassConnection.Connection.Tables.locations);
-                string query = $"Delete From Locations Where Id_locations = " + locations.Id_locations.ToString() + "";
-                var query_apply = Pages.Login_Regin.Login.connection.Query(query);
-                if (query_apply != null)
+                if (MessageBox.Show("Вы уверены, что хотите удалить информацию о месте дислокации?", "Удаление информации", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
                     Pages.Login_Regin.Login.connection.LoadData(ClassConnection.Connection.Tables.locations);
-                    MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Pages.Main.page_main.locations);
+                    string query = $"Delete From Locations Where Id_locations = " + locations.Id_locations.ToString() + "";
+                    var query_apply = Pages.Login_Regin.Login.connection.Query(query);
+                    if (query_apply != null)
+                    {
+                        Pages.Login_Regin.Login.connection.LoadData(ClassConnection.Connection.Tables.locations);
+                        MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Pages.Main.page_main.locations);
+                    }
+                    else MessageBox.Show("Запрос на удаление места дислокации не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-                else MessageBox.Show("Запрос на удаление места дислокации не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             catch (Exception ex)
             {

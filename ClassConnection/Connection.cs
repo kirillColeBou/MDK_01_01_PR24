@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.IO;
 using OfficeOpenXml;
 using Microsoft.Win32;
+using System.Windows.Forms;
 
 namespace ClassConnection
 {
@@ -27,25 +28,28 @@ namespace ClassConnection
         public static List<Country> country = new List<Country>();
         #endregion
 
+        public static bool ConnectIsTrue = false;
+
         public enum Tables
         {
             companies, locations, parts, technique, type_of_troops, weapons, users, country
         }
 
-        public bool Connect()
+        public static void Connect()
         {
-            //string Path = $@"Server=DESKTOP-UIE24UG\SQLEXPRESS;Database=military_district;User Id=sa;Password=Asdfg123";
-            string Path = $@"Server=student.permaviat.ru;Database=base1_ISP_21_2_23;User Id=ISP_21_2_23;Password=3frQxZ83o#";
-            SqlConnection connection = new SqlConnection(Path);
             try
             {
+                string Path = $@"Server=DESKTOP-UIE24UG\SQLEXPRESS;Database=military_district;User Id=sa;Password=Asdfg123";
+                //string Path = $@"Server=student.permaviat.ru;Database=base1_ISP_21_2_23;User Id=ISP_21_2_23;Password=3frQxZ83o#";
+                SqlConnection connection = new SqlConnection(Path);
                 connection.Open();
+                ConnectIsTrue = true;
                 Path_connection = Path;
-                return true;
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                MessageBox.Show(ex.Message);
+                ConnectIsTrue = false;
             }
         }        
 

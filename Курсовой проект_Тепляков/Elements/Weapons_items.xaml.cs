@@ -48,15 +48,18 @@ namespace Курсовой_проект_Тепляков.Elements
         {
             try
             {
-                Pages.Login_Regin.Login.connection.LoadData(ClassConnection.Connection.Tables.weapons);
-                string query = $"Delete From Weapons Where Id_weapons = " + weapons.Id_weapons.ToString() + "";
-                var query_apply = Pages.Login_Regin.Login.connection.Query(query);
-                if (query_apply != null)
+                if (MessageBox.Show("Вы уверены, что хотите удалить информацию о вооружении?", "Удаление информации", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
                     Pages.Login_Regin.Login.connection.LoadData(ClassConnection.Connection.Tables.weapons);
-                    MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Pages.Main.page_main.weapons);
+                    string query = $"Delete From Weapons Where Id_weapons = " + weapons.Id_weapons.ToString() + "";
+                    var query_apply = Pages.Login_Regin.Login.connection.Query(query);
+                    if (query_apply != null)
+                    {
+                        Pages.Login_Regin.Login.connection.LoadData(ClassConnection.Connection.Tables.weapons);
+                        MainWindow.main.Animation_move(MainWindow.main.frame_main, MainWindow.main.scroll_main, null, null, Pages.Main.page_main.weapons);
+                    }
+                    else MessageBox.Show("Запрос на удаление вида вооружения не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-                else MessageBox.Show("Запрос на удаление вида вооружения не был обработан!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             catch (Exception ex)
             {
